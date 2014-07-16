@@ -1,0 +1,7 @@
+bin
+*sdf
+*.~ml
+*.suo
+*.user
+*.tmp
+*.vspscc
