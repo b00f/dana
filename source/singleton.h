@@ -41,7 +41,7 @@ public:
     static void DestroyInstance()
     {
         delete m_instance;
-        m_instance = NULL;
+        m_instance = 0;
     };
 
 protected:

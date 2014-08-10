@@ -85,16 +85,6 @@ void ConfigGeneralPage::setAutoStart(bool enabled) {
         settings.remove(APP_NAME);
     }
 }
-#elif Q_OS_LINUX
-bool ConfigGeneralPage::isAutoStart()
-{
-    return false;
-}
-
-void ConfigGeneralPage::setAutoStart(bool enabled)
-{
-}
-
 #else
 bool ConfigGeneralPage::isAutoStart()
 {

@@ -377,7 +377,7 @@ void DeckWindow::onStopQuickQuery()
 {
     bool running = isRunningQuickQuery();
     if(running) {
-        _ASSERT(0);
+        ///_ASSERT(0);
     }
 
     emit quickQuery(false);

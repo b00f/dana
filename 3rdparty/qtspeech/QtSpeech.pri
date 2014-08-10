@@ -40,8 +40,8 @@ win32 {
 }
 
 unix:!mac {
-    HEADERS += QtSpeech_unx.h
-    SOURCES += QtSpeech_unx.cpp
+    HEADERS += $$PWD/QtSpeech_unx.h
+    SOURCES += $$PWD/QtSpeech_unx.cpp
 
     INCLUDEPATH += $$PWD/festival/speech_tools/include
     INCLUDEPATH += $$PWD/festival/festival/src/include

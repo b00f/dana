@@ -36,7 +36,7 @@ public:
             QDir::cleanPath(path1 + QDir::separator() + path2) );
     }
 
-    static void createDirectory(QString &path)
+    static void createDirectory(const QString &path)
     {
         QDir dir(path);
 

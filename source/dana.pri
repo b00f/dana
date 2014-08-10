@@ -62,7 +62,8 @@ HEADERS += \
     decklistdatamodel.h \
     deckdatamodel.h \
     deckproxymodel.h \
-    uploaddialog.h
+    uploaddialog.h \
+    filedownloader.h
     
 SOURCES += \
     ./aboutdialog.cpp \
@@ -123,7 +124,8 @@ SOURCES += \
     decklistdatamodel.cpp \
     deckdatamodel.cpp \
     deckproxymodel.cpp \
-    uploaddialog.cpp
+    uploaddialog.cpp \
+    filedownloader.cpp
 
 INCLUDEPATH += "../3rdparty/qtspeech/"
 INCLUDEPATH += "../3rdparty/qtsingleapplication/"

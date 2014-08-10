@@ -26,8 +26,8 @@
 #include "card.h"
 #include "constants.h"
 
-#include <QtSQl\QSqlQuery>
-#include <QtSQl\QSqlRecord>
+#include <QSqlRecord>
+#include <QSqlQuery>
 #include <QtDebug>
 
 

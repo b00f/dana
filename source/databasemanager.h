@@ -22,8 +22,8 @@
 
 #include "singleton.h"
 
-#include <QtSQl\QSqlDatabase>
-#include <QtSQl\QSqlError>
+#include <QSqlDatabase>
+#include <QSqlError>
 #include <QVariant>
 
 class DeckList;
