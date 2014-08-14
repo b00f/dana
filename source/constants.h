@@ -91,16 +91,25 @@ static const QColor LevelsColor[LevelCount+1] = {
 };
 
 
-static const int appVersion() {
+static inline int appVersion() {
     return LAST_VERSION-1; 
 }
 
-static const QString appVersionString() {
+static inline QString appVersionString() {
     return QString::number(appVersion()); 
 }
 
-static inline QString appPath() { 
-    return QCoreApplication::applicationDirPath(); 
+static inline QString appPath() {
+    QDir appDir = QDir(qApp->applicationDirPath());
+#ifdef Q_OS_MAC
+    /*
+     * if (appDir.dirName() == "MacOS") {
+        appDir.cdUp();
+        appDir.cdUp();
+        appDir.cdUp();
+    }*/
+#endif
+    return appDir.absolutePath();
 }
 
 static inline QString danaPath() {

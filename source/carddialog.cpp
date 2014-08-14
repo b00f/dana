@@ -35,9 +35,9 @@
 
 CardDialog::CardDialog(Mode mode, QWidget *parent)
     : QxDialog("card_dialog", parent)
+    , mode(mode)
     , card(0)
     , cardQuery(0)
-    , mode(mode)
 {
     setupView();
 
@@ -562,6 +562,9 @@ void CardDialog::setCard(Card *_card)
 
                 btnNext->setFocus();
             } break;
+
+        case Format: {
+                     } break;
         }
     } else {
         btnSave->setDisabled(true);

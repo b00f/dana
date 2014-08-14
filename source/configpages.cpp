@@ -93,6 +93,7 @@ bool ConfigGeneralPage::isAutoStart()
 
 void ConfigGeneralPage::setAutoStart(bool enabled)
 {
+    Q_UNUSED(enabled);
 }
 #endif
 

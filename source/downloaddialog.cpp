@@ -58,6 +58,8 @@ void DownloadDialog::setupView()
     deckListWidget = new DeckListWidget;
     btnDownload = new QPushButton(ICON_DECK_DOWNLOAD, STR_ACTION_DOWNLOAD);
 
+    deckListWidget->hideSearchBox(false);
+
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QHBoxLayout *filterLayout = new QHBoxLayout;
     QHBoxLayout *footerLayout = new QHBoxLayout;

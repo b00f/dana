@@ -50,14 +50,14 @@ DeckListWidget::DeckListWidget(QWidget *parent)
 
     ///searchBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-    setStyleSheet(QString("QListView{margin-top:%1;background-color:white;border-bottom:1px solid black;}").arg(searchBox->height()+2));
+    ///setStyleSheet(QString("QListView{margin-top:%1;background-color:white;border-bottom:1px solid black;}").arg(searchBox->height()+2));
 }
 
 void DeckListWidget::hideSearchBox(bool hide)
 {
     if(hide) {
         searchBox->hide();
-        setStyleSheet("QListView{margin:0px;}");
+        setStyleSheet("QListView{margin-top:0;}");
     } else {
         searchBox->show();
         setStyleSheet(QString("QListView{margin-top:%1;}").arg(searchBox->height()+2));

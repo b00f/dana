@@ -26,7 +26,7 @@ HEADERS += \
     $$PWD/QtSpeech.h \
 
 macx {
-    SOURCES += QtSpeech_mac.cpp
+    SOURCES += $$PWD/QtSpeech_mac.cpp
     LIBS *= -framework AppKit
 }
 

@@ -37,17 +37,20 @@ void TempDeck::removeDeck()
 
 bool TempDeck::openDeck(QVariant param)
 {
+    Q_UNUSED(param);
+
     return false;
 }
 
 void TempDeck::closeDeck(QVariant param)
 {
+    Q_UNUSED(param);
 }
 
 QString TempDeck::getDeckPath() const
 {
     QString deckPath = utils::combinePaths(
-        tempPath(), QString("tempDeck_%1").arg((int)this));
+        tempPath(), QString("tempDeck_%1").arg((quint64)this));
 
     utils::createDirectory(deckPath);
 

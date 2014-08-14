@@ -1,0 +1,62 @@
+cd dana/source
+
+/Users/Samira/Qt/5.3/clang_64/bin/qmake
+make clean
+/Users/Samira/Qt/5.3/clang_64/bin/qmake -config release
+make
+
+/// deployment by qt tool
+/Users/Samira/Qt/5.3/clang_64/bin/macdeployqt –dmg dana.app
+
+/// manual deploy
+mkdir dana.app/Contents/Frameworks
+
+cp -R /Users/Samira/Qt/5.3/clang_64/lib/QtCore.framework     dana.app/Contents/Frameworks
+cp -R /Users/Samira/Qt/5.3/clang_64/lib/QtGui.framework      dana.app/Contents/Frameworks
+cp -R /Users/Samira/Qt/5.3/clang_64/lib/QtWidgets.framework  dana.app/Contents/Frameworks
+cp -R /Users/Samira/Qt/5.3/clang_64/lib/QtSql.framework      dana.app/Contents/Frameworks
+cp -R /Users/Samira/Qt/5.3/clang_64/lib/QtNetwork.framework  dana.app/Contents/Frameworks
+cp -R /Users/Samira/Qt/5.3/clang_64/lib/QtXml.framework      dana.app/Contents/Frameworks
+
+install_name_tool -id @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore       dana.app/Contents/Frameworks/QtCore.framework/Versions/5/QtCore
+install_name_tool -id @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui         dana.app/Contents/Frameworks/QtGui.framework/Versions/5/QtGui
+install_name_tool -id @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets dana.app/Contents/Frameworks/QtWidgets.framework/Versions/5/QtWidgets
+install_name_tool -id @executable_path/../Frameworks/QtSql.framework/Versions/5/QtSql         dana.app/Contents/Frameworks/QtSql.framework/Versions/5/QtSql
+install_name_tool -id @executable_path/../Frameworks/QtNetwork.framework/Versions/5/QtNetwork dana.app/Contents/Frameworks/QtNetwork.framework/Versions/5/QtNetwork
+install_name_tool -id @executable_path/../Frameworks/QtXml.framework/Versions/5/QtXml         dana.app/Contents/Frameworks/QtXml.framework/Versions/5/QtXml
+
+
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/QtCore       @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore       dana.app/Contents/MacOs/dana
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/QtGui         @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui         dana.app/Contents/MacOs/dana
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets dana.app/Contents/MacOs/dana
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/QtSql         @executable_path/../Frameworks/QtSql.framework/Versions/5/QtSql         dana.app/Contents/MacOs/dana
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/lib/QtNetwork.framework/Versions/5/QtNetwork @executable_path/../Frameworks/QtNetwork.framework/Versions/5/QtNetwork dana.app/Contents/MacOs/dana
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/lib/QtXml.framework/Versions/5/QtXml         @executable_path/../Frameworks/QtXml.framework/Versions/5/QtXml         dana.app/Contents/MacOs/dana
+
+
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore dana.app/Contents/Frameworks/QtGui.framework/Versions/5/QtGui
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/QtGui.framework/Versions/5/QtGui   @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui   dana.app/Contents/Frameworks/QtWidgets.framework/Versions/5/QtWidgets
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore dana.app/Contents/Frameworks/QtWidgets.framework/Versions/5/QtWidgets
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore dana.app/Contents/Frameworks/QtSql.framework/Versions/5/QtSql
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore dana.app/Contents/Frameworks/QtNetwork.framework/Versions/5/QtNetwork
+install_name_tool -change /Users/Samira/Qt/5.3/clang_64/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore dana.app/Contents/Frameworks/QtXml.framework/Versions/5/QtXml
+
+
+mkdir dana.app/Contents/Resources/imageformats
+mkdir dana.app/Contents/Resources/accessible
+
+
+cp /Users/Samira/Qt/5.3/clang_64/plugins/imageformats/libqgif.dylib                 dana.app/Contents/Resources/imageformats/ 
+cp /Users/Samira/Qt/5.3/clang_64/plugins/imageformats/libqico.dylib                 dana.app/Contents/Resources/imageformats/ 
+cp /Users/Samira/Qt/5.3/clang_64/plugins/imageformats/libqjpeg.dylib                dana.app/Contents/Resources/imageformats/ 
+cp /Users/Samira/Qt/5.3/clang_64/plugins/imageformats/libqmng.dylib                 dana.app/Contents/Resources/imageformats/  
+cp /Users/Samira/Qt/5.3/clang_64/plugins/imageformats/libqsvg.dylib                 dana.app/Contents/Resources/imageformats/  
+cp /Users/Samira/Qt/5.3/clang_64/plugins/imageformats/libqtga.dylib                 dana.app/Contents/Resources/imageformats/  
+cp /Users/Samira/Qt/5.3/clang_64/plugins/imageformats/libqtiff.dylib                dana.app/Contents/Resources/imageformats/  
+cp /Users/Samira/Qt/5.3/clang_64/plugins/imageformats/libqwbmp.dylib                dana.app/Contents/Resources/imageformats/  
+cp /Users/Samira/Qt/5.3/clang_64/plugins/accessible/libqtaccessiblewidgets.dylib    dana.app/Contents/Resources/accessible/  
+
+
+cp ../3rdparty/zlib/mac/minigzip  dana.app/Contents/MacOS/ 
+cp ../3rdparty/zlib/mac/miniunz   dana.app/Contents/MacOS/ 
+cp ../3rdparty/zlib/mac/minizip   dana.app/Contents/MacOS/   

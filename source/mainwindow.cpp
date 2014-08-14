@@ -187,11 +187,12 @@ void MainWindow::onOpenDesk()
 void MainWindow::onActivateTrayIcon(QSystemTrayIcon::ActivationReason reason)
 {
     switch (reason) {
-    //case QSystemTrayIcon::Trigger:
     case QSystemTrayIcon::DoubleClick:
         showNormal();
         break;
-    case QSystemTrayIcon::Context:
+
+    // mac build
+    default:
         actQuery->setVisible(((DeckWindow *)deckWindow)->isRunningQuickQuery());
         break;
     }

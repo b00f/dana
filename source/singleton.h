@@ -63,7 +63,7 @@ protected:
 private:
 
     //! Copy constructor.
-    CSingleton(const CSingleton &source)
+    CSingleton(const CSingleton &/*source*/)
     {
     };
 

@@ -98,7 +98,9 @@ void ComboLabel::onClick()
 
 void ComboLabel::focusOutEvent(QFocusEvent *fe)
 {
-    Q_UNUSED(fe);
+    // mac build
+    if(fe->reason()==Qt::PopupFocusReason)
+        return;
   ///  if(fe->reason() == Qt::TabFocusReason)
   ///      focusNextChild();
 

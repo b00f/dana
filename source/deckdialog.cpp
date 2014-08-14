@@ -173,6 +173,10 @@ void DeckDialog::setupView()
         case View:
             btnSave->hide();
             break;
+
+         case Add:
+         case Edit:
+            break;
         }
 	}
 

@@ -46,7 +46,7 @@ protected slots:
 protected:
     virtual void setupActions();
     virtual void setupToolbar()=0;
-    virtual void setupView()=0;
+    virtual void setupView();
     virtual void setupContextMenu()=0;
 
 protected:
