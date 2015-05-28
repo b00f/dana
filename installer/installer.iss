@@ -64,6 +64,11 @@ Source: {#QtPath}\plugins\imageformats\qsvg.dll;                       DestDir: 
 Source: {#QtPath}\plugins\imageformats\qtga.dll;                       DestDir: {app}\plugins\imageformats\; 
 Source: {#QtPath}\plugins\imageformats\qtiff.dll;                      DestDir: {app}\plugins\imageformats\; 
 Source: {#QtPath}\plugins\imageformats\qwbmp.dll;                      DestDir: {app}\plugins\imageformats\; 
+Source: {#QtPath}\plugins\imageformats\qdds.dll;                       DestDir: {app}\plugins\imageformats\; 
+Source: {#QtPath}\plugins\imageformats\qicns.dll;                      DestDir: {app}\plugins\imageformats\; 
+Source: {#QtPath}\plugins\imageformats\qjp2.dll;                       DestDir: {app}\plugins\imageformats\; 
+Source: {#QtPath}\plugins\imageformats\qwebp.dll;                      DestDir: {app}\plugins\imageformats\; 
+Source: {#QtPath}\plugins\platforms\qwindows.dll;                      DestDir: {app}\plugins\platforms\; 
 
 [Icons]
 Name: {group}\Dana; Filename: {app}\Dana.exe; IconFilename: {app}\Dana.exe; 
