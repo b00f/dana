@@ -107,6 +107,8 @@ void QueryDialog::setupView()
     btnNext  ->setShortcut(QKeySequence("Right"));
     btnReview->setShortcut(QKeySequence("Space"));
 
+    btnReview->setFocusPolicy(Qt::NoFocus);
+
     mainLayout->addLayout(queryLayout);
     mainLayout->addWidget(hLine());
     mainLayout->addLayout(toolsLayout);
@@ -193,13 +195,17 @@ void QueryDialog::onQueryPass()
     card->increaseLevel();
 
     setCard(cardQuery->gotoNextCard());
+
+    listen();
 }
 
 void QueryDialog::onQueryFail()
 {
     card->decreaseLevel();
 
-   setCard(cardQuery->gotoNextCard());
+    setCard(cardQuery->gotoNextCard());
+
+    listen();
 }
 
 void QueryDialog::setCard(Card *_card)

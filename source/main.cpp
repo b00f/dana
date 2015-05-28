@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_MAC
     plugins += "/../Resources/";
 #else
-    QString plugins = appPath();
     plugins += "/plugins";
 #endif
     a.addLibraryPath(plugins);

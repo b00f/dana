@@ -50,7 +50,7 @@ void MyDeck::saveDeck()
 void MyDeck::removeDeck()
 {
     if(DatabaseManager::GetInstance()->deleteDeck(this)) {
-        utils::removeDir( getDeckPath() );
+        utils::removeDirectory( getDeckPath() );
     }
 }
 

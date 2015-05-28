@@ -1,14 +1,15 @@
-#define AppName 		    "Dana"
-#define AppVerName 		  "Dana"
-#define AppVersion 		  "1.0"
-#define AppExeName 		  "Dana"
-#define AppDesc 		    "Dana"
-#define AppCopyright 	  "Copyright© 2014"
-#define AppURL 			    "http://danasrs.com/"
-#define AppGroupName 	  "dana"
-#define SourcePath      "..\bin\msvc2012"
-#define QtPath          "C:\Qt\Qt5.1.0.msvc2012\5.1.0\msvc2012"
-#define AppID  			    "{AF273301-28D0-4DAB-A531-2021022C4C8B}"
+#define AppName             "Dana"
+#define AppVerName          "Dana"
+#define AppVersion          "1.0"
+#define AppExeName          "Dana"
+#define AppDesc             "Dana"
+#define AppCopyright        "Copyright© 2014"
+#define AppURL              "http://danasrs.com/"
+#define AppGroupName        "Dana"
+#define SourcePath          "..\bin\Desktop_Qt_5_4_0_MSVC2012_OpenGL_32bit-Release\release"
+#define QtPath              "C:\Qt\Qt5.4.0\5.4\msvc2012_opengl"
+#define ThirdpartyPath      ".\3rdparty"
+#define AppID               "{AF273301-28D0-4DAB-A531-2021022C4C8B}"
 
 [Setup]
 AppName={#AppName}
@@ -31,25 +32,30 @@ SolidCompression=true
 
 [Files]
 Source: {#SourcePath}\dana.exe;                                        DestDir: {app}; 
-Source: {#SourcePath}\zlibwapi.dll;                                    DestDir: {app}; 
-Source: {#SourcePath}\miniunz.exe;                                     DestDir: {app}; 
-Source: {#SourcePath}\minizip.exe;                                     DestDir: {app}; 
-Source: {#SourcePath}\msvcp110.dll;                                    DestDir: {app}; 
-Source: {#SourcePath}\msvcr110.dll;                                    DestDir: {app}; 
-Source: {#QtPath}\bin\icudt51.dll;                                     DestDir: {app}; 
-Source: {#QtPath}\bin\icuin51.dll;                                     DestDir: {app}; 
-Source: {#QtPath}\bin\icuuc51.dll;                                     DestDir: {app}; 
-Source: {#QtPath}\bin\libEGL.dll;                                      DestDir: {app}; 
-Source: {#QtPath}\bin\libEGLd.dll;                                     DestDir: {app}; 
-Source: {#QtPath}\bin\libGLESv2.dll;                                   DestDir: {app}; 
+Source: {#ThirdpartyPath}\zlibwapi.dll;                                DestDir: {app}; 
+Source: {#ThirdpartyPath}\miniunz.exe;                                 DestDir: {app}; 
+Source: {#ThirdpartyPath}\minizip.exe;                                 DestDir: {app}; 
+Source: {#ThirdpartyPath}\msvcp110.dll;                                DestDir: {app}; 
+Source: {#ThirdpartyPath}\msvcr110.dll;                                DestDir: {app}; 
+Source: {#QtPath}\bin\icudt53.dll;                                     DestDir: {app}; 
+Source: {#QtPath}\bin\icuin53.dll;                                     DestDir: {app}; 
+Source: {#QtPath}\bin\icuuc53.dll;                                     DestDir: {app}; 
+;;Source: {#QtPath}\bin\libEGL.dll;                                      DestDir: {app}; 
+;;Source: {#QtPath}\bin\libEGLd.dll;                                     DestDir: {app}; 
+;;Source: {#QtPath}\bin\libGLESv2.dll;                                   DestDir: {app}; 
 Source: {#QtPath}\bin\Qt5Core.dll;                                     DestDir: {app}; 
 Source: {#QtPath}\bin\Qt5Gui.dll;                                      DestDir: {app}; 
 Source: {#QtPath}\bin\Qt5Network.dll;                                  DestDir: {app}; 
 Source: {#QtPath}\bin\Qt5Widgets.dll;                                  DestDir: {app}; 
 Source: {#QtPath}\bin\Qt5Widgets.dll;                                  DestDir: {app}; 
 Source: {#QtPath}\bin\Qt5Xml.dll;                                      DestDir: {app}; 
+Source: {#QtPath}\bin\Qt5Sql.dll;                                      DestDir: {app}; 
+Source: {#QtPath}\bin\Qt5Svg.dll;                                      DestDir: {app}; 
 Source: {#QtPath}\bin\Qt5Widgets.dll;                                  DestDir: {app}; 
-Source: {#QtPath}\plugins\platforms\qwindows.dll;                              DestDir: {app}\platforms\; 
+Source: {#QtPath}\plugins\platforms\qwindows.dll;                      DestDir: {app}\platforms\; 
+Source: {#QtPath}\plugins\sqldrivers\qsqlite.dll;                      DestDir: {app}\plugins\sqldrivers\; 
+Source: {#QtPath}\plugins\bearer\qnativewifibearer.dll;                DestDir: {app}\plugins\bearer\; 
+Source: {#QtPath}\plugins\bearer\qgenericbearer.dll;                   DestDir: {app}\plugins\bearer\; 
 Source: {#QtPath}\plugins\imageformats\qgif.dll;                       DestDir: {app}\plugins\imageformats\; 
 Source: {#QtPath}\plugins\imageformats\qico.dll;                       DestDir: {app}\plugins\imageformats\; 
 Source: {#QtPath}\plugins\imageformats\qjpeg.dll;                      DestDir: {app}\plugins\imageformats\; 
@@ -58,14 +64,13 @@ Source: {#QtPath}\plugins\imageformats\qsvg.dll;                       DestDir: 
 Source: {#QtPath}\plugins\imageformats\qtga.dll;                       DestDir: {app}\plugins\imageformats\; 
 Source: {#QtPath}\plugins\imageformats\qtiff.dll;                      DestDir: {app}\plugins\imageformats\; 
 Source: {#QtPath}\plugins\imageformats\qwbmp.dll;                      DestDir: {app}\plugins\imageformats\; 
-Source: {#QtPath}\plugins\accessible\qtaccessiblewidgets.dll;          DestDir: {app}\plugins\accessible\; 
 
 [Icons]
-Name: {group}\dana; Filename: {app}\dana.exe; IconFilename: {app}\dana.exe; 
-Name: {group}\uninstall; Filename: {uninstallexe}; WorkingDir: {app};
+Name: {group}\Dana; Filename: {app}\Dana.exe; IconFilename: {app}\Dana.exe; 
+Name: {group}\Uninstall; Filename: {uninstallexe}; WorkingDir: {app};
 
 ;;; HKEY_CURRENT_USER\Software\dana
 
 [UninstallDelete]
-Type: filesandordirs; Name: {userappdata}\..\..\dana
+Type: filesandordirs; Name: {userappdata}\..\..\Dana
 Type: dirifempty; Name: {app}

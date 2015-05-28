@@ -226,7 +226,7 @@ void Deck::Merge(Deck *dst, int option, int *stats)
         flags = dst->getFlags();
     }
 
-    utils::copyDir(getDeckPath(), dst->getDeckPath());
+    utils::copyDirectory(getDeckPath(), dst->getDeckPath());
 
     saveDeck();
 }
@@ -439,7 +439,7 @@ bool Deck::importMnemosyne(QString fileName)
 
     utils::removeFile(metadataPath);
     utils::removeFile(cardsPath);
-    utils::copyDir(getDeckPath(), tempFolder);
+    utils::copyDirectory(getDeckPath(), tempFolder);
 
     return true;
 }
@@ -522,7 +522,7 @@ bool Deck::importDana(QString fileName)
     importFromXml(deckPath);
 
     utils::removeFile(deckPath);
-    utils::copyDir(getDeckPath(), tempFolder);
+    utils::copyDirectory(getDeckPath(), tempFolder);
 
     /// load icon pixmap
     loadPixmap( iconPath );
@@ -684,12 +684,13 @@ bool Deck::exportToDana(QString fileName)
     QString tempFolder = utils::combinePaths(tempPath(), baseName);
     QString deckFile = utils::combinePaths(tempFolder, "deck.xml"); 
         
+    utils::removeDirectory(tempFolder);
     utils::createDirectory(tempFolder);
     
     if(!exportToXml(deckFile))
         return false;
 
-    utils::copyDir(tempFolder, getDeckPath());
+    utils::copyDirectory(tempFolder, getDeckPath());
 
     if(!zlibWrappr::zipFolder(tempFolder, fileName)) {
         return false;

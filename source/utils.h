@@ -46,7 +46,7 @@ public:
     }
 
     ///http://john.nachtimwald.com/2010/06/08/qt-remove-directory-and-its-contents/
-    static bool removeDir(const QString &dirName)
+    static bool removeDirectory(const QString &dirName)
     {
         bool result = true;
         QDir dir(dirName);
@@ -54,7 +54,7 @@ public:
         if (dir.exists(dirName)) {
             Q_FOREACH(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
                 if (info.isDir()) {
-                    result = removeDir(info.absoluteFilePath());
+                    result = removeDirectory(info.absoluteFilePath());
                 }
                 else {
                     result = QFile::remove(info.absoluteFilePath());
@@ -79,7 +79,7 @@ public:
     }
 
     //// http://www.qtcentre.org/archive/index.php/t-23469.html
-    static void copyDir(const QString &to, const QString &from)
+    static void copyDirectory(const QString &to, const QString &from)
     {
         QDir sourceDir(from);
         if(!sourceDir.exists())
@@ -105,14 +105,14 @@ public:
             QString srcName = from + QDir::separator() + dirs[i];
             QString destName = to + QDir::separator() + dirs[i];
 
-            copyDir(destName, srcName);
+            copyDirectory(destName, srcName);
         }
     }
 
-    static void moveDir(const QString &source, const QString &dest)
+    static void moveDirectory(const QString &source, const QString &dest)
     {
-        copyDir(source, dest);
-        removeDir(source);
+        copyDirectory(source, dest);
+        removeDirectory(source);
     }
 
     static bool removeFile(QString path)
