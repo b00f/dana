@@ -1,6 +1,6 @@
-#Dana, Symbol of Wisdom
+#Dana
 
-'Dana' is an open source and free software for whom want to extend their knowledge!
+'Dana' is an open source and free software for whom want to extend their knowledge. 'Dana' has greate user-interface for 'Spaced Repetition' learning technique. 
 
 
 ##About name:
