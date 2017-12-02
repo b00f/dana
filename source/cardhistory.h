@@ -30,7 +30,7 @@ class CardHistory
 
 public:
     CardHistory(QObject *parent = 0);
-    CardHistory(const CardHistory &rhs);
+    CardHistory(const CardHistory &rhs, QObject *parent = 0);
     CardHistory &operator =(const CardHistory &rhs);
 
     void      fromString(QString historyLine);

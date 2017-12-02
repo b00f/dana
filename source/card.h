@@ -44,7 +44,7 @@ public:
     };
 
     Card(QObject *parent = 0);
-    Card(const Card &right);
+    Card(const Card &right, QObject *parent = 0);
 
     bool  operator== (const Card &right) const;
     Card &operator=  (const Card &right);

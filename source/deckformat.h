@@ -36,7 +36,7 @@ public:
     };
 
     DeckFormat(QObject *parent = 0);
-    DeckFormat(const DeckFormat &rhs);
+    DeckFormat(const DeckFormat &rhs, QObject *parent = 0);
 
     DeckFormat &operator=  (const DeckFormat &rhs);
     

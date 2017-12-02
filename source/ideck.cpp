@@ -37,6 +37,7 @@ void iDeck::removeDeck()
 
 bool iDeck::openDeck(QVariant param)
 {
+    Q_UNUSED(param);
     return false;
 }
 
@@ -113,6 +114,7 @@ bool iDeck::openDeck(const QDomNode &nodeDeck)
 
 void iDeck::closeDeck(QVariant param)
 {
+    Q_UNUSED(param)
 }
 
 void iDeck::setRating(int _rating)

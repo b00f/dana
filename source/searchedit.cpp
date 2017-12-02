@@ -69,7 +69,6 @@ void SearchEdit::resizeEvent(QResizeEvent *)
     int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
     QSize sz ;
 
-    QRect t = rect(); 
     sz = searchButton->sizeHint();
     searchButton->move(rect().left() + (3*frameWidth),
 		(rect().bottom() + 1 - sz.height())/2);

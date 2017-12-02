@@ -29,8 +29,8 @@
 
 MergeDialog::MergeDialog(QWidget *parent)
     : QxDialog("merge_dialog", parent)
-    , dstDeck(0)
     , srcDeck(0)
+    , dstDeck(0)
 {
     setupView();
 }

@@ -28,7 +28,8 @@ CardHistory::CardHistory(QObject *parent)
 {
 }
 
-CardHistory::CardHistory(const CardHistory &rhs)
+CardHistory::CardHistory(const CardHistory &rhs, QObject *parent)
+    : QObject(parent)
 {
     *this = rhs;
 }

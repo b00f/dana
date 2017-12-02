@@ -33,7 +33,7 @@
 CardItemDelegate::CardItemDelegate(QTableView *parent)
     : QStyledItemDelegate(parent)
 {
-    QStyleOptionViewItemV4 option;
+    QStyleOptionViewItem option;
 
     int gridHint = parent->style()->styleHint(QStyle::SH_Table_GridLineColor, &option);
     QColor gridColor = static_cast<QRgb>(gridHint);

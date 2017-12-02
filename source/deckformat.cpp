@@ -32,7 +32,8 @@ DeckFormat::DeckFormat(QObject *parent)
     backEditorPolicy = AcceptRich;
 }
 
-DeckFormat::DeckFormat(const DeckFormat &rhs)
+DeckFormat::DeckFormat(const DeckFormat &rhs, QObject *parent)
+    : QObject(parent)
 {
     *this=rhs;
 }

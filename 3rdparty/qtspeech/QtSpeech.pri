@@ -46,6 +46,9 @@ unix:!mac {
     INCLUDEPATH += $$PWD/festival/speech_tools/include
     INCLUDEPATH += $$PWD/festival/festival/src/include
 
+    INCLUDEPATH += /usr/include/speech_tools
+    INCLUDEPATH += /usr/include/festival
+
     #instal fesival-dev before compile:
     # ubuntu:sudo apt-get install festival-dev
     LIBS += -lncurses

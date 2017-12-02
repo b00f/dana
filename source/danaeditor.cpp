@@ -410,6 +410,9 @@ void DanaEditor::listFormatChanged()
         case QTextListFormat::ListDisc:
             actListBullet->setChecked(true);
             break;
+
+        default:
+            break;
         }
     }
 }

@@ -25,8 +25,8 @@
 #include <QHBoxLayout>
 
 SpinLabel::SpinLabel(QString format, QWidget *parent)
-    : format(format)
-    , QWidget(parent)
+    : QWidget(parent)
+    , format(format)
 {
     stacked = new QStackedLayout(this);
     spin = new QSpinBox;

@@ -36,7 +36,8 @@ Card::Card(QObject *parent)
     id=-1;
 }
 
-Card::Card(const Card &right)
+Card::Card(const Card &right, QObject *parent)
+    : QObject(parent)
 {
     *this=right;
 }
