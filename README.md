@@ -25,3 +25,7 @@ Actually it is, but in West Africa it's a symbol of 'Wisdom' and 'Creativity!
 Ananse, the spider, is a well-known character in African folk-tales.
 
 Learning Faster with Dana!
+
+## Download:
+
+you can download compiled version of Dana from here: https://sourceforge.net/projects/danasrs/?source=directory  
