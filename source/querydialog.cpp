@@ -280,11 +280,13 @@ void QueryDialog::showEvent(QShowEvent *event)
 
 void QueryDialog::listen()
 {
-    try {
-        speech->stop();
-        speech->tell(card->getFrontPlain());
-    }catch(...) {
-        QxMessageBox::critical(this, ERR_QT_SPEECH_FAILED);
+    if(card) {
+        try {
+            speech->stop();
+            speech->tell(card->getFrontPlain());
+        }catch(...) {
+            QxMessageBox::critical(this, ERR_QT_SPEECH_FAILED);
+        }
     }
 }
 

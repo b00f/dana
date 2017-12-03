@@ -49,6 +49,7 @@ private slots:
     void onRemoveCard();
     void onAddCard(Card *card);
     void onOpenCard(Card *card);
+    void onSave();
     void onQuery();
     void onStudy();
     void onReport();
@@ -80,6 +81,7 @@ private:
             *actEdit,
             *actStar,
             *actRemove,
+            *actSave,
             *actQuery,
             *actStudy,
             *actReport,

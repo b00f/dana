@@ -42,6 +42,7 @@ void MyDeck::saveDeck()
         utils::createDirectory( getDeckPath() );
     } else {
         DatabaseManager::GetInstance()->updateDeck(this);
+        DatabaseManager::GetInstance()->saveDeck(this);
     }
 
     savePixmap();

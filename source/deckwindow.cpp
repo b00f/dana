@@ -94,6 +94,7 @@ void DeckWindow::setupMenu()
     QMenu *actionMenu = mainMenu->addMenu(STR_MENU_ACTION);
     actionMenu->addAction(actDesk);
     actionMenu->addSeparator();
+    actionMenu->addAction(actSave);
     actionMenu->addAction(actQuery);
     actionMenu->addAction(actQuickQuery);
     actionMenu->addAction(actStudy);
@@ -132,6 +133,11 @@ void DeckWindow::setupActions()
     actStar->setEnabled(false);
     actStar->setStatusTip(STR_ACTION_CARD_STAR_TIP);
     connect(actStar, SIGNAL(triggered()), this, SLOT(onTurnStar()));
+
+    actSave = new QAction(ICON_DECK_SAVE, STR_ACTION_DECK_SAVE, this);
+    actSave->setShortcut(QKeySequence("Ctrl+s"));
+    actSave->setStatusTip(STR_ACTION_DECK_SAVE_TIP);
+    connect(actSave, SIGNAL(triggered()), this, SLOT(onSave()));
 
     actQuery = new QAction(ICON_DECK_QUERY, STR_ACTION_DECK_QUERY, this);
     actQuery->setShortcut(QKeySequence("F5"));
@@ -277,6 +283,11 @@ void DeckWindow::onRemoveCard()
 
         deckWidget->selectRow(index);
     }
+}
+
+void DeckWindow::onSave()
+{
+    deck->saveDeck();
 }
 
 void DeckWindow::onQuery()
