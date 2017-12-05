@@ -56,6 +56,7 @@ void DeckWidget::setupView()
 
     for(int i=0;i<LevelCount;i++) {
         deckLevels[i] = new QxPushButton(this);
+        deckLevels[i]->setToolTip(LevelsName[i]);
         deckLevels[i]->setMinimumSize(QSize(150, 0));
         deckLevels[i]->setCheckable(true);
         deckLevels[i]->setSizePolicy(sizePolicy);
@@ -77,16 +78,27 @@ void DeckWidget::setupView()
     hLine->setMinimumSize(QSize(150, 0));
     hLine->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    deckStars = new QxPushButton(this);
-    deckStars->setCheckable(true);
-    deckStars->setMinimumSize(QSize(150, 0));
-    deckStars->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    deckRetireds = new QxPushButton(this);
+    deckRetireds->setToolTip(STR_LEVEL_RETIRED);
+    deckRetireds->setCheckable(true);
+    deckRetireds->setMinimumSize(QSize(150, 0));
+    deckRetireds->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    signalMapper->setMapping(deckStars, Level_Starred);
-    connect(deckStars, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    deckStarreds = new QxPushButton(this);
+    deckStarreds->setToolTip(STR_LEVEL_STARRED);
+    deckStarreds->setCheckable(true);
+    deckStarreds->setMinimumSize(QSize(150, 0));
+    deckStarreds->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    signalMapper->setMapping(deckRetireds, Level_Retired);
+    signalMapper->setMapping(deckStarreds, Level_Starred);
+
+    connect(deckRetireds, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    connect(deckStarreds, SIGNAL(clicked()), signalMapper, SLOT(map()));
 
     leftLayout->addWidget(hLine);
-    leftLayout->addWidget(deckStars, Level_Starred);
+    leftLayout->addWidget(deckRetireds, Level_Retired);
+    leftLayout->addWidget(deckStarreds, Level_Starred);
 
     mainLayout->addLayout(leftLayout,0,0,2,1);
     mainLayout->addWidget(deckTable,1,1,1,1);
@@ -100,34 +112,39 @@ void DeckWidget::filter(int level)
     QString lable;
     for(int l = 0; l < LevelCount; l++) {
 
-        QString count = deck->getCardsNo_str(l);
+        lable = QString("<b>%1</b><br/><small>%2</small>")
+            .arg(LevelsName[l])
+            .arg(deck->getCardsNo_str(l));
 
-        if(l==level) {
-            lable = QString("<b>%1</b><br/><small>%2</small>")
-                .arg(LevelsName[l])
-                .arg(count);
-
-            deckLevels[l]->setChecked(true);
-        } else {
-            lable = QString("%1<br/><small>%2</small>")
-                .arg(LevelsName[l])
-                .arg(count);
-
-            deckLevels[l]->setChecked(false);
-        }
-
+        deckLevels[l]->setChecked(l==level);
         deckLevels[l]->setHtml(lable);
     }
 
-    QPixmap pixmap(PIXMAP_STARRED);
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    pixmap.save(&buffer, "PNG");
-    lable = QString("<div style=\"vertical-align: middle\"><img src=\"data:image/png;base64,") + byteArray.toBase64() + "\"/> " +
-            QString("<small>(%1)</small></div>").arg(deck->getCardsNo_str(Level_Starred));
-    
-    deckStars->setHtml(lable);
-    deckStars->setChecked(level==Level_Starred);
+    {
+        QPixmap pixmap(PIXMAP_RETIRED);
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        pixmap.save(&buffer, "PNG");
+        lable = QString("<table><tr><td><img src=\"data:image/png;base64,%1\"></td><td valign=\"middle\"><small>(%2)</small></td></tr></table>")
+                .arg((QString)byteArray.toBase64())
+                .arg(deck->getCardsNo_str(Level_Retired));
+
+        deckRetireds->setHtml(lable);
+        deckRetireds->setChecked(level==Level_Retired);
+    }
+
+    {
+        QPixmap pixmap(PIXMAP_STARRED);
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        pixmap.save(&buffer, "PNG");
+        lable = QString("<table><tr><td><img src=\"data:image/png;base64,%1\"></td><td valign=\"middle\"><small>(%2)</small></td></tr></table>")
+                .arg((QString)byteArray.toBase64())
+                .arg(deck->getCardsNo_str(Level_Starred));
+
+        deckStarreds->setHtml(lable);
+        deckStarreds->setChecked(level==Level_Starred);
+    }
 
     proxyModel->setFilterLevel(level);
     

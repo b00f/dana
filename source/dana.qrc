@@ -63,6 +63,7 @@
         <file>images/difficulty-easy.png</file>
         <file>images/difficulty-hard.png</file>
         <file>images/difficulty-normal.png</file>
+	<file>images/completed.png</file>
         <file>images/filter.png</file>
         <file>images/flip.png</file>
         <file>images/pause.png</file>

@@ -66,7 +66,8 @@ protected:
 private:
     QxPushButton *deckLevels[LevelCount];
     QFrame *hLine;
-    QxPushButton *deckStars;
+    QxPushButton *deckRetireds;
+    QxPushButton *deckStarreds;
     DeckTable *deckTable;
 
     DeckDataModel *dataModel;

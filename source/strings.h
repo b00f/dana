@@ -348,6 +348,7 @@
 #define PIXMAP_DIFFICULTY_HARD                           QPixmap(":/images/difficulty-hard.png")
 #define PIXMAP_DIFFICULTY_NORMAL                         QPixmap(":/images/difficulty-normal.png")
 #define PIXMAP_DIFFICULTY_EASY                           QPixmap(":/images/difficulty-easy.png")
+#define PIXMAP_RETIRED                                   QPixmap(":/images/completed.png")
 #define PIXMAP_STARRED                                   QPixmap(":/images/starred.png")
 #define PIXMAP_UNSTARRED                                 QPixmap(":/images/unstarred.png")
 #define PIXMAP_CLOSE                                     QPixmap(":/images/close.png")
