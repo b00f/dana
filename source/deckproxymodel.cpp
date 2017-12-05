@@ -97,8 +97,13 @@ bool DeckProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourcePa
     if (!index.isValid())
 		return false;
 
-    if(filterLevel != Level_ALL)
-    {
+    if(filterLevel == Level_Starred) {
+        bool is_stared = index.data(DeckDataModel::StarredRole).toBool();
+
+        if(!is_stared)
+            return false;
+
+    } else if(filterLevel != Level_ALL) {
         int cardLevel = index.data(DeckDataModel::LevelRole).toInt();
 
         if(filterLevel != cardLevel)

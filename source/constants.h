@@ -69,7 +69,8 @@ enum Levels {
     Level_5             ,
 
     LevelCount          ,
-    Level_Retired = LevelCount
+    Level_Retired = LevelCount,
+    Level_Starred       ,
 };
 
 static const QString LevelsName[LevelCount+1] = {

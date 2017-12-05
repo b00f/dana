@@ -46,10 +46,9 @@ void QueryDialog::setupView()
 {
     cardQuery = new CardQuery;
 
-    QVBoxLayout *mainLayout =  new QVBoxLayout(this);
-    QVBoxLayout *queryLayout = new QVBoxLayout;
-    QHBoxLayout *statusLayout = new QHBoxLayout;
-    QHBoxLayout *toolsLayout = new QHBoxLayout;
+
+    iconStar.addPixmap(PIXMAP_STARRED,   QIcon::Normal, QIcon::On);
+    iconStar.addPixmap(PIXMAP_UNSTARRED, QIcon::Normal, QIcon::Off);
 
     lblFront       = new QLabel;
     btnUp          = new QPushButton(ICON_THUMB_UP  , STR_NOPE);
@@ -58,6 +57,7 @@ void QueryDialog::setupView()
     btnPrev        = new QPushButton(ICON_PREV      , STR_NOPE);
     btnReview      = new QPushButton(ICON_CARD_OPEN , STR_NOPE);
     btnPause       = new QPushButton(ICON_STOP      , STR_NOPE);
+    btnStar        = new QPushButton(iconStar       , STR_NOPE);
     lblLevel       = new QLabel;
     lblDifficaulty = new QLabel;
     histograph     = new Histograph;
@@ -70,6 +70,7 @@ void QueryDialog::setupView()
     connect(btnPrev,   SIGNAL(clicked()), this, SLOT(onPrevCard()));
     connect(btnReview, SIGNAL(clicked()), this, SLOT(onOpenCard()));
     connect(btnPause,  SIGNAL(clicked()), this, SLOT(stop()));
+    connect(btnStar,   SIGNAL(clicked()), this, SLOT(onTurnStar()));
 
     btnUp     ->setToolTip(STR_CARD_EASY_TIP        );
     btnDown   ->setToolTip(STR_CARD_HARD_TIP        );
@@ -77,11 +78,19 @@ void QueryDialog::setupView()
     btnPrev   ->setToolTip(STR_CARD_PREV_TIP        );
     btnReview ->setToolTip(STR_CARD_REVIEW_TIP      );
     btnPause  ->setToolTip(STR_QUERY_STOP_QUERY_TIP );
+    btnStar   ->setToolTip(STR_CARD_PREV_TIP );
     histograph->setToolTip(STR_QUERY_HISTOGRAPH_TIP );
 
     lblFront->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     lblFront->setAlignment(Qt::AlignCenter|Qt::AlignVCenter);
     lblFront->setWordWrap(true);
+
+    btnStar->setCheckable(true);
+
+    QVBoxLayout *mainLayout =  new QVBoxLayout(this);
+    QVBoxLayout *queryLayout = new QVBoxLayout;
+    QHBoxLayout *statusLayout = new QHBoxLayout;
+    QHBoxLayout *toolsLayout = new QHBoxLayout;
 
     statusLayout->addWidget(histograph);
     statusLayout->addStretch();
@@ -94,6 +103,7 @@ void QueryDialog::setupView()
     toolsLayout->addWidget(btnPause);
     toolsLayout->addStretch();
     toolsLayout->addWidget(btnReview);
+    toolsLayout->addWidget(btnStar);
     toolsLayout->addWidget(vLine());
     toolsLayout->addWidget(btnDown);
     toolsLayout->addWidget(btnUp);
@@ -226,6 +236,7 @@ void QueryDialog::setCard(Card *_card)
         btnDown->setEnabled(true);
         btnPrev->setEnabled(cardQuery->hasPrevCard());
         btnNext->setEnabled(cardQuery->hasNextCard());
+        btnStar->setChecked(card->isStarred());
 
         QMap<time_t, int> history;
         card->getHistory().getMap(history);
@@ -237,7 +248,8 @@ void QueryDialog::setCard(Card *_card)
         btnNext->setEnabled(false);
         btnUp->setEnabled(false);
         btnDown->setEnabled(false);
-        
+        btnStar->setEnabled(false);
+
         stop();
     }
 }
@@ -323,4 +335,16 @@ QString QueryDialog::formatHtml(const QString &text)
         .arg(text);
 
     return html;
+}
+
+void QueryDialog::onTurnStar()
+{
+    card->turnStarFlag();
+
+    if(btnStar->isChecked()) {
+        btnStar->setChecked(true);
+    } else {
+        btnStar->setChecked(false);
+    }
+
 }

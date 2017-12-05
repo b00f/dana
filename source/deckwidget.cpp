@@ -70,6 +70,24 @@ void DeckWidget::setupView()
 
     deckLevels[0]->setChecked(true);
 
+    hLine = new QFrame(this);
+
+    hLine->setFrameShape(QFrame::HLine);
+    hLine->setFrameShadow(QFrame::Sunken);
+    hLine->setMinimumSize(QSize(150, 0));
+    hLine->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    deckStars = new QxPushButton(this);
+    deckStars->setCheckable(true);
+    deckStars->setMinimumSize(QSize(150, 0));
+    deckStars->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    signalMapper->setMapping(deckStars, Level_Starred);
+    connect(deckStars, SIGNAL(clicked()), signalMapper, SLOT(map()));
+
+    leftLayout->addWidget(hLine);
+    leftLayout->addWidget(deckStars, Level_Starred);
+
     mainLayout->addLayout(leftLayout,0,0,2,1);
     mainLayout->addWidget(deckTable,1,1,1,1);
 
@@ -80,28 +98,37 @@ void DeckWidget::setupView()
 void DeckWidget::filter(int level)
 {
     QString lable;
-    int count = 0;
     for(int l = 0; l < LevelCount; l++) {
 
-        count = deck->getCardsNo(l);
+        QString count = deck->getCardsNo_str(l);
 
         if(l==level) {
             lable = QString("<b>%1</b><br/><small>%2</small>")
                 .arg(LevelsName[l])
-                .arg(cardNumberToString(count));
+                .arg(count);
 
             deckLevels[l]->setChecked(true);
         } else {
             lable = QString("%1<br/><small>%2</small>")
                 .arg(LevelsName[l])
-                .arg(cardNumberToString(count));
+                .arg(count);
 
             deckLevels[l]->setChecked(false);
         }
 
         deckLevels[l]->setHtml(lable);
     }
+
+    QPixmap pixmap(PIXMAP_STARRED);
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    pixmap.save(&buffer, "PNG");
+    lable = QString("<div style=\"vertical-align: middle\"><img src=\"data:image/png;base64,") + byteArray.toBase64() + "\"/> " +
+            QString("<small>(%1)</small></div>").arg(deck->getCardsNo_str(Level_Starred));
     
+    deckStars->setHtml(lable);
+    deckStars->setChecked(level==Level_Starred);
+
     proxyModel->setFilterLevel(level);
     
     updateView();

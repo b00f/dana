@@ -266,6 +266,11 @@ int Deck::getInHandCardsNo() const
     return inhand;
 }
 
+QString Deck::getCardsNo_str(int level) const
+{
+    return cardNumberToString(getCardsNo(level));
+}
+
 int Deck::getCardsNo(int level) const
 {
     int count = 0;
@@ -278,6 +283,11 @@ int Deck::getCardsNo(int level) const
         if(level == Level_Retired)
         {
             if(!card->isInHand())
+                count ++;
+
+        } else if(level == Level_Starred)
+        {
+            if(card->isStarred())
                 count ++;
 
         } else if(level == Level_ALL ||

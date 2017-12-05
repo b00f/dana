@@ -38,9 +38,9 @@ signals:
     void finished();
 
 private:
-    friend class QtSpeech;
-    QtSpeech::LogicError err;
+    friend class QtSpeech;    
     bool has_error;
+    QtSpeech::LogicError err;
     static bool init;
 };
 

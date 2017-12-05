@@ -65,27 +65,28 @@ public:
 
     virtual DeckFormat &getFormat();
         
-    virtual void setName(QString name);
-    virtual void setDesc(QString desc);
-    virtual void setPixmap(QPixmap pixmap);
-    virtual void setAuthor(QString author);
-    virtual void setTags(QString tags);
-    virtual void setFlags(uint flags);
-    virtual void setFormat(DeckFormat format);
+    virtual void    setName(QString name);
+    virtual void    setDesc(QString desc);
+    virtual void    setPixmap(QPixmap pixmap);
+    virtual void    setAuthor(QString author);
+    virtual void    setTags(QString tags);
+    virtual void    setFlags(uint flags);
+    virtual void    setFormat(DeckFormat format);
     
-    virtual void  saveDeck() = 0;
-    virtual void  removeDeck() = 0;
+    virtual void    saveDeck() = 0;
+    virtual void    removeDeck() = 0;
 
-    virtual bool  openDeck(QVariant param = QVariant()) = 0;
-    virtual void  closeDeck(QVariant param = QVariant()) = 0;
+    virtual bool    openDeck(QVariant param = QVariant()) = 0;
+    virtual void    closeDeck(QVariant param = QVariant()) = 0;
 
-    virtual void  clear();
-    virtual void  addCard(Card *card);
-    virtual void  removeOneCard(Card *card);
-    virtual Card *getCardAt(int index) const;    
-    virtual int   getTotalCardsNo() const;
-    virtual int   getInHandCardsNo() const;
-    virtual int   getCardsNo(int level = /*Level_ALL*/-1) const;
+    virtual void    clear();
+    virtual void    addCard(Card *card);
+    virtual void    removeOneCard(Card *card);
+    virtual Card   *getCardAt(int index) const;
+    virtual int     getTotalCardsNo() const;
+    virtual int     getInHandCardsNo() const;
+    virtual int     getCardsNo(int level = /*Level_ALL*/-1) const;
+    virtual QString getCardsNo_str(int level = /*Level_ALL*/-1) const;
 
     bool importDeck(QVariant param);
     bool exportDeck(QVariant param);

@@ -57,6 +57,7 @@ private slots:
     void onQueryFail();
     void onPrevCard();
     void onNextCard();
+    void onTurnStar();
     void listen();
 
 private:
@@ -75,6 +76,7 @@ private:
     QPushButton *btnNext;
     QPushButton *btnPrev;
     QPushButton *btnReview;
+    QPushButton *btnStar;
     QPushButton *btnPause;
     QLabel *lblLevel;
     QLabel *lblDifficaulty;
@@ -92,6 +94,7 @@ private:
     QAction *actListen;
 
     DeckFormat deckFormat;
+    QIcon iconStar;
 };
 
 #endif // __QUERYDIALOG_H
