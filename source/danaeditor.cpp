@@ -90,7 +90,7 @@ void DanaEditor::setText(QString text)
     QString textColor = charFormat.foreground().color().name();
     QString textDecoration = charFormat.font().underline()?"underline":"none";
 
-    QString html = QString("<html><body align='%1'><p style='font-family:%2; font-weight:%3; font-style:%4; font-size:%5pt; color:%6; text-decoration:%7; margin:0px; padding:0px'>%8</p></body></html>")
+    QString html = QString("<html><bod><div style='text-align:%1 !important; font-family:%2; font-weight:%3; font-style:%4; font-size:%5pt; color:%6; text-decoration:%7; margin:0px; padding:0px'>%8</div></body></html>")
             .arg(align)
             .arg(fontFamily)
             .arg(fontWeight)
@@ -574,10 +574,6 @@ void DanaEditor::setTextFormat(QTextCharFormat _charFormat, QTextBlockFormat _bl
 {
     charFormat= _charFormat;
     blockFormat= _blockFormat;
-    
-    if(toPlainText().size() > 0) {
-        setHtml(toHtml());
-    }
 }
 
 void DanaEditor::getTextFormat(QTextCharFormat &charFormat, QTextBlockFormat &blockFormat)
@@ -646,7 +642,7 @@ void DanaEditor::clearFormat()
 {
     QString text = document()->toPlainText();
     text.replace("\n", "<br>");
-    setHtml(text);
+    setText(text);
 }
 
 void DanaEditor::insertFromMimeData (const QMimeData *source)

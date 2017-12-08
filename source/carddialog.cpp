@@ -277,9 +277,6 @@ void CardDialog::setupView()
                 } break;
 
     case Format: {
-        editFront->setText(STR_CARD_FORMAT_SAMPLE_TEXT);
-        editBack ->setText(STR_CARD_FORMAT_SAMPLE_TEXT);
-
         editFront->setReadOnly(true);
         editBack ->setReadOnly(true);
 

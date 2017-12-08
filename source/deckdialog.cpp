@@ -23,6 +23,7 @@
 #include "carddialog.h"
 #include "constants.h"
 #include "deck.h"
+#include "card.h"
 
 #include <math.h>
 
@@ -227,9 +228,14 @@ void DeckDialog::onChangeFormat()
 {
     CardDialog *dlg = new CardDialog(CardDialog::Format, this);
 
+    Card temp;
+    temp.updateFront(STR_CARD_FORMAT_SAMPLE_TEXT);
+    temp.updateBack(STR_CARD_FORMAT_SAMPLE_TEXT);
+
     DeckFormat format = deck->getFormat();
 
     dlg->setFormat(format);
+    dlg->setCard(&temp);
 
     if(dlg->exec()==CardDialog::Accepted) {
         dlg->getFormat(format);
