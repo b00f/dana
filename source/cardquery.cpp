@@ -26,9 +26,8 @@
 
 bool timeCompare(/*const */Card *a, /*const */Card *b)
 {
-    bool lessThan = a->getHistory().getLastAccessTime() < b->getHistory().getLastAccessTime();
-
-    return lessThan;
+    return a->getHistory()->getLastPoint()->time <
+           b->getHistory()->getLastPoint()->time;
 }
 
 
@@ -58,30 +57,31 @@ void CardQuery::setDeck(Deck *_deck)
 void CardQuery::shuffle()
 {
     shuffled.clear();
+    int count = deck->getTotalCardsNo();
+    int index[count];
+
+    for (int i=0; i<count; i++) {
+        index[i] = i;  // fill the array in order
+    }
+
+    //--- Shuffle elements by randomly exchanging each with one other.
+    srand (time(NULL));
+    for (int i=0; i<count; i++) {
+        int r = rand() % count;  // generate a random position
+        int temp = index[i]; index[i] = index[r]; index[r] = temp;
+    }
 
     /// remove retired cards
-    int count = deck->getTotalCardsNo();
+
     Card *card=0;
-    for(int index = 0; index < count; index++) {
-        card=deck->getCardAt(index);
+    for(int i = 0; i < count; i++) {
+        card=deck->getCardAt(index[i]);
         if(Level_Retired != card->getLevel()) {
             shuffled.append(card);
         }
     }
 
     currentIndex=-1;
-
-    if( Preferences::GetInstance()->getShufflingMethod() == Preferences::ByDate) {
-        /// sort cards by time
-        qSort(shuffled.begin(), shuffled.end(), timeCompare);
-    } else {
-        QTime now = QTime::currentTime();
-        qsrand(now.msec());
-        int n = shuffled.size();
-        for (int i = n-1; i > 0; --i) {
-            shuffled.swap(i, qrand()%(i+1));
-        }
-    }
 }
 
 Card *CardQuery::gotoNextCard()

@@ -223,42 +223,42 @@ void Card::turnStarFlag()
     TURN_FLAG(flags, FLAG_STAR);
 }
 
+void Card::setLevel(int _level)
+{
+    setModified(true);
+
+    level = _level;
+}
+
 void Card::updateLevel(int _level)
 {
     setModified(true);
-    
+
     if(_level<Level_1)
-        level=Level_1;
-    else if(_level>LevelCount)
-        level=Level_Retired;
-    else
-        level=_level;
+        _level=Level_1;
 
-    history.addHistoryPoint(level);
+    if(_level>LevelCount)
+        _level=Level_Retired;
 
-    /// 
-    int level = -1;
-    int passed = 0;
-    QMap<time_t, int> historyMap;
-    history.getMap(historyMap);
+    if(level>=_level) {
+        level=_level; /// decrease level
+    } else {
+        Point* point = history.getLastPoint(true);
 
-    QMapIterator<time_t, int> itr(historyMap);
+        int days = point->time.daysTo(QDateTime::currentDateTime());
 
-    while(itr.hasNext())
-    {
-        itr.next();
-
-        if(level < itr.value())
-            passed++;
-        else
-            passed--;
-
-        level = itr.value();
+        if(days > (_level*2)) /// give time to change card's level
+            level = _level;
     }
 
-    if(passed>2) {
+    history.addPoint(level);
+
+    /// 
+    int difficulty = history.difficulty();
+
+    if(difficulty==1) {
         SET_FLAG(flags, FLAG_EASY);
-    } else if(passed<-1) {
+    } else if(difficulty==-1) {
         SET_FLAG(flags, FLAG_HARD);
     } else {
         UNSET_FLAG(flags, FLAG_EASY);
@@ -266,7 +266,7 @@ void Card::updateLevel(int _level)
     }
 }
 
-CardHistory &Card::getHistory()
+CardHistory *Card::getHistory()
 {
-    return history;
+    return &history;
 }

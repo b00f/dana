@@ -27,7 +27,6 @@
 #define SETTING_KEY_AUTOSTART          "auto_start"
 #define SETTING_KEY_CHECK_UPDATE       "update_check"
 #define SETTING_KEY_QUERY_INTERVAL     "query_interval"
-#define SETTING_KEY_SHUFFLE_METHOD     "shuffle_method"
 #define SETTING_KEY_USERNAME           "username"
 #define SETTING_KEY_PASSWORD           "password"
 #define SETTING_KEY_PROXY_ENABLED      "proxy_enabled"
@@ -51,7 +50,6 @@ Preferences::~Preferences(void)
 void Preferences::load()
 {
     queryInterval   = QxSettings::getSetting(SETTING_KEY_QUERY_INTERVAL,    SETTING_GROUP_NAME, 30).toInt();
-    shufflingMethod = QxSettings::getSetting(SETTING_KEY_SHUFFLE_METHOD,    SETTING_GROUP_NAME, ByDate) .toInt();
     username        = QxSettings::getSetting(SETTING_KEY_USERNAME,          SETTING_GROUP_NAME, "").toString();
     password        = QxSettings::getSetting(SETTING_KEY_PASSWORD,          SETTING_GROUP_NAME, "").toString();
     proxyUsername   = QxSettings::getSetting(SETTING_KEY_PROXY_USERNAME,    SETTING_GROUP_NAME, "").toString();
@@ -62,7 +60,6 @@ void Preferences::load()
 void Preferences::save()
 {
     QxSettings::setSetting(SETTING_KEY_QUERY_INTERVAL,  SETTING_GROUP_NAME, queryInterval);
-    QxSettings::setSetting(SETTING_KEY_SHUFFLE_METHOD,  SETTING_GROUP_NAME, shufflingMethod);
     QxSettings::setSetting(SETTING_KEY_USERNAME,        SETTING_GROUP_NAME, username);
     QxSettings::setSetting(SETTING_KEY_PASSWORD,        SETTING_GROUP_NAME, password);
     QxSettings::setSetting(SETTING_KEY_PROXY_USERNAME,  SETTING_GROUP_NAME, proxyUsername);
@@ -78,16 +75,6 @@ int Preferences::getQueryInterval()
 void Preferences::setQueryInterval(int interval)
 {
     queryInterval = interval;
-}
-
-Preferences::ShufflingMethod Preferences::getShufflingMethod()
-{
-    return (ShufflingMethod)shufflingMethod;
-}
-
-void Preferences::setShufflingMethod(ShufflingMethod method)
-{
-    shufflingMethod = method;
 }
 
 QString Preferences::getUsername()

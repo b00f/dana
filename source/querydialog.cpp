@@ -57,6 +57,7 @@ void QueryDialog::setupView()
     btnPrev        = new QPushButton(ICON_PREV      , STR_NOPE);
     btnReview      = new QPushButton(ICON_CARD_OPEN , STR_NOPE);
     btnPause       = new QPushButton(ICON_STOP      , STR_NOPE);
+    btnListen      = new QPushButton(ICON_LISTEN    , STR_NOPE);
     btnStar        = new QPushButton(iconStar       , STR_NOPE);
     lblLevel       = new QLabel;
     lblDifficaulty = new QLabel;
@@ -69,8 +70,9 @@ void QueryDialog::setupView()
     connect(btnNext,   SIGNAL(clicked()), this, SLOT(onNextCard()));
     connect(btnPrev,   SIGNAL(clicked()), this, SLOT(onPrevCard()));
     connect(btnReview, SIGNAL(clicked()), this, SLOT(onOpenCard()));
-    connect(btnPause,  SIGNAL(clicked()), this, SLOT(stop()));
+    connect(btnListen, SIGNAL(clicked()), this, SLOT(onListen()));
     connect(btnStar,   SIGNAL(clicked()), this, SLOT(onTurnStar()));
+    connect(btnPause,  SIGNAL(clicked()), this, SLOT(stop()));
 
     btnUp     ->setToolTip(STR_CARD_EASY_TIP        );
     btnDown   ->setToolTip(STR_CARD_HARD_TIP        );
@@ -78,7 +80,8 @@ void QueryDialog::setupView()
     btnPrev   ->setToolTip(STR_CARD_PREV_TIP        );
     btnReview ->setToolTip(STR_CARD_REVIEW_TIP      );
     btnPause  ->setToolTip(STR_QUERY_STOP_QUERY_TIP );
-    btnStar   ->setToolTip(STR_CARD_PREV_TIP );
+    btnStar   ->setToolTip(STR_CARD_PREV_TIP        );
+    btnListen ->setToolTip(STR_CARD_LISTEN          );
     histograph->setToolTip(STR_QUERY_HISTOGRAPH_TIP );
 
     lblFront->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -103,6 +106,7 @@ void QueryDialog::setupView()
     toolsLayout->addWidget(btnPause);
     toolsLayout->addStretch();
     toolsLayout->addWidget(btnReview);
+    toolsLayout->addWidget(btnListen);
     toolsLayout->addWidget(btnStar);
     toolsLayout->addWidget(vLine());
     toolsLayout->addWidget(btnDown);
@@ -116,6 +120,7 @@ void QueryDialog::setupView()
     btnPrev  ->setShortcut(QKeySequence("Left"));
     btnNext  ->setShortcut(QKeySequence("Right"));
     btnReview->setShortcut(QKeySequence("Space"));
+    btnListen->setShortcut(Qt::CTRL + Qt::Key_D);
 
     btnReview->setFocusPolicy(Qt::NoFocus);
 
@@ -126,10 +131,9 @@ void QueryDialog::setupView()
     connect(mainTimer, SIGNAL(timeout()), this, SLOT(show()));
     connect(closeTimer, SIGNAL(timeout()), this, SLOT(close()));
 
-    int closeTimerInterval = 2; /// close this dialog if user doesn't reaction for two minutes.
+    int closeTimerInterval = 2; /// close this dialog if user hasn't reacted for two minutes.
     int mainTimerInterval = Preferences::GetInstance()->getQueryInterval();
     
-    /// close this dialog if user doesn't reaction for two minutes.
     closeTimer->setInterval(MIN_2_MSEC(closeTimerInterval));
     mainTimer->setInterval(MIN_2_MSEC(mainTimerInterval));
     
@@ -142,11 +146,6 @@ void QueryDialog::setupView()
 
         setGeometry(x-5,y-5,500,200);
     }
-
-    actListen = new QAction(STR_ACTION_LISTEN_IT, this);
-    actListen->setShortcut(Qt::CTRL + Qt::Key_D);
-    addAction(actListen);
-    connect(actListen, SIGNAL(triggered(bool)), this, SLOT(listen()));
 
     btnUp->setFocus();
 
@@ -205,8 +204,6 @@ void QueryDialog::onQueryPass()
     card->increaseLevel();
 
     setCard(cardQuery->gotoNextCard());
-
-    listen();
 }
 
 void QueryDialog::onQueryFail()
@@ -214,8 +211,6 @@ void QueryDialog::onQueryFail()
     card->decreaseLevel();
 
     setCard(cardQuery->gotoNextCard());
-
-    listen();
 }
 
 void QueryDialog::setCard(Card *_card)
@@ -238,9 +233,7 @@ void QueryDialog::setCard(Card *_card)
         btnNext->setEnabled(cardQuery->hasNextCard());
         btnStar->setChecked(card->isStarred());
 
-        QMap<time_t, int> history;
-        card->getHistory().getMap(history);
-        histograph->setData(history);        
+        histograph->setHistory(card->getHistory());
 
     } else {
         btnReview->setEnabled(false);
@@ -290,7 +283,7 @@ void QueryDialog::showEvent(QShowEvent *event)
     mainTimer->stop();
 }
 
-void QueryDialog::listen()
+void QueryDialog::onListen()
 {
     if(card) {
         try {

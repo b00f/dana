@@ -55,6 +55,7 @@ public:
     void         updateFront(QString front);
     void         updateBack(QString back);
     void         updateLevel(int level);
+    void         setLevel(int _level);
     void         setFlags(uint flags);
                  
     int          getId() const;
@@ -69,7 +70,7 @@ public:
     bool         isInHand() const;
     bool         isRetired() const;
    
-    CardHistory &getHistory();
+    CardHistory *getHistory();
    
     void         turnStarFlag();
     void         increaseStudy();

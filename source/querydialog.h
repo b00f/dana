@@ -58,7 +58,7 @@ private slots:
     void onPrevCard();
     void onNextCard();
     void onTurnStar();
-    void listen();
+    void onListen();
 
 private:
     void setupView();
@@ -76,6 +76,7 @@ private:
     QPushButton *btnNext;
     QPushButton *btnPrev;
     QPushButton *btnReview;
+    QPushButton *btnListen;
     QPushButton *btnStar;
     QPushButton *btnPause;
     QLabel *lblLevel;

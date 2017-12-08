@@ -120,7 +120,6 @@
 #define STR_ACTION_DECK_REMOVE                           QString("&Remove Deck") 
 #define STR_ACTION_DECK_PROPERTIES                       QString("&Properties")
 #define STR_ACTION_BACK_TO_DESK                          QString("Back to &Desk")
-#define STR_ACTION_LISTEN_IT                             QString("Listen it! (Ctrl+D)")
 
 #define STR_ACTION_RESTORE_TIP                           QString("Restore Main Window")
 #define STR_ACTION_QUIT_TIP                              QString("Exit Dana")
@@ -152,7 +151,6 @@
 #define STR_ACTION_DECK_REMOVE_TIP                       QString("Remove selected Deck")
 #define STR_ACTION_DECK_PROPERTIES_TIP                   QString("Check deck Properties")
 #define STR_ACTION_BACK_TO_DESK_TIP                      QString("Back to &Desk")
-#define STR_ACTION_LISTEN_IT_TIP                         QString("Listen it! (Ctrl+D)")
 
 /// deck
 #define STR_DECK_NEW                                     QString("New Deck")
@@ -207,6 +205,8 @@
 #define STR_CARD_NEXT_TIP                                QString("Goto Next Card in Deck")
 #define STR_CARD_PREV                                    QString("&Previous Card")
 #define STR_CARD_PREV_TIP                                QString("Goto Previous Card in Deck")
+#define STR_CARD_LISTEN                                  QString("Listen to the card")
+#define STR_CARD_LISTEN_TIP                              QString("Listen to the card (Ctrl+D)")
 #define STR_CARD_FORMAT_SAMPLE_TEXT                      QString("Sample_Text")
 
 /// download dialog
@@ -324,6 +324,7 @@
 #define ICON_FLIP                                        QIcon(":/images/flip.png")
 #define ICON_EXIT                                        QIcon(":/images/exit.png")
 #define ICON_SAVE                                        QIcon(":/images/save.png")
+#define ICON_LISTEN                                      QIcon(":/images/listen.png")
 #define ICON_THUMB_UP                                    QIcon(":/images/thumb-up.png")
 #define ICON_THUMB_DOWN                                  QIcon(":/images/thumb-down.png")
 #define ICON_NEXT                                        QIcon(":/images/next.png")

@@ -30,11 +30,6 @@ class Preferences
     : public CSingleton<Preferences>
 {
 public:
-    enum ShufflingMethod {
-        Randomly  = 0,
-        ByDate       ,
-    };
-
     Preferences(void);
     ~Preferences(void);
 
@@ -43,9 +38,6 @@ public:
 
     int getQueryInterval();
     void setQueryInterval(int interval);
-
-    ShufflingMethod getShufflingMethod();
-    void setShufflingMethod(ShufflingMethod method);
 
     QString getUsername();
     void setUsername(QString username);
@@ -64,7 +56,6 @@ public:
 
 private:
     int         queryInterval;
-    int         shufflingMethod;
     int         frontPolicy;
     int         backPolicy;
     QString     username;

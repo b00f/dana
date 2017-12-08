@@ -22,7 +22,8 @@
 
 #include <QDateTime>
 #include <QWidget>
-#include <QMap>
+
+#include "cardhistory.h"
 
 class Histograph :
     public QWidget
@@ -32,13 +33,13 @@ class Histograph :
 public:
     explicit Histograph(QWidget *parent = 0);
     
-    void setData(QMap<time_t, int> history);
+    void setHistory(CardHistory* history);
 
 private:
     virtual void paintEvent(QPaintEvent*);
 
 private:
-    QMap<time_t, int> History;
+    CardHistory* History;
 };
 
 #endif // __HISTOGRAPH_H

@@ -109,17 +109,7 @@ ConfigDeckPage::ConfigDeckPage(QWidget *parent)
     timerLayout->addStretch();
     timerLayout->addWidget(queryTimer);
 
-    QHBoxLayout *shuffleLayout = new QHBoxLayout;
-    QLabel *shuffleLabel = new QLabel(STR_CONFIG_DECK_SHUFFLE_LABEL);
-    shufflingCombo = new ComboLabel(QIcon(), true);
-    shufflingCombo->addItem(STR_CONFIG_DECK_SHUFFLE_RANDOM , Preferences::Randomly);
-    shufflingCombo->addItem(STR_CONFIG_DECK_SHUFFLE_BY_DATE, Preferences::ByDate);    
-    shuffleLayout->addWidget(shuffleLabel);
-    shuffleLayout->addStretch();
-    shuffleLayout->addWidget(shufflingCombo);
-
     settingLayout->addLayout(timerLayout);
-    settingLayout->addLayout(shuffleLayout);
 
     /// on close
     /*
@@ -128,13 +118,11 @@ ConfigDeckPage::ConfigDeckPage(QWidget *parent)
     */
 
     queryTimer->setSpinValue( preferences->getQueryInterval() );
-    shufflingCombo->setCurrentIndex( preferences->getShufflingMethod() );
 }
 
 void ConfigDeckPage::save()
 {
     preferences->setQueryInterval( queryTimer->getSpinValue() );
-    preferences->setShufflingMethod( (Preferences::ShufflingMethod)shufflingCombo->currentIndex() );
 }
 
 ConfigNetwordPage::ConfigNetwordPage(QWidget *parent)

@@ -273,14 +273,14 @@ bool DatabaseManager::insertCard(Card *card, int deckId)
     query.prepare(SQL_INSERT_CARD);
 
     /// initialize card history here
-    card->getHistory().addHistoryPoint( card->getLevel() );
+    card->getHistory()->addPoint( card->getLevel() );
 
     query.bindValue(":deckid",         deckId);
     query.bindValue(":front",          card->getFront());
     query.bindValue(":back",           card->getBack());
     query.bindValue(":level",          card->getLevel());
     query.bindValue(":flags",          card->getFlags());    
-    query.bindValue(":history",        card->getHistory().toString());
+    query.bindValue(":history",        card->getHistory()->toString());
 
     if(!query.exec()) {
         /// report error
@@ -303,7 +303,7 @@ bool DatabaseManager::updateCard(Card *card)
     query.bindValue(":back",           card->getBack());
     query.bindValue(":level",          card->getLevel());
     query.bindValue(":flags",          card->getFlags());
-    query.bindValue(":history",        card->getHistory().toString());   
+    query.bindValue(":history",        card->getHistory()->toString());
 
     if(!query.exec()) {
         /// report error
@@ -396,9 +396,9 @@ void DatabaseManager::loadDeck(MyDeck *deck)
         card->setId          (query.value(idFieldNo    ).toInt()     );
         card->updateFront    (query.value(frontFieldNo ).toString()  );
         card->updateBack     (query.value(backFieldNo  ).toString()  );
-        card->updateLevel    (query.value(levelFieldNo ).toInt()     );
+        card->setLevel       (query.value(levelFieldNo ).toInt()     );
         card->setFlags       (query.value(flagsFieldNo ).toUInt()    );
-        card->getHistory().fromString(query.value(historyFieldNo).toString()  );
+        card->getHistory()->fromString(query.value(historyFieldNo).toString()  );
 
         card->resetModification();
 

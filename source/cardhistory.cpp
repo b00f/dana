@@ -23,34 +23,44 @@
 #include <QDateTime>
 #include <QStringList>
 
-CardHistory::CardHistory(QObject *parent)
-    : QObject(parent)
+CardHistory::CardHistory()
 {
 }
 
-CardHistory::CardHistory(const CardHistory &rhs, QObject *parent)
-    : QObject(parent)
+CardHistory::CardHistory(const CardHistory &rhs)
 {
     *this = rhs;
 }
 
+CardHistory::~CardHistory()
+{
+    for (auto it=history.constBegin();
+        it!=history.constEnd(); ++it) {
+        delete (*it);
+    }
+    history.clear();
+}
+
 CardHistory &CardHistory::operator =(const CardHistory &rhs)
 {
-    historyMap = rhs.historyMap;
+    history = rhs.history;
 
     return *this;
 }
 
-void CardHistory::addHistoryPoint(int level)
+void CardHistory::addPoint(int level)
 {
-    time_t tm = QDateTime::currentDateTime().toTime_t();
+    Point* point = new Point();
 
-    historyMap.insert(tm, level);
+    point->time = QDateTime::currentDateTime();
+    point->level = level;
+
+    history.push_back(point);
 }
 
 void CardHistory::fromString(QString historyLine)
 {
-    historyMap.clear();
+    history.clear();
 
     int index = 0;
     int level = 0;
@@ -58,38 +68,80 @@ void CardHistory::fromString(QString historyLine)
     QString token;
     QStringList sl = historyLine.split(';');
 
-    for (QStringList::Iterator it=sl.begin(); 
-        it!=sl.end(); ++it) {
-            token = *it;
-            index = token.indexOf(',');
+    for (QStringList::Iterator it=sl.begin();
+         it!=sl.end(); ++it) {
+        token = *it;
+        index = token.indexOf(',');
 
-            if(index != -1)
-            {
-                level = token.midRef(index+1).toInt();
-                time = token.leftRef(index).toLongLong();
+        if(index != -1) {
+            level = token.midRef(index+1).toInt();
+            time = token.leftRef(index).toLongLong();
 
-                historyMap.insert(time, level);
-            }
+            Point* point = new Point();
+
+            point->time = QDateTime::fromTime_t(time);
+            point->level = level;
+
+            history.push_back(point);
+        }
+
     }
 }
 
-QString CardHistory::toString()
+QString CardHistory::toString() const
 {
     QString historyLine;
-    for (QMap<time_t, int>::Iterator it=historyMap.begin(); 
-        it!=historyMap.end(); ++it) {
-             historyLine.append(QString("%1,%2;").arg(it.key()).arg(it.value()));
+    for (auto it=history.constBegin();
+        it!=history.constEnd(); ++it) {
+             historyLine.append(QString("%1,%2;")
+                                .arg((*it)->time.toTime_t())
+                                .arg((*it)->level));
     }
 
     return historyLine;
 }
 
-void CardHistory::getMap(QMap<time_t, int> &_historyMap)
+Point* CardHistory::getLastPoint(bool same_level) const
 {
-    _historyMap = historyMap;
+    Point* point = 0;
+
+    if(same_level) {
+        int level = history[history.size()-1]->level;
+        int index = history.size()-2;
+
+        for(; index >= 0; --index) {
+
+            if(level != history[index]->level) {
+                break;
+            }
+        }
+
+        point = history[index+1];
+
+    } else {
+        point = history[history.size()-1];
+    }
+
+    return point;
 }
 
-QDateTime CardHistory::getLastAccessTime()
+int CardHistory::difficulty() const
 {
-    return QDateTime::fromTime_t(historyMap.end().key());
+    int level = 0;
+    int success = 0;
+    for (auto it=history.constBegin();
+        it!=history.constEnd(); ++it) {
+        if((*it)->level >= level)
+            success++;
+        else
+            success--;
+    }
+
+    if(success>5) {
+        return 1;
+    } else if(success<-3) {
+        return -1;
+    } else {
+        return 0;
+    }
 }

@@ -86,7 +86,7 @@ public:
     virtual int     getTotalCardsNo() const;
     virtual int     getInHandCardsNo() const;
     virtual int     getCardsNo(int level = /*Level_ALL*/-1) const;
-    virtual QString getCardsNo_str(int level = /*Level_ALL*/-1) const;
+    virtual QString getCardsNoString(int level = /*Level_ALL*/-1) const;
 
     bool importDeck(QVariant param);
     bool exportDeck(QVariant param);

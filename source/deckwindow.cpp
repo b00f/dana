@@ -340,7 +340,7 @@ void DeckWindow::onSetLevel(QAction *action)
     if(!card)
         return;
 
-    card->updateLevel(action->data().toInt());
+    card->setLevel(action->data().toInt());
 
     updateView();
 }

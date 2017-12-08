@@ -20,29 +20,35 @@
 #ifndef __CARDHISTORY_H
 #define __CARDHISTORY_H
 
-#include <QObject>
-#include <QMap>
+#include <QDateTime>
+#include <QList>
+
+class Point
+{
+public:
+    QDateTime time;
+    int level;
+};
 
 class CardHistory
-    : public QObject
 {
-    Q_OBJECT
+    friend class Histograph;
 
 public:
-    CardHistory(QObject *parent = 0);
-    CardHistory(const CardHistory &rhs, QObject *parent = 0);
+    CardHistory();
+    CardHistory(const CardHistory &rhs);
     CardHistory &operator =(const CardHistory &rhs);
+    ~CardHistory();
 
     void      fromString(QString historyLine);
-    QString   toString();
-    QDateTime getLastAccessTime();
+    QString   toString() const;
+    Point*    getLastPoint(bool same_level = false) const;
+    int       difficulty() const;
 
-    void      addHistoryPoint(int level);
-    
-    void      getMap(QMap<time_t, int> &historyMap);
+    void      addPoint(int level);
 
 protected:
-    QMap<time_t, int> historyMap;  
+    QList<Point*> history;
 };
 
 #endif // __CARDHISTORY_H

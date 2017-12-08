@@ -266,7 +266,7 @@ int Deck::getInHandCardsNo() const
     return inhand;
 }
 
-QString Deck::getCardsNo_str(int level) const
+QString Deck::getCardsNoString(int level) const
 {
     return cardNumberToString(getCardsNo(level));
 }

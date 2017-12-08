@@ -74,7 +74,6 @@ public:
 
 protected:
     SpinLabel *queryTimer;
-    ComboLabel *shufflingCombo;
 };
 
 class ConfigNetwordPage 

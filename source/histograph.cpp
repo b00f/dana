@@ -25,10 +25,11 @@
 
 Histograph::Histograph(QWidget *parent)
     : QWidget(parent)
+    , History(0)
 {
 }
 
-void Histograph::setData(QMap<time_t, int> history)
+void Histograph::setHistory(CardHistory* history)
 {
     History = history;
 
@@ -43,7 +44,7 @@ void Histograph::paintEvent(QPaintEvent*)
     int h = height() - 4;
 
     time_t now = QDateTime::currentDateTime().toTime_t();
-    time_t start = History.begin().key();
+    time_t start = History->history[0]->time.toTime_t();
         
     double diff = now - start;    
     double x_unit_width = w / diff;
@@ -52,18 +53,16 @@ void Histograph::paintEvent(QPaintEvent*)
     double x=0;
     double y=0;
     int i =0;
-    int c = History.size();
+    int c = History->history.size();
     QPointF *points = new QPointF[c];
-    QMapIterator<time_t, int> itr(History);
     
     p.setRenderHint(QPainter::Antialiasing, true);
 
-    while(itr.hasNext())
-    {
-        itr.next();
+    for (auto it=History->history.constBegin();
+        it!=History->history.constEnd(); ++it) {
 
-        x = (itr.key() - start) *x_unit_width + 2;
-        y = h - (itr.value() *y_unit_width);
+        x = ((*it)->time.toTime_t() - start) *x_unit_width + 2;
+        y = h - ((*it)->level *y_unit_width);
         
         points[i].setX(x);
         points[i].setY(y);

@@ -114,7 +114,7 @@ void DeckWidget::filter(int level)
 
         lable = QString("<b>%1</b><br/><small>%2</small>")
             .arg(LevelsName[l])
-            .arg(deck->getCardsNo_str(l));
+            .arg(deck->getCardsNoString(l));
 
         deckLevels[l]->setChecked(l==level);
         deckLevels[l]->setHtml(lable);
@@ -127,7 +127,7 @@ void DeckWidget::filter(int level)
         pixmap.save(&buffer, "PNG");
         lable = QString("<table><tr><td><img src=\"data:image/png;base64,%1\"></td><td valign=\"middle\"><small>(%2)</small></td></tr></table>")
                 .arg((QString)byteArray.toBase64())
-                .arg(deck->getCardsNo_str(Level_Retired));
+                .arg(deck->getCardsNoString(Level_Retired));
 
         deckRetireds->setHtml(lable);
         deckRetireds->setChecked(level==Level_Retired);
@@ -140,7 +140,7 @@ void DeckWidget::filter(int level)
         pixmap.save(&buffer, "PNG");
         lable = QString("<table><tr><td><img src=\"data:image/png;base64,%1\"></td><td valign=\"middle\"><small>(%2)</small></td></tr></table>")
                 .arg((QString)byteArray.toBase64())
-                .arg(deck->getCardsNo_str(Level_Starred));
+                .arg(deck->getCardsNoString(Level_Starred));
 
         deckStarreds->setHtml(lable);
         deckStarreds->setChecked(level==Level_Starred);
