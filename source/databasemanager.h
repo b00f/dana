@@ -23,6 +23,7 @@
 #include "singleton.h"
 
 #include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QSqlError>
 #include <QVariant>
 
@@ -35,8 +36,8 @@ class DatabaseManager
 public:
     DatabaseManager();
 	
-	bool openDB();
-    QSqlError lastError();
+    bool open();
+    QSqlError lastError() const;
     
     bool loadDeckList(DeckList *deckList);
 
@@ -53,6 +54,10 @@ public:
     bool updateCard(Card *card);    
 
 private:
+    QSqlQuery queryUpdateCard;
+    QSqlQuery queryInsertCard;
+    QSqlQuery queryDeleteCard;
+
     QSqlDatabase db;
 };
 

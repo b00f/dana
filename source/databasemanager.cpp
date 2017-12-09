@@ -98,34 +98,43 @@
 
 DatabaseManager::DatabaseManager()
 {
-    openDB();
-}
-
-bool DatabaseManager::openDB()
-{
     // Find QSLite driver
     db = QSqlDatabase::addDatabase("QSQLITE");
-    
+
     db.setDatabaseName( dBPath() );
 
-    if (!db.open())
-        return false;
-
-    if(!db.tables().contains(QLatin1String("DECK")))
+    if(open())
     {
-        db.exec(SQL_CREATE_DECK_TABLE);
-    }
+        if(!db.tables().contains(QLatin1String("DECK")))
+        {
+            db.exec(SQL_CREATE_DECK_TABLE);
+        }
 
-    if(!db.tables().contains(QLatin1String("CARD")))
-    {
-        db.exec(SQL_CREATE_CARD_TABLE);
-    }
+        if(!db.tables().contains(QLatin1String("CARD")))
+        {
+            db.exec(SQL_CREATE_CARD_TABLE);
+        }
 
-    // database opened
-    return true;
+        queryUpdateCard.prepare(SQL_UPDATE_CARD);
+        queryInsertCard.prepare(SQL_INSERT_CARD);
+        queryDeleteCard.prepare(SQL_DELETE_CARD);
+    }
 }
 
-QSqlError DatabaseManager::lastError()
+bool DatabaseManager::open()
+{
+    if(!db.isOpen())
+    {
+        if(!db.open())
+        {
+            qWarning() << "ERROR: could not open database. Reason: "<<db.lastError();
+        }
+    }
+
+    return db.isOpen();
+}
+
+QSqlError DatabaseManager::lastError() const
 {
     // If opening database has failed user can ask 
     // error description by QSqlError::text()
@@ -169,7 +178,7 @@ bool DatabaseManager::updateDeck(MyDeck *deck)
     QDateTime now = QDateTime::currentDateTime();
     QSqlQuery query;
     query.prepare(SQL_UPDATE_DECK_INFO);
-    
+
     query.bindValue(":deckid",         deck->getId());
     query.bindValue(":name",           deck->getName());
     query.bindValue(":desc",           deck->getDesc());
@@ -269,61 +278,54 @@ bool DatabaseManager::loadDeckList(DeckList *deckList)
 
 bool DatabaseManager::insertCard(Card *card, int deckId)
 {
-    QSqlQuery query;
-    query.prepare(SQL_INSERT_CARD);
-
     /// initialize card history here
     card->getHistory()->addPoint( card->getLevel() );
 
-    query.bindValue(":deckid",         deckId);
-    query.bindValue(":front",          card->getFront());
-    query.bindValue(":back",           card->getBack());
-    query.bindValue(":level",          card->getLevel());
-    query.bindValue(":flags",          card->getFlags());    
-    query.bindValue(":history",        card->getHistory()->toString());
+    queryInsertCard.bindValue(":deckid",  deckId);
+    queryInsertCard.bindValue(":front",   card->getFront());
+    queryInsertCard.bindValue(":back",    card->getBack());
+    queryInsertCard.bindValue(":level",   card->getLevel());
+    queryInsertCard.bindValue(":flags",   card->getFlags());
+    queryInsertCard.bindValue(":history", card->getHistory()->toString());
 
-    if(!query.exec()) {
+    if(!queryInsertCard.exec()) {
         /// report error
-        qCritical() << query.lastError();
+        qCritical() << queryInsertCard.lastError();
         return false;
     }
 
-    card->setId(query.lastInsertId().toInt());
+    card->setId(queryInsertCard.lastInsertId().toInt());
 
     return true;
 }
 
 bool DatabaseManager::updateCard(Card *card)
 {
-    QSqlQuery query;
-    query.prepare(SQL_UPDATE_CARD);
+    queryUpdateCard.bindValue(":cardid",  card->getId());
+    queryUpdateCard.bindValue(":front",   card->getFront());
+    queryUpdateCard.bindValue(":back",    card->getBack());
+    queryUpdateCard.bindValue(":level",   card->getLevel());
+    queryUpdateCard.bindValue(":flags",   card->getFlags());
+    queryUpdateCard.bindValue(":history", card->getHistory()->toString());
 
-    query.bindValue(":cardid",         card->getId());
-    query.bindValue(":front",          card->getFront());
-    query.bindValue(":back",           card->getBack());
-    query.bindValue(":level",          card->getLevel());
-    query.bindValue(":flags",          card->getFlags());
-    query.bindValue(":history",        card->getHistory()->toString());
-
-    if(!query.exec()) {
+    if(!queryUpdateCard.exec()) {
         /// report error
-        qCritical() << query.lastError();
+        qCritical() << queryUpdateCard.lastError();
         return false;
     }
+
+    card->resetModification();
 
     return true;
 }
 
 bool DatabaseManager::deleteCard(Card *card)
 {
-    QSqlQuery query;
-    query.prepare(SQL_DELETE_CARD);
+    queryDeleteCard.bindValue(":cardid", card->getId());
 
-    query.bindValue(":cardid", card->getId());
-
-    if(!query.exec()) {
+    if(!queryDeleteCard.exec()) {
         /// report error
-        qCritical() << query.lastError();
+        qCritical() << queryDeleteCard.lastError();
         return false;
     }
 
@@ -345,8 +347,6 @@ bool DatabaseManager::saveDeck(MyDeck *deck)
         if(card->isModified()) {
             hasChange = true;
             updateCard(card);
-
-            card->resetModification();
         }
     }
 
