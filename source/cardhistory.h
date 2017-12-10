@@ -32,8 +32,6 @@ public:
 
 class CardHistory
 {
-    friend class Histograph;
-
 public:
     CardHistory();
     CardHistory(const CardHistory &rhs);
@@ -42,13 +40,14 @@ public:
 
     void      fromString(QString historyLine);
     QString   toString() const;
-    Point*    getLastPoint(bool same_level = false) const;
-    int       difficulty() const;
+    Point*    getLastPoint(bool sameLevel = false) const;
 
     void      addPoint(int level);
 
+    const QList<Point*> &getPoints() const;
+
 protected:
-    QList<Point*> history;
+    QList<Point*> points;
 };
 
 #endif // __CARDHISTORY_H

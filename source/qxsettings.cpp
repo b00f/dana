@@ -19,9 +19,10 @@
 //
 
 #include "qxsettings.h"
+#include "constants.h"
 
-QxSettings::QxSettings(QObject *parent)
-    : QSettings(parent)
+QxSettings::QxSettings()
+    : QSettings(danaPath()+"/settings.ini", Format::NativeFormat)
 {
 }
 

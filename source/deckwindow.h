@@ -25,6 +25,7 @@
 #include "childwindow.h"
 #include "querydialog.h"
 #include "reviewdialog.h"
+#include "cardinfodialog.h"
 
 class MyDeck;
 class DeckWindow 
@@ -62,6 +63,7 @@ private slots:
     void onStopQuickQuery();
     void onQuickQuery();
     void updateView();
+    void onCardInfo();
 
 private:
     void setupToolbar();
@@ -86,12 +88,14 @@ private:
             *actStudy,
             *actReport,
             *actReview,
+            *actCardInfo,
             *actQuickQuery;
 
     MyDeck *deck;
 
 	QueryDialog *qqDlg;
     ReviewDialog *reviewDlg;
+    CardInfoDialog *infoDlg;
     
     QMenu *contextMent;
     QMenu *levelMenu;

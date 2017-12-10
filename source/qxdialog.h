@@ -32,7 +32,7 @@ class QxDialog
 public:
     explicit QxDialog(QString name, QWidget *parent = 0);
 
-    QVariant getSetting(const QString &key);
+    QVariant getSetting(const QString &key, const QVariant &defaultValue = QVariant());
     void setSetting(const QString &key, const QVariant &value);
     void setWindowTitle(const QString &caption);
 

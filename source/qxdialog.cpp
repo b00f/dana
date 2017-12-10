@@ -49,10 +49,10 @@ void QxDialog::onFinish(int result)
     setSetting("geometry", saveGeometry());
 }
 
-QVariant QxDialog::getSetting(const QString &key)
+QVariant QxDialog::getSetting(const QString &key, const QVariant &defaultValue)
 {
     QString group = name;
-    return QxSettings::getSetting(key, group);
+    return QxSettings::getSetting(key, group, defaultValue);
 }
 
 void QxDialog::setSetting(const QString &key, const QVariant &value)

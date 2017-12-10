@@ -1,4 +1,4 @@
-QT += core xml gui network widgets sql
+QT += core xml gui network widgets sql charts
 
 TARGET = dana
 TEMPLATE = app

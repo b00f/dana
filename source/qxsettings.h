@@ -28,7 +28,7 @@ class QxSettings
     Q_OBJECT
 
 public:
-    explicit QxSettings(QObject *parent = 0);
+    explicit QxSettings();
     
     static QVariant getSetting(const QString &key, const QString &group, const QVariant &defaultValue = QVariant());
     static void     setSetting(const QString &key, const QString &group, const QVariant &value);

@@ -22,24 +22,19 @@
 
 #include <QDateTime>
 #include <QWidget>
+#include <QtCharts/QChartView>
 
 #include "cardhistory.h"
 
 class Histograph :
-    public QWidget
+    public QtCharts::QChartView
 {
     Q_OBJECT
 
 public:
     explicit Histograph(QWidget *parent = 0);
     
-    void setHistory(CardHistory* history);
-
-private:
-    virtual void paintEvent(QPaintEvent*);
-
-private:
-    CardHistory* History;
+    void setHistory(CardHistory* history, bool embeded = false);
 };
 
 #endif // __HISTOGRAPH_H

@@ -34,16 +34,16 @@ CardHistory::CardHistory(const CardHistory &rhs)
 
 CardHistory::~CardHistory()
 {
-    for (auto it=history.constBegin();
-        it!=history.constEnd(); ++it) {
+    for (auto it=points.constBegin();
+        it!=points.constEnd(); ++it) {
         delete (*it);
     }
-    history.clear();
+    points.clear();
 }
 
 CardHistory &CardHistory::operator =(const CardHistory &rhs)
 {
-    history = rhs.history;
+    points = rhs.points;
 
     return *this;
 }
@@ -55,12 +55,12 @@ void CardHistory::addPoint(int level)
     point->time = QDateTime::currentDateTime();
     point->level = level;
 
-    history.push_back(point);
+    points.push_back(point);
 }
 
 void CardHistory::fromString(QString historyLine)
 {
-    history.clear();
+    points.clear();
 
     int index = 0;
     int level = 0;
@@ -82,7 +82,7 @@ void CardHistory::fromString(QString historyLine)
             point->time = QDateTime::fromTime_t(time);
             point->level = level;
 
-            history.push_back(point);
+            points.push_back(point);
         }
 
     }
@@ -91,8 +91,8 @@ void CardHistory::fromString(QString historyLine)
 QString CardHistory::toString() const
 {
     QString historyLine;
-    for (auto it=history.constBegin();
-        it!=history.constEnd(); ++it) {
+    for (auto it=points.constBegin();
+        it!=points.constEnd(); ++it) {
              historyLine.append(QString("%1,%2;")
                                 .arg((*it)->time.toTime_t())
                                 .arg((*it)->level));
@@ -101,47 +101,31 @@ QString CardHistory::toString() const
     return historyLine;
 }
 
-Point* CardHistory::getLastPoint(bool same_level) const
+Point* CardHistory::getLastPoint(bool sameLevel) const
 {
     Point* point = 0;
 
-    if(same_level) {
-        int level = history[history.size()-1]->level;
-        int index = history.size()-2;
+    if(sameLevel) {
+        int level = points[points.size()-1]->level;
+        int index = points.size()-2;
 
         for(; index >= 0; --index) {
 
-            if(level != history[index]->level) {
+            if(level != points[index]->level) {
                 break;
             }
         }
 
-        point = history[index+1];
+        point = points[index+1];
 
     } else {
-        point = history[history.size()-1];
+        point = points[points.size()-1];
     }
 
     return point;
 }
 
-int CardHistory::difficulty() const
+const QList<Point *> &CardHistory::getPoints() const
 {
-    int level = 0;
-    int success = 0;
-    for (auto it=history.constBegin();
-        it!=history.constEnd(); ++it) {
-        if((*it)->level >= level)
-            success++;
-        else
-            success--;
-    }
-
-    if(success>5) {
-        return 1;
-    } else if(success<-3) {
-        return -1;
-    } else {
-        return 0;
-    }
+    return points;
 }

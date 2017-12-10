@@ -21,58 +21,81 @@
 #include "histograph.h"
 #include "constants.h"
 
-#include <QPainter>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QScatterSeries>
+#include <QtCharts/QDateTimeAxis>
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QCategoryAxis>
+#include <QGraphicsLayout>
 
 Histograph::Histograph(QWidget *parent)
-    : QWidget(parent)
-    , History(0)
+    : QtCharts::QChartView(parent)
 {
 }
 
-void Histograph::setHistory(CardHistory* history)
+void Histograph::setHistory(CardHistory* history, bool embeded)
 {
-    History = history;
+    QList<Point*> points = history->getPoints();
 
-    repaint();
-}
+    QtCharts::QScatterSeries *series0 = new QtCharts::QScatterSeries(this);
+    QtCharts::QLineSeries *series1 = new QtCharts::QLineSeries(this);
 
-void Histograph::paintEvent(QPaintEvent*)
-{
-    QPainter p(this);
-    
-    int w = width() - 4;
-    int h = height() - 4;
+    for (auto it=points.constBegin();
+        it!=points.constEnd(); ++it) {
 
-    time_t now = QDateTime::currentDateTime().toTime_t();
-    time_t start = History->history[0]->time.toTime_t();
-        
-    double diff = now - start;    
-    double x_unit_width = w / diff;
-    double y_unit_width = h / LevelCount;
-
-    double x=0;
-    double y=0;
-    int i =0;
-    int c = History->history.size();
-    QPointF *points = new QPointF[c];
-    
-    p.setRenderHint(QPainter::Antialiasing, true);
-
-    for (auto it=History->history.constBegin();
-        it!=History->history.constEnd(); ++it) {
-
-        x = ((*it)->time.toTime_t() - start) *x_unit_width + 2;
-        y = h - ((*it)->level *y_unit_width);
-        
-        points[i].setX(x);
-        points[i].setY(y);
-
-        p.setPen(QPen(Qt::black, 3));
-        p.drawPoint(x,y);
-
-        i++;
+        series0->append((*it)->time.toMSecsSinceEpoch(), (*it)->level);
+        series1->append((*it)->time.toMSecsSinceEpoch(), (*it)->level);
     }
-        
-    p.setPen(QPen(Qt::black, 1));
-    p.drawPolyline(points, c);
+    series0->setMarkerShape(QtCharts::QScatterSeries::MarkerShapeRectangle);
+    series0->setMarkerSize(8);
+
+    /// fix a bug in qtchart. when there is just one point, it doesn't show anything.
+    if(series0->count()==1) {
+        series0->append(points[0]->time.toMSecsSinceEpoch()+100, points[0]->level);
+        series1->append(points[0]->time.toMSecsSinceEpoch()+100, points[0]->level);
+    }
+
+    QtCharts::QChart *chart = new QtCharts::QChart();
+    chart->legend()->hide();
+    chart->addSeries(series0);
+    chart->addSeries(series1);
+    chart->setMargins(QMargins(4,4,4,4));
+    chart->layout()->setContentsMargins(0, 0, 0, 0);
+    chart->setBackgroundRoundness(0);
+    setRenderHint(QPainter::Antialiasing);
+
+    QtCharts::QDateTimeAxis *axisX = new QtCharts::QDateTimeAxis;
+
+    axisX->setFormat("dd MMM");
+    //axisX->setTitleText("Date");
+    axisX->setTickCount(1);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series0->attachAxis(axisX);
+    series1->attachAxis(axisX);
+
+    QtCharts::QCategoryAxis *axisY = new QtCharts::QCategoryAxis;
+    //axisY->setTitleText("Level");
+    axisY->setRange(Level_1, Level_Retired);
+    axisY->setStartValue(Level_1);
+    axisY->append("1", Level_1);
+    axisY->append("2", Level_2);
+    axisY->append("3", Level_3);
+    axisY->append("4", Level_4);
+    axisY->append("5", Level_5);
+    axisY->append("R", Level_Retired);
+    axisY->setLabelsVisible(false);
+    axisY->setLabelsPosition(QtCharts::QCategoryAxis::AxisLabelsPositionCenter);
+    axisY->setTickCount(1);
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series0->attachAxis(axisY);
+    series1->attachAxis(axisY);
+
+    if(embeded) {
+        axisX->setLabelsVisible(false);
+        chart->setBackgroundVisible(false);
+        chart->setMargins(QMargins(-20,-8,-8,-20));
+        series0->setMarkerSize(4);
+    }
+
+    setChart(chart);
 }

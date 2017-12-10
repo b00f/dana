@@ -19,7 +19,6 @@
 //
 
 #include "deckwindow.h"
-#include "reviewdialog.h"
 #include "reportdialog.h"
 #include "qxmessagebox.h"
 #include "constants.h"
@@ -41,6 +40,7 @@ DeckWindow::DeckWindow(QMainWindow *parent)
 
     qqDlg = new QueryDialog(this);
     reviewDlg = new ReviewDialog(this);
+    infoDlg = new CardInfoDialog(this);
 
     qqDlg->hide();
     reviewDlg->hide();
@@ -74,6 +74,7 @@ void DeckWindow::setupToolbar()
     toolbar->addSeparator();
     toolbar->addAction(actAdd);
     toolbar->addAction(actRemove);
+    toolbar->addAction(actCardInfo);
     toolbar->addSeparator();
     toolbar->addAction(actAbout);
 }
@@ -87,6 +88,7 @@ void DeckWindow::setupMenu()
     cardMenu->addAction(actAdd);
     cardMenu->addAction(actEdit);
     cardMenu->addAction(actRemove);
+    cardMenu->addAction(actCardInfo);
     cardMenu->addSeparator();
     cardMenu->addAction(actQuit);
 
@@ -139,6 +141,12 @@ void DeckWindow::setupActions()
     actSave->setStatusTip(STR_ACTION_DECK_SAVE_TIP);
     connect(actSave, SIGNAL(triggered()), this, SLOT(onSave()));
 
+    actCardInfo = new QAction(ICON_CARD_INFO, STR_ACTION_CARD_INFO, this);
+    actCardInfo->setShortcut(QKeySequence("Ctrl+i"));
+    actCardInfo->setStatusTip(STR_ACTION_CARD_INFO_TIP);
+    connect(actCardInfo, SIGNAL(triggered()), this, SLOT(onCardInfo()));
+
+
     actQuery = new QAction(ICON_DECK_QUERY, STR_ACTION_DECK_QUERY, this);
     actQuery->setShortcut(QKeySequence("F5"));
     actQuery->setStatusTip(STR_ACTION_DECK_QUERY_TIP);
@@ -185,6 +193,7 @@ void DeckWindow::setupContextMenu()
     contextMent->addAction(actEdit);
     contextMent->addAction(actRemove);
     contextMent->addAction(actStar);
+    contextMent->addAction(actCardInfo);
     contextMent->addSeparator();
     contextMent->addMenu(levelMenu);
 
@@ -353,11 +362,15 @@ void DeckWindow::onSelectionChang()
         actEdit->setEnabled(true);
         actRemove->setEnabled(true);
         actStar->setEnabled(true);
+        actCardInfo->setEnabled(true);
         levelMenu->setEnabled(true);
+
+        infoDlg->setCard(card);
     } else {
         actEdit->setEnabled(false);
         actRemove->setEnabled(false);
         actStar->setEnabled(false);
+        actCardInfo->setEnabled(false);
         levelMenu->setEnabled(false);
     }
 }
@@ -417,4 +430,12 @@ void DeckWindow::showQuickQuery()
 bool DeckWindow::isRunningQuickQuery()
 {
     return qqDlg->isRunning();
+}
+
+void DeckWindow::onCardInfo()
+{
+    Card *card = getSelectedCard();
+
+    infoDlg ->setCard(card);
+    infoDlg ->show();
 }

@@ -31,7 +31,6 @@ QueryDialog::QueryDialog(QWidget *parent)
 {
     speech = new QtSpeech;
     card = 0;
-    cardQuery = 0;
     running = false;
 
     setupView();
@@ -44,24 +43,21 @@ QueryDialog::~QueryDialog()
 
 void QueryDialog::setupView()
 {
-    cardQuery = new CardQuery;
-
-
     iconStar.addPixmap(PIXMAP_STARRED,   QIcon::Normal, QIcon::On);
     iconStar.addPixmap(PIXMAP_UNSTARRED, QIcon::Normal, QIcon::Off);
 
-    lblFront       = new QLabel;
-    btnUp          = new QPushButton(ICON_THUMB_UP  , STR_NOPE);
-    btnDown        = new QPushButton(ICON_THUMB_DOWN, STR_NOPE);
-    btnNext        = new QPushButton(ICON_NEXT      , STR_NOPE);
-    btnPrev        = new QPushButton(ICON_PREV      , STR_NOPE);
-    btnReview      = new QPushButton(ICON_CARD_OPEN , STR_NOPE);
-    btnPause       = new QPushButton(ICON_STOP      , STR_NOPE);
-    btnListen      = new QPushButton(ICON_LISTEN    , STR_NOPE);
-    btnStar        = new QPushButton(iconStar       , STR_NOPE);
-    lblLevel       = new QLabel;
-    lblDifficaulty = new QLabel;
-    histograph     = new Histograph;
+    btnUp          = new QPushButton(ICON_THUMB_UP  , STR_NOPE, this);
+    btnDown        = new QPushButton(ICON_THUMB_DOWN, STR_NOPE, this);
+    btnNext        = new QPushButton(ICON_NEXT      , STR_NOPE, this);
+    btnPrev        = new QPushButton(ICON_PREV      , STR_NOPE, this);
+    btnReview      = new QPushButton(ICON_CARD_OPEN , STR_NOPE, this);
+    btnPause       = new QPushButton(ICON_STOP      , STR_NOPE, this);
+    btnListen      = new QPushButton(ICON_LISTEN    , STR_NOPE, this);
+    btnStar        = new QPushButton(iconStar       , STR_NOPE, this);
+    lblFront       = new QLabel(this);
+    lblLevel       = new QLabel(this);
+    lblDifficaulty = new QLabel(this);
+    histograph     = new Histograph(this);
     mainTimer      = new QTimer(this);
     closeTimer     = new QTimer(this);
 
@@ -164,7 +160,7 @@ void QueryDialog::start()
 {
     running = true;
     
-    cardQuery->shuffle();
+    cardQuery.shuffle();
 
     onNextCard();
     show();
@@ -184,33 +180,33 @@ void QueryDialog::onOpenCard()
 
 void QueryDialog::setDeck(Deck *deck)
 {
-    cardQuery->setDeck(deck);
+    cardQuery.setDeck(deck);
 
     deckFormat = deck->getFormat();
 }
 
 void QueryDialog::onPrevCard()
 {
-    setCard(cardQuery->gotoPrevCard());
+    setCard(cardQuery.gotoPrevCard());
 }
 
 void QueryDialog::onNextCard()
 {
-    setCard(cardQuery->gotoNextCard());
+    setCard(cardQuery.gotoNextCard());
 }
 
 void QueryDialog::onQueryPass()
 {
     card->increaseLevel();
 
-    setCard(cardQuery->gotoNextCard());
+    setCard(cardQuery.gotoNextCard());
 }
 
 void QueryDialog::onQueryFail()
 {
     card->decreaseLevel();
 
-    setCard(cardQuery->gotoNextCard());
+    setCard(cardQuery.gotoNextCard());
 }
 
 void QueryDialog::setCard(Card *_card)
@@ -229,11 +225,11 @@ void QueryDialog::setCard(Card *_card)
         btnReview->setEnabled(true);
         btnUp->setEnabled(true);
         btnDown->setEnabled(true);
-        btnPrev->setEnabled(cardQuery->hasPrevCard());
-        btnNext->setEnabled(cardQuery->hasNextCard());
+        btnPrev->setEnabled(cardQuery.hasPrevCard());
+        btnNext->setEnabled(cardQuery.hasNextCard());
         btnStar->setChecked(card->isStarred());
 
-        histograph->setHistory(card->getHistory());
+        histograph->setHistory(card->getHistory(), true);
 
     } else {
         btnReview->setEnabled(false);
@@ -273,6 +269,8 @@ void QueryDialog::closeEvent(QCloseEvent *event)
 
         stop();
     }
+
+    QxDialog::closeEvent(event);
 }
 
 void QueryDialog::showEvent(QShowEvent *event)

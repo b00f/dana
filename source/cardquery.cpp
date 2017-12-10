@@ -31,9 +31,8 @@ bool timeCompare(/*const */Card *a, /*const */Card *b)
 }
 
 
-CardQuery::CardQuery(QObject *parent)
-    : QObject(parent)
-    , currentIndex(-1)
+CardQuery::CardQuery()
+    : currentIndex(-1)
     , filterLevel(Level_ALL)
     , deck(0)
 {

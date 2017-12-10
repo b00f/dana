@@ -54,9 +54,6 @@ public:
     bool updateCard(Card *card);    
 
 private:
-    QSqlQuery queryUpdateCard;
-    QSqlQuery queryInsertCard;
-    QSqlQuery queryDeleteCard;
 
     QSqlDatabase db;
 };

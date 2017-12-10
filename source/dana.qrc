@@ -63,8 +63,8 @@
         <file>images/difficulty-easy.png</file>
         <file>images/difficulty-hard.png</file>
         <file>images/difficulty-normal.png</file>
-	<file>images/completed.png</file>
-	<file>images/listen.png</file>
+        <file>images/completed.png</file>
+        <file>images/listen.png</file>
         <file>images/filter.png</file>
         <file>images/flip.png</file>
         <file>images/pause.png</file>
@@ -75,5 +75,6 @@
         <file>images/sort.png</file>
         <file>images/view-options.png</file>
         <file>images/deck_96.png</file>
+        <file>images/card-info.png</file>
     </qresource>
 </RCC>

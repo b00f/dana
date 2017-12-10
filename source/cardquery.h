@@ -28,11 +28,9 @@
 class Deck;
 class Card;
 class CardQuery 
-    : public QObject
 {
-    Q_OBJECT
 public:
-    CardQuery(QObject *parent = 0);
+    CardQuery();
 
     void startQuery();
     void setDeck(Deck *deck);

@@ -24,9 +24,6 @@
 #include <QString>
 
 #define FLAG_STAR       0x00000001
-#define FLAG_EASY       0x00000002
-#define FLAG_HARD       0x00000004
-
 
 Card::Card(QObject *parent)
     : QObject(parent)
@@ -145,11 +142,23 @@ QColor Card::getLevelColor(int level)
 
 Card::Difficulty Card::getDifficulty() const
 {
-    if(IS_FLAG_SET(flags, FLAG_EASY))
-        return Easy;
+    const QList<Point*> points = history.getPoints();
 
-    if(IS_FLAG_SET(flags, FLAG_HARD))
+    int level = 0;
+    int success = 0;
+    for (auto it=points.constBegin();
+        it!=points.constEnd(); ++it) {
+        if((*it)->level >= level)
+            success++;
+        else
+            success--;
+    }
+
+    if(success>5) {
+        return Easy;
+    } else if(success<-3) {
         return Hard;
+    }
 
     return Normal;
 }
@@ -252,18 +261,6 @@ void Card::updateLevel(int _level)
     }
 
     history.addPoint(level);
-
-    /// 
-    int difficulty = history.difficulty();
-
-    if(difficulty==1) {
-        SET_FLAG(flags, FLAG_EASY);
-    } else if(difficulty==-1) {
-        SET_FLAG(flags, FLAG_HARD);
-    } else {
-        UNSET_FLAG(flags, FLAG_EASY);
-        UNSET_FLAG(flags, FLAG_HARD);
-    }
 }
 
 CardHistory *Card::getHistory()

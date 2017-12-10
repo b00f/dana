@@ -83,7 +83,6 @@ private:
     QLabel *lblDifficaulty;
     Histograph *histograph;
     
-    CardQuery *cardQuery;
     Card *card;
 
     QTimer *mainTimer;
@@ -94,6 +93,7 @@ private:
     QtSpeech *speech;
     QAction *actListen;
 
+    CardQuery cardQuery;
     DeckFormat deckFormat;
     QIcon iconStar;
 };
