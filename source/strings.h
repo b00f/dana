@@ -38,8 +38,8 @@
 #define WNG_ASKING_FOR_UPDATE_REMOTE_DECK                QString("You have uploaded this deck before. Do you want to update it?")
 #define WNG_ASKING_FOR_MERGE_TITLE                       QString("Merging deck")
 #define WNG_ASKING_FOR_MERGE                             QString("This deck exeist in your local desk. Do you want to merge it for any posible changes?")
-                                                         
-/// error                                                
+
+/// error
 #define ERR_QT_SPEECH_FAILED                             QString("An error occurred during using your TTS system.\nPlease check it and ensure it installed properly.")
 #define ERR_MSG_DECK_EXPORT_FAILD                        QString("An error occurred during exporting deck.\nTry again and if error still persists please report it.")
 #define ERR_MSG_DECK_IMPORT_FAILD                        QString("An error occurred during importing deck.\nTry again and if error still persists please report it.")
@@ -290,8 +290,8 @@
 #define STR_LOGIN_EMAIL                                  QString("Email")
 #define STR_LOGIN_PASSWORD                               QString("Password")
 #define STR_LOGIN_REMEMBER_ME                            QString("Remember me on this computer")
-#define STR_LOGIN_CREATE_ACCOUNT                         QString("<a href='http://danasrs.com/dana/register.php'>Create a free account</a>")
-#define STR_LOGIN_CREATE_FORGET_PASSWORD                 QString("<a href='http://danasrs.com/dana/forgot_password.php?email=%1'>Forgotten your password?")
+#define STR_LOGIN_CREATE_ACCOUNT                         QString("<a href='http://dana-box.com/dana/register.php'>Create a free account</a>")
+#define STR_LOGIN_CREATE_FORGET_PASSWORD                 QString("<a href='http://dana-box.com/dana/forgot_password.php?email=%1'>Forgotten your password?")
 
 /// report dialog
 #define STR_REPORT_HEADER_LEVEL                          QString("Level")

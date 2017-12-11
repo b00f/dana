@@ -76,12 +76,12 @@ MainWindow::MainWindow()
 
     centralWidget->setLayout(stackedLayout);
     setCentralWidget(centralWidget);
-    
+
     stackedLayout->addWidget(deckWindow);
     stackedLayout->addWidget(deskWindow);
 
     setWindowTitle(APP_TITLE);
-	
+
     connect(deckWindow, SIGNAL(openDesk()), this, SLOT(onOpenDesk()));
     connect(deckWindow, SIGNAL(quickQuery(bool)), this, SLOT(onQuickQuery(bool)));
     connect(deskWindow, SIGNAL(openDeck(Deck*)), this, SLOT(onOpenDeck(Deck*)));
@@ -94,7 +94,7 @@ MainWindow::MainWindow()
 
     connect(deckWindow, SIGNAL(exit()), this, SLOT(quitApp()));
     connect(deskWindow, SIGNAL(exit()), this, SLOT(quitApp()));
-    
+
     stackedLayout->setCurrentWidget(deskWindow);
 
 	/// ----------------------
@@ -116,7 +116,7 @@ MainWindow::MainWindow()
     actAbout->setStatusTip(STR_ACTION_ABOUT_TIP);
     actAbout->setShortcut(QKeySequence("F1"));
     connect(actAbout, SIGNAL(triggered()), this, SLOT(showAbout()));
-	
+
     QMenu *trayIconMenu = new QMenu(this);
 
 	trayIconMenu->addAction(actRestore);
@@ -167,8 +167,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::onOpenDeck(Deck *deck)
 {
     ((DeckWindow *)deckWindow)->setDeck((MyDeck*)deck);
-    
-    deckWindow->setupMenu();    
+
+    deckWindow->setupMenu();
 
     stackedLayout->setCurrentWidget(deckWindow);
 
@@ -240,7 +240,7 @@ void MainWindow::updateChecked(const QString& result)
     }
 
     QDesktopServices::openUrl(
-        QUrl("http://danasrs.com/download.php", QUrl::TolerantMode));
+        QUrl("http://dana-box.com/download.php", QUrl::TolerantMode));
 }
 
 void MainWindow::onQuickQuery(bool running)

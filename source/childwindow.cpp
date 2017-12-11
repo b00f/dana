@@ -36,7 +36,7 @@ ChildWindow::ChildWindow(QMainWindow *parent)
 void ChildWindow::setupView()
 {
     QGridLayout *gridLayout = new QGridLayout(this);
-    
+
     title = new QLabel;
     toolbar = new QToolBar;
     mainLayout = new QVBoxLayout;
@@ -45,7 +45,7 @@ void ChildWindow::setupView()
     mainLayout->setMargin(0);
 
     ///title->setMaximumWidth(500);
-    
+
     QSpacerItem *hSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     gridLayout->addWidget(title     , 0, 0, 1, 1);
@@ -109,11 +109,11 @@ void ChildWindow::showConfig()
 void ChildWindow::onSupport()
 {
     QDesktopServices::openUrl(
-        QUrl("http://danasrs.com/support.php", QUrl::TolerantMode));
+        QUrl("http://dana-box.com/support.php", QUrl::TolerantMode));
 }
 
 void ChildWindow::onReportBug()
 {
     QDesktopServices::openUrl(
-        QUrl("http://danasrs.com/report_bug.php", QUrl::TolerantMode));
+        QUrl("http://dana-box.com/report_bug.php", QUrl::TolerantMode));
 }

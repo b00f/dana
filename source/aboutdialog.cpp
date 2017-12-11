@@ -23,7 +23,7 @@
 
 AboutDialog::AboutDialog(QWidget *parent)
     : QxDialog("about_dialog", parent)
-{    
+{
     setupView();
 }
 
@@ -35,7 +35,8 @@ void AboutDialog::setupView()
     QLabel *name = new QLabel(this);
 
     icon->setPixmap(PIXMAP_DANA_96);
-    name->setText(tr("<p><h3>Dana</h3><br>version %1<br>A free and open source flash card system based on <a href='http://'>Leitner Box</a><br><br>Written by Mostafa Sedaghat Joo(mostafa.sedaghat@gmail.com)</p>").arg("1.1"));
+    name->setText(tr("<p><h3>Dana</h3><br>version %1<br>A free and open source flash card system based on <a href='http://'>Leitner Box</a><br><br>Written by Mostafa Sedaghat Joo(mostafa.sedaghat@gmail.com)</p>")
+        .arg(appVersionString()));
 
     mainLayout->addWidget(icon,     0,0,1,1, Qt::AlignCenter|Qt::AlignTop);
     mainLayout->addWidget(name,     1,0,1,1, Qt::AlignCenter|Qt::AlignTop);

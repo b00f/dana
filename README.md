@@ -1,6 +1,6 @@
 # Dana
 
-Dana is an open source and free software for whom want to extend their knowledge. 'Dana' has great user-interface for 'Spaced Repetition' learning technique. 
+Dana is an open source and free software for whom want to extend their knowledge. 'Dana' has great user-interface for 'Spaced Repetition' learning technique.
 
 
 ## About name:
@@ -28,4 +28,4 @@ Learning Faster with Dana!
 
 ## Download:
 
-you can download compiled version of Dana from here: https://sourceforge.net/projects/danasrs/?source=directory  
+you can download compiled version of Dana from here: https://sourceforge.net/projects/dana-box/

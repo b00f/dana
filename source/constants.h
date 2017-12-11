@@ -56,6 +56,7 @@ static const QString dana_suffix  = QString("dana");
 enum Versions {
     FIRST_VERSION           = 100,
     ENABLE_NETWORK_MANAGER  = 101,
+    ADD_CARD_INFO           = 102,
     LAST_VERSION                 ,
 };
 
@@ -93,11 +94,11 @@ static const QColor LevelsColor[LevelCount+1] = {
 
 
 static inline int appVersion() {
-    return LAST_VERSION-1; 
+    return LAST_VERSION-1;
 }
 
 static inline QString appVersionString() {
-    return QString::number(appVersion()); 
+    return QString::number(appVersion());
 }
 
 static inline QString appPath() {
@@ -125,20 +126,20 @@ static inline QString danaPath() {
 }
 
 static inline QString dBPath() {
-    
-    QString dbPath = 
+
+    QString dbPath =
         utils::combinePaths(danaPath(), "dana.sqlite");
 
     return dbPath;
 }
 
 static inline QString tempPath() {
-    QString tempPath = 
+    QString tempPath =
         utils::combinePaths(QDir::tempPath(), "Dana");
 
     utils::createDirectory(tempPath);
 
-    return tempPath; 
+    return tempPath;
 }
 
 static inline QString cardNumberToString(int count) {

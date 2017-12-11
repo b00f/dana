@@ -31,7 +31,7 @@
 #include <QNetworkReply>
 #include <QUrlQuery>
 #include <QDebug>
-         
+
 #define ADD_QUERY_ITEM(b,n,v) QString("%1Content-Disposition: form-data; name=\"%2\"\r\n\r\n%3").arg(b).arg(n).arg(v);
 
 
@@ -53,7 +53,7 @@ NetworkManager::NetworkManager(QObject *parent)
     loggedin = false;
     reply = 0;
     downFile = 0;
-    remoteUrl = QUrl("http://danasrs.com/dana/dana.php");
+    remoteUrl = QUrl("http://dana-box.com/dana/dana.php");
     autoProxuAuthentication = true;
 
     qnam->setCookieJar(cookieJar);
@@ -63,8 +63,8 @@ NetworkManager::NetworkManager(QObject *parent)
         this, SLOT(onReply(QNetworkReply*)), Qt::QueuedConnection);
 
     connect(qnam, SIGNAL(proxyAuthenticationRequired(const QNetworkProxy&,QAuthenticator*)),
-        this, SLOT(onProxyAuthentication(QNetworkProxy,QAuthenticator*))); 
-    
+        this, SLOT(onProxyAuthentication(QNetworkProxy,QAuthenticator*)));
+
     autoLogin();
 }
 
@@ -79,7 +79,7 @@ void NetworkManager::autoLogin()
 
     if(!preferences->getUsername().isEmpty()) {
         login(
-            preferences->getUsername(), 
+            preferences->getUsername(),
             preferences->getPassword() );
     }
 }
@@ -117,12 +117,12 @@ void NetworkManager::onProxyAuthentication(const QNetworkProxy &networkProxy, QA
 void NetworkManager::onReply(QNetworkReply *reply)
 {
     QString error;
-    
+
     if(reply->error() != QNetworkReply::NoError) {
         error = reply->errorString();
 
         qDebug() << error;
-    }    
+    }
 
     /// if an error occurred
     if(!error.isEmpty()) {
@@ -164,7 +164,7 @@ void NetworkManager::onReply(QNetworkReply *reply)
         }
         break;
 
-    case UploadRequest:    
+    case UploadRequest:
     case VoteRequest:
     default:
         if(result.isEmpty()) {
@@ -182,7 +182,7 @@ void NetworkManager::onReply(QNetworkReply *reply)
 
 void NetworkManager::uploadDeck(Deck *deck)
 {
-    QString filePath = 
+    QString filePath =
         utils::combinePaths(tempPath(), "deck.dana");
 
     utils::removeFile(filePath);
@@ -222,7 +222,7 @@ void NetworkManager::uploadDeck(Deck *deck)
     QBuffer buffer( &bArray );
     buffer.open( QIODevice::WriteOnly );
     pixmap.save( &buffer, "PNG" );
-    buffer.close();    
+    buffer.close();
     postData += bArray;
     postData += boundaryLast;
 
@@ -244,13 +244,13 @@ void NetworkManager::login(QString username, QString password)
     QByteArray postData;
     QUrlQuery urlQuery;
     QNetworkRequest request;
-        
+
     urlQuery.addQueryItem("action", "login");
     urlQuery.addQueryItem("version", appVersionString());
     urlQuery.addQueryItem("email", username);
     urlQuery.addQueryItem("password", password);
     postData = urlQuery.query(QUrl::FullyEncoded).toUtf8();
-    
+
     request.setAttribute(QNetworkRequest::User, LoginRequest);
     request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/x-www-form-urlencoded"));
     request.setUrl(remoteUrl);
@@ -347,14 +347,14 @@ void NetworkManager::downloadDeck(int deckId)
     request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/x-www-form-urlencoded"));
     request.setUrl(remoteUrl);
 
-    QString filePath = 
+    QString filePath =
         utils::combinePaths(tempPath(), "download.dana");
 
     utils::removeFile(filePath);
 
     downFile = new QFile(filePath);
     downFile->open(QIODevice::ReadWrite);
-    
+
     reply = qnam->post(request, postData);
 
     connect(reply, SIGNAL(finished()), this, SLOT(downloadDone()));
