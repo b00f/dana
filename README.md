@@ -1,4 +1,4 @@
-# Dana [![Build Status](https://travis-ci.org/m-o-s-t-a-f-a/dana.svg?branch=master)]
+# Dana (https://travis-ci.org/m-o-s-t-a-f-a/dana.svg?branch=master)
 
 Dana is an open source and free software for whom want to extend their knowledge. 'Dana' has great user-interface for 'Spaced Repetition' learning technique.
 
