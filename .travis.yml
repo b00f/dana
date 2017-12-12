@@ -13,4 +13,5 @@ compiler:
 # Build steps
 script:
   - cd source
-  - qmake .. && make
+  - qmake 
+  - make
