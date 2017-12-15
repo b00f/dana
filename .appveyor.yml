@@ -23,5 +23,5 @@ after_build:
 artifacts:
   - path: Output\dana-*.exe
   - path: release
-    type: zip
+  - type: zip
 
