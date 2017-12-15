@@ -22,6 +22,15 @@ after_build:
 
 artifacts:
   - path: Output\dana-*.exe
-  - path: release
-  - type: zip
+    name: SetupExe
+  
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: m2QyYh1slxSys5zfq9Lu+w==
+  artifact: SetupExe
+  prerelease: true
+  tag: v$(appveyor_build_version)
+  release: Version $(appveyor_build_version)
+  description: $(APPVEYOR_REPO_COMMIT_MESSAGE) ($(APPVEYOR_REPO_COMMIT_TIMESTAMP))
 
