@@ -25,14 +25,21 @@ unix {
 
     shortcutfiles.files = dana.desktop
     shortcutfiles.path = $$PREFIX/share/applications/
-    data.files += ./images/dana_96.png
-    data.path = $$PREFIX/share/pixmaps/
+    pixmap.files = ./images/dana_96.png
+    pixmap.path = $$PREFIX/share/pixmaps/
+    zlib.files = ./../3rdparty/zlib/linux/minigzip ./../3rdparty/zlib/linux/miniunz ./../3rdparty/zlib/linux/minizip
+    zlib.path = $$PREFIX/share/zlib/
 
     INSTALLS += shortcutfiles
+    INSTALLS += pixmap
+    INSTALLS += zlib
 }
 
 INSTALLS += target
 
 DISTFILES += \
     dana.desktop \
-    dana.png
+    ./images/dana_96.png \
+    ./../3rdparty/zlib/linux/minigzip \
+    ./../3rdparty/zlib/linux/miniunz \
+    ./../3rdparty/zlib/linux/minizip
