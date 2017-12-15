@@ -1,14 +1,12 @@
 #define AppName             "Dana"
 #define AppVerName          "Dana"
-#define AppVersion          "1.0"
+#define AppVersion          "1.2"
 #define AppExeName          "Dana"
 #define AppDesc             "Dana"
 #define AppCopyright        "Copyright 2014"
 #define AppURL              "http://dana-box.com/"
 #define AppGroupName        "Dana"
-#define SourcePath          "..\bin\Desktop_Qt_5_4_0_MSVC2012_OpenGL_32bit-Release\release"
-#define QtPath              "C:\Qt\Qt5.4.0\5.4\msvc2012_opengl"
-#define ThirdpartyPath      ".\3rdparty"
+#define QtPath              QTDIR
 #define AppID               "{AF273301-28D0-4DAB-A531-2021022C4C8B}"
 
 [Setup]
@@ -31,12 +29,12 @@ SolidCompression=true
 ;;;LicenseFile=.\License.txt
 
 [Files]
-Source: {#SourcePath}\dana.exe;                                        DestDir: {app};
-Source: {#ThirdpartyPath}\zlibwapi.dll;                                DestDir: {app};
-Source: {#ThirdpartyPath}\miniunz.exe;                                 DestDir: {app};
-Source: {#ThirdpartyPath}\minizip.exe;                                 DestDir: {app};
-Source: {#ThirdpartyPath}\msvcp110.dll;                                DestDir: {app};
-Source: {#ThirdpartyPath}\msvcr110.dll;                                DestDir: {app};
+Source: release\dana.exe;                                        DestDir: {app};
+Source: release\zlibwapi.dll;                                DestDir: {app};
+Source: release\miniunz.exe;                                 DestDir: {app};
+Source: release\minizip.exe;                                 DestDir: {app};
+Source: release\msvcp110.dll;                                DestDir: {app};
+Source: release\msvcr110.dll;                                DestDir: {app};
 Source: {#QtPath}\bin\icudt53.dll;                                     DestDir: {app};
 Source: {#QtPath}\bin\icuin53.dll;                                     DestDir: {app};
 Source: {#QtPath}\bin\icuuc53.dll;                                     DestDir: {app};
