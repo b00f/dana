@@ -36,9 +36,9 @@ void CardInfoDialog::setupView()
     QHBoxLayout *headerLayout = new QHBoxLayout;
     QVBoxLayout *historyLayout = new QVBoxLayout;
 
-    tableHistory = new QTableView(this);
-    lableHistory = new QLabel(STR_CARD_HISTORY, this);
-    histograph =  new Histograph(this);
+    tableHistory = new QTableView;
+    lableHistory = new QLabel(STR_CARD_HISTORY);
+    histograph =  new Histograph;
 
     histograph->setToolTip(STR_QUERY_HISTOGRAPH_TIP);
     histograph->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -59,14 +59,19 @@ void CardInfoDialog::setupView()
 
 void CardInfoDialog::closeEvent(QCloseEvent *event)
 {
-    setSetting(SETTING_HISTORY_COLUMN_TIME, tableHistory->columnWidth(0));
-    setSetting(SETTING_HISTORY_COLUMN_LEVEL, tableHistory->columnWidth(1));
+    if(tableHistory->model()->rowCount() > 0) {
+        setSetting(SETTING_HISTORY_COLUMN_TIME, tableHistory->columnWidth(0));
+        setSetting(SETTING_HISTORY_COLUMN_LEVEL, tableHistory->columnWidth(1));
+    }
 
     QxDialog::closeEvent(event);
 }
 
 void CardInfoDialog::setCard(Card *card)
 {
+    if(!card)
+        return;
+
     QList<Point*> points = card->getHistory()->getPoints();
 
     QStandardItemModel *model = new QStandardItemModel(points.size(), 2, this);
@@ -84,4 +89,5 @@ void CardInfoDialog::setCard(Card *card)
     tableHistory->setColumnWidth(1, getSetting(SETTING_HISTORY_COLUMN_LEVEL, 20).toInt());
 
     histograph->setHistory(card->getHistory());
+    //lableHistory->setText(QString("%1 history:").arg(card->getFrontPlain()));
 }

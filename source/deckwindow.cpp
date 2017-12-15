@@ -70,6 +70,7 @@ void DeckWindow::setupToolbar()
     /// toolbar->addAction(actQuery);
     toolbar->addAction(actQuickQuery);
     toolbar->addAction(actReview);
+    toolbar->addAction(actReport);
     /// toolbar->addAction(actReport);
     toolbar->addSeparator();
     toolbar->addAction(actAdd);
@@ -425,6 +426,8 @@ void DeckWindow::onQuickQuery()
 void DeckWindow::showQuickQuery()
 {
     qqDlg->show();
+    qqDlg->raise();
+    activateWindow();
 }
 
 bool DeckWindow::isRunningQuickQuery()

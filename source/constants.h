@@ -92,14 +92,20 @@ static const QColor LevelsColor[LevelCount+1] = {
     QColor(0,0,0),
 };
 
-
 static inline int appVersion() {
     return LAST_VERSION-1;
 }
 
-static inline QString appVersionString() {
-    return QString::number(appVersion());
+static inline QString appVersionToString() {
+    int major = appVersion()/100;
+    int minor = appVersion()%100;
+    return QString::number(major)+"."+QString::number(minor);
 }
+
+static inline int appVersionFromString(QString version) {
+    return version.replace(".", "0").toInt();
+}
+
 
 static inline QString appPath() {
     QDir appDir = QDir(qApp->applicationDirPath());

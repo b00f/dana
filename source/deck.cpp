@@ -730,7 +730,7 @@ bool Deck::exportToXml(QString fileName)
     xml.writeStartElement(XML_TAG_ROOT);
 
     xml.writeStartElement(XML_TAG_VERSION);
-    xml.writeCharacters(appVersionString());
+    xml.writeCharacters(appVersionToString());
     xml.writeEndElement();
 
     /// --<deck>

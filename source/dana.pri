@@ -36,7 +36,6 @@ HEADERS += \
     ./modifier.h \
     ./mydeck.h \
     ./networkmanager.h \
-    ./pieview.h \
     ./progressdialog.h \
     ./proxydialog.h \
     ./querydialog.h \
@@ -102,7 +101,6 @@ SOURCES += \
     ./modifier.cpp \
     ./mydeck.cpp \
     ./networkmanager.cpp \
-    ./pieview.cpp \
     ./preferences.cpp \
     ./progressdialog.cpp \
     ./proxydialog.cpp \

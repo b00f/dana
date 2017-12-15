@@ -22,6 +22,9 @@
 
 #include "qxdialog.h"
 
+#include <QtCharts/QChartView>
+QT_CHARTS_USE_NAMESPACE
+
 class Deck;
 class ReportDialog 
     : public QxDialog
@@ -33,12 +36,10 @@ public:
 
     void setupModel(Deck *deck);
 
-private:	
-	void setupView();
+private:
+    void setupView();
 
-	QAbstractItemModel *model;
-	QAbstractItemView *pieChart;
-	QItemSelectionModel *selectionModel;
+    QChartView *chartView;
 };
 
 #endif // __REPORTDIALOG_H

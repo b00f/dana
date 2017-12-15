@@ -20,68 +20,46 @@
 
 #include "reportdialog.h"
 #include "constants.h"
-#include "pieview.h"
 #include "deck.h"
 
+#include <QtCharts/QPieSeries>
 
 ReportDialog::ReportDialog(QWidget *parent)
     : QxDialog("report_dialog", parent)
 {
-    model = new QStandardItemModel(8, 2, this);
-
-	model->setHeaderData(0, Qt::Horizontal, STR_REPORT_HEADER_LEVEL);
-    model->setHeaderData(1, Qt::Horizontal, STR_REPORT_HEADER_COUNT);
-	
-	setupView();
+    setupView();
 
     setWindowTitle(STR_DIALOG_TITLE_REPORT);
 }
 
 void ReportDialog::setupModel(Deck *deck)
 {
-    model->removeRows(0, model->rowCount(QModelIndex()), QModelIndex());
+    QPieSeries *series = new QPieSeries();
 
-    int row = 0;
-    int count = 0;
     for(int i=0;i<LevelCount+1;i++)
-	{
-        count = deck->getCardsNo(i);
-        QVariant color = LevelsColor[i];
+    {
+        series->append(LevelsName[i],
+                       deck->getCardsNo(i));
 
-        model->insertRows(row, 1, QModelIndex());
+        QPieSlice *slice = series->slices().at(i);
+        slice->setLabelVisible();
+        slice->setLabelColor(LevelsColor[i]);
+        slice->setPen(QPen(Qt::white, 1));
+        slice->setBrush(LevelsColor[i]);
+    }
 
-        model->setData(model->index(row, 0, QModelIndex()),
-            LevelsName[i]);
-        model->setData(model->index(row, 1, QModelIndex()),
-            QString("%1").arg(count));
-        model->setData(model->index(row, 0, QModelIndex()),
-            color, Qt::DecorationRole);
-		row++;
-	}
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->legend()->hide();
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    QGridLayout *mainLayout = new QGridLayout(this);
+
+    mainLayout->addWidget(chartView);
 }
 
 void ReportDialog::setupView()
 {
-    QGridLayout *mainLayout = new QGridLayout(this);
-    QSplitter *splitter = new QSplitter(Qt::Horizontal);
-	QTableView *table = new QTableView;
-	pieChart = new PieView;
-	splitter->addWidget(table);
-    splitter->addWidget(pieChart);
-    splitter->setStretchFactor(0, 1);
-    splitter->setStretchFactor(1, 2);
-
-	table->setModel(model);
-	pieChart->setModel(model);
-
-	QItemSelectionModel *selectionModel = new QItemSelectionModel(model);
-	table->setSelectionModel(selectionModel);
-	pieChart->setSelectionModel(selectionModel);
-
-    table->verticalHeader()->setVisible(false);
-
-	QHeaderView *headerView = table->horizontalHeader();
-	headerView->setStretchLastSection(true);
-
-    mainLayout->addWidget(splitter);
 }

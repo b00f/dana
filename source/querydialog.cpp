@@ -59,7 +59,6 @@ void QueryDialog::setupView()
     lblDifficaulty = new QLabel(this);
     histograph     = new Histograph(this);
     mainTimer      = new QTimer(this);
-    closeTimer     = new QTimer(this);
 
     connect(btnUp,     SIGNAL(clicked()), this, SLOT(onQueryPass()));
     connect(btnDown,   SIGNAL(clicked()), this, SLOT(onQueryFail()));
@@ -125,12 +124,9 @@ void QueryDialog::setupView()
     mainLayout->addLayout(toolsLayout);
 
     connect(mainTimer, SIGNAL(timeout()), this, SLOT(show()));
-    connect(closeTimer, SIGNAL(timeout()), this, SLOT(close()));
 
-    int closeTimerInterval = 2; /// close this dialog if user hasn't reacted for two minutes.
     int mainTimerInterval = Preferences::GetInstance()->getQueryInterval();
-    
-    closeTimer->setInterval(MIN_2_MSEC(closeTimerInterval));
+
     mainTimer->setInterval(MIN_2_MSEC(mainTimerInterval));
     
     /*if(getSetting("geometry").isNull())*/{
@@ -211,7 +207,6 @@ void QueryDialog::onQueryFail()
 
 void QueryDialog::setCard(Card *_card)
 {
-    closeTimer->start();
     lblFront->clear();
 
     card=_card;
@@ -252,7 +247,6 @@ void QueryDialog::closeEvent(QCloseEvent *event)
 {
     if(running) {
         mainTimer->start();
-        closeTimer->stop();
 
         hide();
 
@@ -260,10 +254,7 @@ void QueryDialog::closeEvent(QCloseEvent *event)
     }
     else {
         mainTimer->stop();
-        closeTimer->stop();
-
         mainTimer->disconnect();
-        closeTimer->disconnect();
 
         event->accept();
 
@@ -277,7 +268,6 @@ void QueryDialog::showEvent(QShowEvent *event)
 {
     Q_UNUSED(event);
 
-    closeTimer->start();
     mainTimer->stop();
 }
 

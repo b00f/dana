@@ -197,7 +197,7 @@ void NetworkManager::uploadDeck(Deck *deck)
     QByteArray postData;
 
     postData += ADD_QUERY_ITEM(boundary, "action",  "share");
-    postData += ADD_QUERY_ITEM(boundary, "version",  appVersionString());
+    postData += ADD_QUERY_ITEM(boundary, "version",  appVersionToString());
     postData += ADD_QUERY_ITEM(boundary, "name",     deck->getName());
     postData += ADD_QUERY_ITEM(boundary, "desc",     deck->getDesc());
     postData += ADD_QUERY_ITEM(boundary, "author",   deck->getAuthor());
@@ -246,7 +246,7 @@ void NetworkManager::login(QString username, QString password)
     QNetworkRequest request;
 
     urlQuery.addQueryItem("action", "login");
-    urlQuery.addQueryItem("version", appVersionString());
+    urlQuery.addQueryItem("version", appVersionToString());
     urlQuery.addQueryItem("email", username);
     urlQuery.addQueryItem("password", password);
     postData = urlQuery.query(QUrl::FullyEncoded).toUtf8();
@@ -284,7 +284,7 @@ void NetworkManager::getDeckList()
     QNetworkRequest request;
 
     urlQuery.addQueryItem("action", "deck_list");
-    urlQuery.addQueryItem("version", appVersionString());
+    urlQuery.addQueryItem("version", appVersionToString());
     postData = urlQuery.query(QUrl::FullyEncoded).toUtf8();
 
     request.setAttribute(QNetworkRequest::User, DeckListRequest);
@@ -301,7 +301,7 @@ void NetworkManager::checkDeck(Deck *deck)
     QNetworkRequest request;
 
     urlQuery.addQueryItem("action", "check_deck");
-    urlQuery.addQueryItem("version", appVersionString());
+    urlQuery.addQueryItem("version", appVersionToString());
     urlQuery.addQueryItem("name", deck->getName());
     urlQuery.addQueryItem("guid", deck->getGuid().toString());
     postData = urlQuery.query(QUrl::FullyEncoded).toUtf8();
@@ -320,7 +320,7 @@ void NetworkManager::vote(int deckId, int rating)
     QNetworkRequest request;
 
     urlQuery.addQueryItem("action", "vote");
-    urlQuery.addQueryItem("version", appVersionString());
+    urlQuery.addQueryItem("version", appVersionToString());
     urlQuery.addQueryItem("deck_id", QString::number(deckId));
     urlQuery.addQueryItem("rating", QString::number(rating));
     postData = urlQuery.query(QUrl::FullyEncoded).toUtf8();
@@ -339,7 +339,7 @@ void NetworkManager::downloadDeck(int deckId)
     QNetworkRequest request;
 
     urlQuery.addQueryItem("action", "download");
-    urlQuery.addQueryItem("version", appVersionString());
+    urlQuery.addQueryItem("version", appVersionToString());
     urlQuery.addQueryItem("deck_id", QString::number(deckId));
     postData = urlQuery.query(QUrl::FullyEncoded).toUtf8();
 
@@ -369,7 +369,7 @@ void NetworkManager::checkUpdate()
     QNetworkRequest request;
 
     urlQuery.addQueryItem("action", "check_update");
-    urlQuery.addQueryItem("version", appVersionString());
+    urlQuery.addQueryItem("version", appVersionToString());
     postData = urlQuery.query(QUrl::FullyEncoded).toUtf8();
 
     request.setAttribute(QNetworkRequest::User, CheckUpdateRequest);

@@ -86,7 +86,6 @@ private:
     Card *card;
 
     QTimer *mainTimer;
-    QTimer *closeTimer;
 
     bool running;
 

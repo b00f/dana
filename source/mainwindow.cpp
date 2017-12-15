@@ -103,24 +103,19 @@ MainWindow::MainWindow()
     actRestore->setStatusTip(STR_ACTION_RESTORE_TIP);
 	connect(actRestore, SIGNAL(triggered()), this, SLOT(showNormal()));
 
-    actQuery = new QAction(STR_ACTION_SHOW_QUERY, this);
-    actQuery->setStatusTip(STR_ACTION_SHOW_QUERY_TIP);
-    connect(actQuery, SIGNAL(triggered()), this, SLOT(showQuickQuery()));
-
 	actQuit = new QAction(STR_ACTION_QUIT, this);
     actQuit->setStatusTip(STR_ACTION_QUIT_TIP);
     actQuit->setShortcut(QKeySequence("Ctrl+Q"));
 	connect(actQuit, SIGNAL(triggered()), this, SLOT(quitApp()));
 
-    actAbout = new QAction(ICON_ABOUT, STR_ACTION_ABOUT, this);
+    actAbout = new QAction(STR_ACTION_ABOUT, this);
     actAbout->setStatusTip(STR_ACTION_ABOUT_TIP);
     actAbout->setShortcut(QKeySequence("F1"));
     connect(actAbout, SIGNAL(triggered()), this, SLOT(showAbout()));
 
     QMenu *trayIconMenu = new QMenu(this);
 
-	trayIconMenu->addAction(actRestore);
-    trayIconMenu->addAction(actQuery);
+    trayIconMenu->addAction(actRestore);
     trayIconMenu->addAction(actAbout);
 	trayIconMenu->addSeparator();
 	trayIconMenu->addAction(actQuit);
@@ -193,7 +188,6 @@ void MainWindow::onActivateTrayIcon(QSystemTrayIcon::ActivationReason reason)
 
     // mac build
     default:
-        actQuery->setVisible(((DeckWindow *)deckWindow)->isRunningQuickQuery());
         break;
     }
 }
@@ -203,11 +197,6 @@ void MainWindow::onMessageReceiveFromOtherInst(const QString &)
 	show();
 
 	//QApplication::postEvent(this, new QEvent(Event_Main_Raise));
-}
-
-void MainWindow::showQuickQuery()
-{
-    ((DeckWindow *)deckWindow)->showQuickQuery();
 }
 
 void MainWindow::showAbout()

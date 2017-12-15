@@ -14,3 +14,25 @@ include(dana.pri)
 win32 {
    RC_FILE = dana.rc
 }
+
+unix {
+
+    isEmpty(PREFIX) {
+        PREFIX = /usr
+    }
+
+    target.path = $$PREFIX/bin
+
+    shortcutfiles.files = dana.desktop
+    shortcutfiles.path = $$PREFIX/share/applications/
+    data.files += ./images/dana_96.png
+    data.path = $$PREFIX/share/pixmaps/
+
+    INSTALLS += shortcutfiles
+}
+
+INSTALLS += target
+
+DISTFILES += \
+    dana.desktop \
+    dana.png

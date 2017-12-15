@@ -111,6 +111,10 @@ DatabaseManager::DatabaseManager()
         if(!db.tables().contains(QLatin1String("CARD"))) {
             db.exec(SQL_CREATE_CARD_TABLE);
         }
+
+        /// https://stackoverflow.com/questions/1711631/improve-insert-per-second-performance-of-sqlite
+        db.exec("PRAGMA synchronous = OFF");
+        db.exec("PRAGMA journal_mode = MEMORY");
     }
 }
 

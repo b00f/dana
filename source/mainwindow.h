@@ -46,7 +46,6 @@ private slots:
     void onCheckUpdate();
     void updateChecked(const QString& result);
 	void onMessageReceiveFromOtherInst(const QString &msg);
-    void showQuickQuery();
     void onQuickQuery(bool running);
 
 private:
@@ -59,7 +58,6 @@ private:
     ChildWindow *deckWindow;
     ChildWindow *deskWindow;
 
-    QAction *actQuery; /// show Quick Query dialog
 	QAction *actRestore;
     QAction *actAbout;
     QAction *actQuit;
