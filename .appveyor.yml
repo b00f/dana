@@ -1,6 +1,36 @@
+branches:
+  only:
+    - master
+    - devel
+
 install:
   - set QTDIR=C:\Qt\5.9.2\mingw53_32
-  - set PATH=%PATH%;%QTDIR%\bin;C:\MinGW\bin
+  - choco install -y InnoSetup
+  - set PATH=%QTDIR%\bin;C:\Qt\Tools\mingw530_32\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 build_script:
-  - qmake source\dana.pro
+  - qmake source\dana.pro CONFIG+=release
   - mingw32-make
+after_build:
+  - windeployqt release/dana.exe
+  - cmd: cp ./../3rdparty/zlib/windows/miniunz.exe release"
+  - cmd: cp ./../3rdparty/zlib/windows/minizip.exe release"
+  - cmd: cp ./../3rdparty/zlib/windows/zlibwapi.dll release"
+  - cmd: cp LICENSE release/LICENSE.txt"
+  - iscc innosetup.iss
+  - rm release/*.o
+  - rm release/*.cpp
+
+artifacts:
+  - path: Output\dana-*.exe
+    name: SetupExe
+  
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: m2QyYh1slxSys5zfq9Lu+w==
+  artifact: SetupExe
+  prerelease: true
+  tag: v$(appveyor_build_version)
+  release: Version $(appveyor_build_version)
+  description: $(APPVEYOR_REPO_COMMIT_MESSAGE) ($(APPVEYOR_REPO_COMMIT_TIMESTAMP))
+
