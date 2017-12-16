@@ -9,7 +9,6 @@ before_install:
 
 install:
   - sudo apt-get -y install qt59base qt59svg qt59charts-no-lgpl
-  - sudo apt-get install -qq festival-dev
   - source /opt/qt59/bin/qt59-env.sh
   
 
