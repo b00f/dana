@@ -2,7 +2,7 @@
 Comment=A desktop client for the Dana learning box.
 Exec=dana
 GenericName=Dana
-Icon=dana_96.png
+Icon=dana_96
 Name=dana
 NoDisplay=false
 StartupNotify=true
