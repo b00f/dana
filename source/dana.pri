@@ -127,8 +127,7 @@ SOURCES += \
     filedownloader.cpp \
     $$PWD/cardinfodialog.cpp
 
-INCLUDEPATH += "../3rdparty/qtspeech/"
-INCLUDEPATH += "../3rdparty/qtsingleapplication/"
+INCLUDEPATH += "../3rdparty/singleapplication/"
 
 RESOURCES += dana.qrc
 

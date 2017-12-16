@@ -23,8 +23,7 @@
 #include <QtGui>
 #include <QtDebug>
 #include <QtWidgets>
-
-#include <QtSpeech>
+#include <QTextToSpeech>
 
 class DanaEditor 
     : public QTextEdit
@@ -99,8 +98,6 @@ private slots:
 	void currentCharFormatChanged(const QTextCharFormat &format);
     void cursorPositionChanged();
 
-    void onFinishSpeech();
-
 private:
     QAction *actShowToolbar,
             *actTextBold,
@@ -127,7 +124,7 @@ private:
 
     QString rsrcPath;
 
-    QtSpeech *speech;
+    QTextToSpeech *speech;
 
     QString deckPath;
 

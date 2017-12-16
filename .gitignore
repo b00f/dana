@@ -1,2 +1,11 @@
 bin/*
 build-dana*
+source/moc_*
+source/*.o
+source/appdir
+source/.qmake.stash
+source/Makefile
+source/dana
+source/linuxdeployqt-continuous-x86_64.AppImage
+source/qrc_dana.cpp
+

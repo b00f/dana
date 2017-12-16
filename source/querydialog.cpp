@@ -29,16 +29,11 @@
 QueryDialog::QueryDialog(QWidget *parent)
     : QxDialog("query_dialog", parent)
 {
-    speech = new QtSpeech;
+    speech = new QTextToSpeech(this);
     card = 0;
     running = false;
 
     setupView();
-}
-
-QueryDialog::~QueryDialog()
-{
-    delete speech;
 }
 
 void QueryDialog::setupView()
@@ -274,12 +269,7 @@ void QueryDialog::showEvent(QShowEvent *event)
 void QueryDialog::onListen()
 {
     if(card) {
-        try {
-            speech->stop();
-            speech->tell(card->getFrontPlain());
-        }catch(...) {
-            QxMessageBox::critical(this, ERR_QT_SPEECH_FAILED);
-        }
+        speech->say(card->getFrontPlain());
     }
 }
 
