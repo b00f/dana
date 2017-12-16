@@ -19,11 +19,11 @@
 #include <QtCore>
 #include <QtSpeech>
 
+#include <windows.h>
+#include <windowsx.h>
 #include <sapi.h>
 #include <sphelper.h>
 #include <comdef.h>
-#include <windows.h>
-#include <windowsx.h>
 #include <commctrl.h>
 
 namespace QtSpeech_v1 { // API v1.0
