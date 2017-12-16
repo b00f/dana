@@ -10,13 +10,6 @@ include(./../3rdparty/singleapplication/singleapplication.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 
 
-
-
-
-win32 {
-   RC_FILE = dana.rc
-}
-
 unix {
 
     isEmpty(PREFIX) {
