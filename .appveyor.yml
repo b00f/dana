@@ -3,18 +3,7 @@ branches:
     - master
     - devel
 
-
-environment:
-  my_variable:
-    secure: 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
-
-
 install:
-  - ps: $fileContent = "-----BEGIN RSA PRIVATE KEY-----`n"
-  - ps: $fileContent += $env:priv_key.Replace(' ', "`n")
-  - ps: $fileContent += "`n-----END RSA PRIVATE KEY-----`n"
-  - ps: Set-Content $env:userprofile\.ssh\id_rsa $fileContent
-  - git submodule update --init --recursive
   - set QTDIR=C:\Qt\5.9.2\mingw53_32
   - choco install -y InnoSetup
   - set PATH=%QTDIR%\bin;C:\Qt\Tools\mingw530_32\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
