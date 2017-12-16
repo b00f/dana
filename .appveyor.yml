@@ -19,7 +19,7 @@ after_build:
   - cmd: cp ./3rdparty/zlib/windows/minizip.exe release
   - cmd: cp ./3rdparty/zlib/windows/zlibwapi.dll release
   - cmd: cp LICENSE.md release/LICENSE.txt
-  - iscc innosetup.iss
+  - iscc ./installer/installer.iss
   - rm release/*.o
   - rm release/*.cpp
 
