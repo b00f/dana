@@ -15,9 +15,9 @@ build_script:
   
 after_build:
   - windeployqt release/dana.exe
-  - cmd: cp ./../3rdparty/zlib/windows/miniunz.exe release
-  - cmd: cp ./../3rdparty/zlib/windows/minizip.exe release
-  - cmd: cp ./../3rdparty/zlib/windows/zlibwapi.dll release
+  - cmd: cp ./3rdparty/zlib/windows/miniunz.exe release
+  - cmd: cp ./3rdparty/zlib/windows/minizip.exe release
+  - cmd: cp ./3rdparty/zlib/windows/zlibwapi.dll release
   - cmd: cp LICENSE release/LICENSE.txt"
   - iscc innosetup.iss
   - rm release/*.o
