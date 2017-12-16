@@ -21,10 +21,13 @@
 
 #include <windows.h>
 #include <windowsx.h>
+#include <atlbase.h>
 #include <sapi.h>
 #include <sphelper.h>
 #include <comdef.h>
 #include <commctrl.h>
+
+using namespace ATL;
 
 namespace QtSpeech_v1 { // API v1.0
 
