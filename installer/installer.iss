@@ -28,18 +28,16 @@ SolidCompression=true
 ;;;LicenseFile=.\License.txt
 
 [Files]
-Source: release\dana.exe;                                        DestDir: {app};
-Source: release\zlibwapi.dll;                                DestDir: {app};
-Source: release\miniunz.exe;                                 DestDir: {app};
-Source: release\minizip.exe;                                 DestDir: {app};
-Source: release\msvcp110.dll;                                DestDir: {app};
-Source: release\msvcr110.dll;                                DestDir: {app};
+Source: ..\source\release\dana.exe;                                   DestDir: {app};
+Source: ..\source\release\zlibwapi.dll;                               DestDir: {app};
+Source: ..\source\release\miniunz.exe;                                DestDir: {app};
+Source: ..\source\release\minizip.exe;                                DestDir: {app};
 Source: {%QTDIR}\bin\icudt53.dll;                                     DestDir: {app};
 Source: {%QTDIR}\bin\icuin53.dll;                                     DestDir: {app};
 Source: {%QTDIR}\bin\icuuc53.dll;                                     DestDir: {app};
-;;Source: {%QTDIR}\bin\libEGL.dll;                                      DestDir: {app};
-;;Source: {%QTDIR}\bin\libEGLd.dll;                                     DestDir: {app};
-;;Source: {%QTDIR}\bin\libGLESv2.dll;                                   DestDir: {app};
+;;Source: {%QTDIR}\bin\libEGL.dll;                                    DestDir: {app};
+;;Source: {%QTDIR}\bin\libEGLd.dll;                                   DestDir: {app};
+;;Source: {%QTDIR}\bin\libGLESv2.dll;                                 DestDir: {app};
 Source: {%QTDIR}\bin\Qt5Core.dll;                                     DestDir: {app};
 Source: {%QTDIR}\bin\Qt5Gui.dll;                                      DestDir: {app};
 Source: {%QTDIR}\bin\Qt5Network.dll;                                  DestDir: {app};
