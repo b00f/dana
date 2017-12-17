@@ -11,6 +11,8 @@ To build Dana, you need:
 To build Dana run the following commands from the root of the source directory:
 
 ```
+git clone --recursive https://github.com/m-o-s-t-a-f-a/dana.git
+cd dana/source
 qmake
 make
 ```
