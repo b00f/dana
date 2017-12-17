@@ -27,7 +27,7 @@
 #include "cardquery.h"
 
 #include <QTimer>
-#include <QtSpeech>
+#include <QTextToSpeech>
 
 class Deck;
 class Card;
@@ -38,7 +38,6 @@ class QueryDialog
 
 public:
     explicit QueryDialog(QWidget *parent = 0);
-    ~QueryDialog();
 
     void setDeck(Deck *deck);
     bool isRunning();
@@ -89,7 +88,7 @@ private:
 
     bool running;
 
-    QtSpeech *speech;
+    QTextToSpeech *speech;
     QAction *actListen;
 
     CardQuery cardQuery;

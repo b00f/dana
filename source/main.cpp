@@ -22,11 +22,11 @@
 #include "constants.h"
 
 #include <QApplication>
-#include <QtSingleApplication>
+#include <singleapplication.h>
 
 int main(int argc, char *argv[])
 {
-    QtSingleApplication a(argc, argv);
+    SingleApplication app(argc, argv);
 
     QString plugins = appPath();
 #ifdef Q_OS_MAC
@@ -34,25 +34,19 @@ int main(int argc, char *argv[])
 #else
     plugins += "/plugins";
 #endif
-    a.addLibraryPath(plugins);
+    app.addLibraryPath(plugins);
 
-	if (a.isRunning()) {
-		a.sendMessage("SHOW");
-        return 0;
-	}
+    MainWindow w;    
 
-    MainWindow w;
+    QObject::connect( &app, &SingleApplication::instanceStarted, [ &w ]() {
+        w.raise();
+        w.activateWindow();
+    });
+
     w.show();
 
-    a.setActivationWindow(&w);
-    a.setQuitOnLastWindowClosed(false);
+    app.setActiveWindow(&w);
+    app.setQuitOnLastWindowClosed(false);
 
-	a.connect(&a, SIGNAL(messageReceived(const QString &)),
-			   &w, SLOT  (onMessageReceiveFromOtherInst(const QString &)));
-
-///    QApplication a(argc, argv);
-///    MainWindow w;
-///    w.show();
-
-    return a.exec();
+    return app.exec();
 }

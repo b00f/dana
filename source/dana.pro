@@ -1,19 +1,14 @@
-QT += core xml gui network widgets sql charts
+QT += core xml gui network widgets sql charts texttospeech
 
 TARGET = dana
 TEMPLATE = app
 
 ##macx: CONFIG-=app_bundle
 
-include(./../3rdparty/qtsingleapplication/src/qtsingleapplication.pri)
-include(./../3rdparty/qtspeech/QtSpeech.pri)
 include(dana.pri)
+include(./../3rdparty/singleapplication/singleapplication.pri)
+DEFINES += QAPPLICATION_CLASS=QApplication
 
-
-
-win32 {
-   RC_FILE = dana.rc
-}
 
 unix {
 

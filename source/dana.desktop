@@ -9,3 +9,4 @@ StartupNotify=true
 Terminal=false
 Type=Application
 Categories=Education;Qt;
+

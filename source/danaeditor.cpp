@@ -28,7 +28,7 @@
 DanaEditor::DanaEditor(QWidget *parent)
     : QTextEdit(parent)
 {
-    speech = new QtSpeech;
+    speech = new QTextToSpeech(this);
 
     rsrcPath = ":/images/danaeditor/";
 
@@ -42,9 +42,6 @@ DanaEditor::DanaEditor(QWidget *parent)
     connect(this, SIGNAL(cursorPositionChanged()),
             this, SLOT(cursorPositionChanged()));
 
-    connect(speech, SIGNAL(finished()),
-            this, SLOT(onFinishSpeech()));
-
     //installEventFilter(this);
     setTabChangesFocus(true);
 
@@ -56,8 +53,6 @@ DanaEditor::DanaEditor(QWidget *parent)
 
 DanaEditor::~DanaEditor()
 {
-    speech->stop();
-    delete speech;
 }
 
 void DanaEditor::setText(QString text)
@@ -146,7 +141,7 @@ void DanaEditor::setupActions()
     actInsertLatex   = createAction("latex.png"                , tr("Insert Latex")  , this, SLOT(insertLatex())   );
     actInsertImage   = createAction("picture.png"              , tr("Insert Image")  , this, SLOT(insertImage())    , Qt::CTRL + Qt::Key_O);
     actClearFormat   = createAction("format-clear.png"         , tr("Clear Format")  , this, SLOT(clearFormat())    , Qt::CTRL + Qt::Key_Delete);
-    actListen        = createAction("listen.png"               , tr("Listen it!")    , this, SLOT(listen())         , Qt::CTRL + Qt::Key_D, true);
+    actListen        = createAction("listen.png"               , tr("Listen it!")    , this, SLOT(listen())         , Qt::CTRL + Qt::Key_D);
     actShowToolbar   = createAction("show-toolbar.png"         , tr("Show Toolbar")  , this, SLOT(showToolbar())   );
 
     QActionGroup *grpDir = new QActionGroup(this);
@@ -470,19 +465,7 @@ void DanaEditor::indentLess()
 
 void DanaEditor::listen()
 {
-    try {
-        speech->stop();
-
-        if(actListen->isChecked())
-            speech->tell(toPlainText());
-    }catch(...) {
-        QxMessageBox::critical(this, ERR_QT_SPEECH_FAILED);
-    }
-}
-
-void DanaEditor::onFinishSpeech()
-{
-    actListen->setChecked(false);
+    speech->say(toPlainText());
 }
 
 bool DanaEditor::eventFilter(QObject *watched, QEvent *event)
