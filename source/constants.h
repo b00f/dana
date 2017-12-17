@@ -121,10 +121,7 @@ static inline QString appPath() {
 }
 
 static inline QString danaPath() {
-    QString path = QSettings().value("dana_folder").toString();
-
-    if(path.isEmpty())
-        path = QDir::homePath() + "/.dana";
+    QString path = QDir::homePath() + "/.dana";
 
     utils::createDirectory(path);
 
