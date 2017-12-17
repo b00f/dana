@@ -50,20 +50,20 @@ HEADERS += \
     ./strings.h \
     ./utils.h \
     ./verticallabel.h \
-    ./zlibwrappr.h \
     ./preferences.h \
     ./qxpushbutton.h \
     ./simplecrypt.h \
     ./tempdeck.h \
     ./qxmessagebox.h \
-    decklistproxymodel.h \
-    decklistdatamodelsingle.h \
-    decklistdatamodel.h \
-    deckdatamodel.h \
-    deckproxymodel.h \
-    uploaddialog.h \
-    filedownloader.h \
-    $$PWD/cardinfodialog.h
+    ./decklistproxymodel.h \
+    ./decklistdatamodelsingle.h \
+    ./decklistdatamodel.h \
+    ./deckdatamodel.h \
+    ./deckproxymodel.h \
+    ./uploaddialog.h \
+    ./filedownloader.h \
+    ./cardinfodialog.h \
+    ./compressor.h
     
 SOURCES += \
     ./aboutdialog.cpp \
@@ -117,15 +117,15 @@ SOURCES += \
     ./spinlabel.cpp \
     ./tempdeck.cpp \
     ./verticallabel.cpp \
-    ./zlibwrappr.cpp \
-    decklistproxymodel.cpp \
-    decklistdatamodelsingle.cpp \
-    decklistdatamodel.cpp \
-    deckdatamodel.cpp \
-    deckproxymodel.cpp \
-    uploaddialog.cpp \
-    filedownloader.cpp \
-    $$PWD/cardinfodialog.cpp
+    ./decklistproxymodel.cpp \
+    ./decklistdatamodelsingle.cpp \
+    ./decklistdatamodel.cpp \
+    ./deckdatamodel.cpp \
+    ./deckproxymodel.cpp \
+    ./uploaddialog.cpp \
+    ./filedownloader.cpp \
+    ./cardinfodialog.cpp \
+    ./compressor.cpp
 
 INCLUDEPATH += "../3rdparty/singleapplication/"
 

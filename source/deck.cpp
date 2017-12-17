@@ -20,7 +20,7 @@
 
 #include "deck.h"
 #include "card.h"
-#include "zlibwrappr.h"
+#include "compressor.h"
 #include "constants.h"
 
 #include <QXmlStreamWriter>
@@ -354,7 +354,8 @@ bool Deck::importMnemosyne(QString fileName)
 
     utils::createDirectory(tempFolder);
 
-    if(!zlibWrappr::unzipFolder(fileName, tempFolder)) {
+    Compressor c;
+    if(!c.decompressFolder(fileName, tempFolder)) {
         return false;
     }
 
@@ -524,7 +525,8 @@ bool Deck::importDana(QString fileName)
     
     utils::createDirectory(tempFolder);
     
-    if(!zlibWrappr::unzipFolder(fileName, tempFolder)) {
+    Compressor c;
+    if(!c.decompressFolder(fileName, tempFolder)) {
         return false;
     }
 
@@ -702,7 +704,8 @@ bool Deck::exportToDana(QString fileName)
 
     utils::copyDirectory(tempFolder, getDeckPath());
 
-    if(!zlibWrappr::zipFolder(tempFolder, fileName)) {
+    Compressor c;
+    if(!c.compressFolder(tempFolder, fileName)) {
         return false;
     }
 
