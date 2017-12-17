@@ -30,7 +30,7 @@ artifacts:
 deploy:
   provider: GitHub
   auth_token:
-    secure: m2QyYh1slxSys5zfq9Lu+w==
+     secure: DsQ/Nv6Df/ryOXUJhBBmDJFwZ6HHGaIauruGGnv4ouuhw9P6necvd8jjKohav/7Y
   artifact: SetupExe
   prerelease: true
   tag: v$(appveyor_build_version)
