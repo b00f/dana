@@ -18,12 +18,12 @@ after_build:
   - windeployqt release/dana.exe
   - cmd: cp LICENSE release/LICENSE.txt
   - iscc ./installer/installer.iss
-  - mv Output/dana-*.exe Output/dana-$(APPVEYOR_REPO_TAG_NAME)-windows.exe 
+  - mv Output/ana-win32.exe dana-$(APPVEYOR_REPO_TAG_NAME)-windows.exe 
   - rm release/*.o
   - rm release/*.cpp
 
 artifacts:
-  - path: Output\dana-*.exe
+  - path: dana-*.exe
     name: SetupExe
   
 deploy:
