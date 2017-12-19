@@ -54,7 +54,7 @@ void Preferences::load()
     password        = QxSettings::getSetting(SETTING_KEY_PASSWORD,          SETTING_GROUP_NAME, "").toString();
     proxyUsername   = QxSettings::getSetting(SETTING_KEY_PROXY_USERNAME,    SETTING_GROUP_NAME, "").toString();
     proxyPassword   = QxSettings::getSetting(SETTING_KEY_PROXY_PASSWORD,    SETTING_GROUP_NAME, "").toString();
-    checkUpdate     = QxSettings::getSetting(SETTING_KEY_CHECK_UPDATE,      SETTING_GROUP_NAME, true).toBool();
+    checkUpdate     = QxSettings::getSetting(SETTING_KEY_CHECK_UPDATE,      SETTING_GROUP_NAME, false).toBool();
 }
 
 void Preferences::save()
