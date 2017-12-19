@@ -26,10 +26,10 @@ In Persian 'Dana' is a name for both girls and boys. It means 'Knowledge' or 'Wi
 "ipsa scientia potestas est" is a Latin aphorism that means 'knowledge itself is power' or 'wisdom is power' that Sir Francis Bacon used it.
 
 ## About icon
-If you are thinking the icon of 'Dana' is looks like a spider web, you are not so far away.
-Actually it is, but in West Africa it's a symbol of 'Wisdom' and 'Creativity!
-Ananse, the spider, is a well-known character in African folk-tales.
-Learning Faster with Dana!
+If you are thinking the icon of 'Dana' is looks like a spider web, you are not far away.
+It is the symbol of 'Wisdom' and 'Creativity' in west African culture. Ananse, the spider, is a well-known character in African folk-tales.
+
+Learning faster with Dana!
 
 ## License
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
@@ -38,3 +38,4 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 ## Downlaod
 you can download compiled version of Dana from here: https://github.com/m-o-s-t-a-f-a/dana/releases
+Also you can compiled your own version. Go ahead, it is easy!
