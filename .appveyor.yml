@@ -22,9 +22,9 @@ after_build:
   - rm release/*.h
   - iscc ./installer/installer.iss
 
-artifacts:
-  - path: Output/dana-*.exe
-    name: SetupExe
+### artifacts:
+###  - path: Output/dana-*.exe
+###    name: SetupExe
     
 ### deploy:
 ###  provider: GitHub
