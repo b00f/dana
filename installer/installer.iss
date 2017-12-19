@@ -29,7 +29,7 @@ SolidCompression=true
 LicenseFile=.\..\LICENSE
 
 [Files]
-Source: ..\release\*;    DestDir: {app};
+Source: ..\release\*; DestDir: {app}; Flags: recursesubdirs      
 
 
 [Icons]
