@@ -1,7 +1,7 @@
-branches:
-  only:
-    - master
-    - devel
+#branches:
+#  only:
+#    - master
+#    - devel
 
 install:
   - set QTDIR=C:\Qt\5.9.2\mingw53_32
@@ -28,8 +28,8 @@ artifacts:
   
 deploy:
   provider: GitHub
-  #on:
-  #  appveyor_repo_tag: true
+  on:
+    appveyor_repo_tag: true
   auth_token:
      secure: DsQ/Nv6Df/ryOXUJhBBmDJFwZ6HHGaIauruGGnv4ouuhw9P6necvd8jjKohav/7Y
   artifact: SetupExe
