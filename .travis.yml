@@ -25,7 +25,8 @@ script:
   - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
 
 after_success:
-  - echo "TRAVIS_TAG is " ${TRAVIS_TAG};
+  - # echo "TRAVIS_TAG is " ${TRAVIS_TAG};
+  - export UPLOADTOOL_SUFFIX=${TRAVIS_TAG}
   - # exit if TRAVIS_TAG is empty, no need to release anything
   - if [ -z "${TRAVIS_TAG}" ]; then exit 0; fi;
   - find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
