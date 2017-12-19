@@ -25,8 +25,8 @@ after_build:
 artifacts:
   - path: Output/dana-*.exe
     name: SetupExe
-  
-deploy:
+    
+### deploy:
 ###  provider: GitHub
 ###  on:
 ###    appveyor_repo_tag: true
