@@ -35,6 +35,7 @@ class DatabaseManager
 {
 public:
     DatabaseManager();
+    ~DatabaseManager();
 	
     bool open();
     QSqlError lastError() const;

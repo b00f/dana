@@ -118,6 +118,13 @@ DatabaseManager::DatabaseManager()
     }
 }
 
+DatabaseManager::~DatabaseManager()
+{
+    if(db.isOpen()) {
+        db.close();
+    }
+}
+
 bool DatabaseManager::open()
 {
     if(!db.isOpen()) {

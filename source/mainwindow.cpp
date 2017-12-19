@@ -144,6 +144,8 @@ MainWindow::MainWindow()
 
 void MainWindow::quitApp()
 {
+    deckList->clear();
+
     QxSettings::setSetting(SETTING_KEY_GEOMETRY, SETTING_GROUP_NAME, saveGeometry());
 
     DatabaseManager::DestroyInstance();

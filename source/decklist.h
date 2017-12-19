@@ -25,7 +25,7 @@
 #include <QList>
 
 class Deck;
-class DeckList 
+class DeckList
     : public QObject
 {
     Q_OBJECT
