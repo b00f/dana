@@ -18,7 +18,7 @@ after_build:
   - windeployqt release/dana.exe
   - cmd: cp LICENSE release/LICENSE.txt
   - iscc ./installer/installer.iss
-  - mv Output/dana-win32.exe dana-${APPVEYOR_REPO_TAG_NAME}-windows.exe 
+  - mv Output/dana-win32.exe dana-%APPVEYOR_REPO_TAG_NAME%-windows.exe 
   - rm release/*.o
   - rm release/*.cpp
 
@@ -28,8 +28,8 @@ artifacts:
   
 deploy:
   provider: GitHub
-  on:
-    appveyor_repo_tag: true
+  #on:
+  #  appveyor_repo_tag: true
   auth_token:
      secure: DsQ/Nv6Df/ryOXUJhBBmDJFwZ6HHGaIauruGGnv4ouuhw9P6necvd8jjKohav/7Y
   artifact: SetupExe
