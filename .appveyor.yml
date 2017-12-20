@@ -17,24 +17,24 @@ build_script:
 after_build:
   - windeployqt release/dana.exe
   - cmd: cp LICENSE release/LICENSE.txt
-  - iscc ./installer/installer.iss
-  - mv Output/dana-win32.exe dana-%APPVEYOR_REPO_TAG_NAME%-windows.exe 
   - rm release/*.o
   - rm release/*.cpp
+  - rm release/*.h
+  - iscc ./installer/installer.iss
 
-artifacts:
-  - path: dana-*.exe
-    name: SetupExe
-  
-deploy:
-  provider: GitHub
-  #on:
-  #  appveyor_repo_tag: true
-  auth_token:
-     secure: DsQ/Nv6Df/ryOXUJhBBmDJFwZ6HHGaIauruGGnv4ouuhw9P6necvd8jjKohav/7Y
-  artifact: SetupExe
-  prerelease: true
-  tag: $(APPVEYOR_REPO_TAG_NAME)
-  release: $(APPVEYOR_REPO_TAG_NAME)
-  description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
+### artifacts:
+###  - path: Output/dana-*.exe
+###    name: SetupExe
+    
+### deploy:
+###  provider: GitHub
+###  on:
+###    appveyor_repo_tag: true
+###  auth_token:
+###     secure: DsQ/Nv6Df/ryOXUJhBBmDJFwZ6HHGaIauruGGnv4ouuhw9P6necvd8jjKohav/7Y
+###  artifact: SetupExe
+###  prerelease: true
+###  tag: $(APPVEYOR_REPO_TAG_NAME)
+###  release: $(APPVEYOR_REPO_TAG_NAME)
+###  description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
 

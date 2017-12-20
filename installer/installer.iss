@@ -29,34 +29,8 @@ SolidCompression=true
 LicenseFile=.\..\LICENSE
 
 [Files]
-Source: ..\release\dana.exe;                               DestDir: {app};
-Source: {#Mingw}\bin\libgcc_s_dw2-1.dll;                   DestDir: {app};
-Source: {#Mingw}\bin\libstdc++-6.dll;                      DestDir: {app};
-Source: {#Mingw}\bin\libwinpthread-1.dll;                  DestDir: {app};
-Source: {#QtDir}\bin\Qt5Core.dll;                          DestDir: {app};
-Source: {#QtDir}\bin\Qt5Gui.dll;                           DestDir: {app};
-Source: {#QtDir}\bin\Qt5Network.dll;                       DestDir: {app};
-Source: {#QtDir}\bin\Qt5Widgets.dll;                       DestDir: {app};
-Source: {#QtDir}\bin\Qt5Widgets.dll;                       DestDir: {app};
-Source: {#QtDir}\bin\Qt5Xml.dll;                           DestDir: {app};
-Source: {#QtDir}\bin\Qt5Sql.dll;                           DestDir: {app};
-Source: {#QtDir}\bin\Qt5Widgets.dll;                       DestDir: {app};
-Source: {#QtDir}\bin\Qt5Charts.dll;                        DestDir: {app};
-Source: {#QtDir}\bin\Qt5TextToSpeech.dll;                  DestDir: {app};
-Source: {#QtDir}\plugins\platforms\qwindows.dll;           DestDir: {app}\platforms\;
-Source: {#QtDir}\plugins\sqldrivers\qsqlite.dll;           DestDir: {app}\plugins\sqldrivers\;
-Source: {#QtDir}\plugins\bearer\qnativewifibearer.dll;     DestDir: {app}\plugins\bearer\;
-Source: {#QtDir}\plugins\bearer\qgenericbearer.dll;        DestDir: {app}\plugins\bearer\;
-Source: {#QtDir}\plugins\imageformats\qgif.dll;            DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\imageformats\qico.dll;            DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\imageformats\qjpeg.dll;           DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\imageformats\qsvg.dll;            DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\imageformats\qtga.dll;            DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\imageformats\qtiff.dll;           DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\imageformats\qwbmp.dll;           DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\imageformats\qicns.dll;           DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\imageformats\qwebp.dll;           DestDir: {app}\plugins\imageformats\;
-Source: {#QtDir}\plugins\platforms\qwindows.dll;           DestDir: {app}\plugins\platforms\;
+Source: ..\release\*; DestDir: {app}; Flags: recursesubdirs      
+
 
 [Icons]
 Name: {group}\Dana; Filename: {app}\Dana.exe; IconFilename: {app}\Dana.exe;
