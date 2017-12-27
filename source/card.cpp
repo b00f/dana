@@ -148,15 +148,22 @@ Card::Difficulty Card::getDifficulty() const
     int success = 0;
     for (auto it=points.constBegin();
         it!=points.constEnd(); ++it) {
-        if((*it)->level >= level)
+        if((*it)->level > level)
             success++;
-        else
+        else if((*it)->level < level)
             success--;
+        else {
+            if(level==0)
+                success--;
+            else
+                success++;
+        }
+        level = (*it)->level;
     }
 
     if(success>5) {
         return Easy;
-    } else if(success<-3) {
+    } else if(success<-5) {
         return Hard;
     }
 
