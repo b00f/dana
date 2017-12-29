@@ -42,13 +42,13 @@ script:
   - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
 
 after_success:
-  - # echo "TRAVIS_TAG is " ${TRAVIS_TAG};
+  # echo "TRAVIS_TAG is " ${TRAVIS_TAG};
   - export UPLOADTOOL_SUFFIX=${TRAVIS_TAG}
-  - # if TRAVIS_TAG is empty, no need to release anything
-  - if [ ! -z "${TRAVIS_TAG}" ]; find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq; fi;
-  - if [ ! -z "${TRAVIS_TAG}" ]; curl --upload-file Dana*.AppImage https://transfer.sh/APPNAME-${TRAVIS_TAG}-linux.AppImage; fi;
-  - if [ ! -z "${TRAVIS_TAG}" ]; wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh; fi;
-  - if [ ! -z "${TRAVIS_TAG}" ]; bash upload.sh Dana*.AppImage*; fi;
+  # if TRAVIS_TAG is empty, no need to release anything
+  - if [ ! -z "${TRAVIS_TAG}" ]; then find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq; fi;
+  - if [ ! -z "${TRAVIS_TAG}" ]; then curl --upload-file Dana*.AppImage https://transfer.sh/APPNAME-${TRAVIS_TAG}-linux.AppImage; fi;
+  - if [ ! -z "${TRAVIS_TAG}" ]; then wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh; fi;
+  - if [ ! -z "${TRAVIS_TAG}" ]; then bash upload.sh Dana*.AppImage*; fi;
   
 branches:
   except:
