@@ -1,8 +1,8 @@
-# Dana [![Build Status](https://travis-ci.org/m-o-s-t-a-f-a/dana.svg?branch=master)](https://travis-ci.org/m-o-s-t-a-f-a/dana.svg?branch=master) [![Build status](https://ci.appveyor.com/api/projects/status/qabibvot9ngvx6ch?svg=true)](https://ci.appveyor.com/project/m-o-s-t-a-f-a/dana)
+# Dana [![Build Status](https://travis-ci.org/b00f/dana.svg?branch=master)](https://travis-ci.org/b00f/dana.svg?branch=master) [![Build status](https://ci.appveyor.com/api/projects/status/qabibvot9ngvx6ch?svg=true)](https://ci.appveyor.com/project/b00f/dana)
 
 Dana is an open source and free software for whom want to extend their knowledge. 'Dana' has great user-interface for 'Spaced Repetition' learning technique.
 
-![screenshot](https://github.com/m-o-s-t-a-f-a/dana/blob/master/screenshots/2.PNG)
+![screenshot](https://github.com/b00f/dana/blob/master/screenshots/2.PNG)
 
 ## Build
 To build Dana, you need:
@@ -12,7 +12,7 @@ To build Dana, you need:
 
 To build Dana run the following commands from the root of the source directory:
 ```
-git clone --recursive https://github.com/m-o-s-t-a-f-a/dana.git
+git clone --recursive https://github.com/b00f/dana.git
 cd dana/source
 qmake
 make
@@ -38,5 +38,5 @@ This program is free software; you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ## Downlaod
-you can download compiled version of Dana from here: https://github.com/m-o-s-t-a-f-a/dana/releases
+you can download compiled version of Dana from here: https://github.com/b00f/dana/releases
 Also you can compiled your own version. Go ahead, it is easy!
