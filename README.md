@@ -1,4 +1,4 @@
-# Dana [![Build Status](https://travis-ci.org/b00f/dana.svg?branch=master)](https://travis-ci.org/b00f/dana.svg?branch=master) [![Build status](https://ci.appveyor.com/api/projects/status/qabibvot9ngvx6ch?svg=true)](https://ci.appveyor.com/project/b00f/dana)
+# Dana [![Build Status](https://travis-ci.org/b00f/dana.svg?branch=master)](https://travis-ci.org/b00f/dana.svg?branch=master) [![Build status](https://ci.appveyor.com/api/projects/status/45mkntil6eyw8u2n?svg=true)](https://ci.appveyor.com/project/b00f/dana)
 
 Dana is an open source and free software for whom want to extend their knowledge. 'Dana' has great user-interface for 'Spaced Repetition' learning technique.
 
