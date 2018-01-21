@@ -53,14 +53,9 @@ public:
     explicit ConfigGeneralPage(QWidget *parent = 0);
     void save();
 
-private:
-    bool isAutoStart();
-    void setAutoStart(bool enabled);
-
 protected:
     QCheckBox *autoStartCheck;
     QCheckBox *checkUpdateCheck;
-
 };
 
 class ConfigDeckPage

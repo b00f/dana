@@ -5,8 +5,11 @@ TEMPLATE = app
 
 ##macx: CONFIG-=app_bundle
 
-include(dana.pri)
 include(./../3rdparty/singleapplication/singleapplication.pri)
+include(./../3rdparty/qautostart/src/qautostart.pri)
+include(dana.pri)
+
+
 DEFINES += QAPPLICATION_CLASS=QApplication
 
 

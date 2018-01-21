@@ -22,7 +22,7 @@
 #include "constants.h"
 
 QxSettings::QxSettings()
-    : QSettings(danaPath()+"/settings.ini", Format::NativeFormat)
+    : QSettings(danaPath()+"/settings.ini", Format::IniFormat)
 {
 }
 

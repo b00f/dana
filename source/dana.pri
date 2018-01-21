@@ -127,7 +127,6 @@ SOURCES += \
     ./cardinfodialog.cpp \
     ./compressor.cpp
 
-INCLUDEPATH += "../3rdparty/singleapplication/"
 
 RESOURCES += dana.qrc
 

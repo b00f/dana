@@ -57,7 +57,7 @@ void CardQuery::shuffle()
 {
     shuffled.clear();
     int count = deck->getTotalCardsNo();
-    int index[count];
+    QVector<int> index(count);
 
     for (int i=0; i<count; i++) {
         index[i] = i;  // fill the array in order

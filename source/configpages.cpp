@@ -24,6 +24,8 @@
 #include "networkmanager.h"
 #include "constants.h"
 
+#include <QAutostart>
+
 ConfigPage::ConfigPage(QWidget *parent)
     : QWidget(parent)
 {
@@ -55,47 +57,15 @@ ConfigGeneralPage::ConfigGeneralPage(QWidget *parent)
     settingLayout->addWidget(autoStartCheck);
     settingLayout->addWidget(checkUpdateCheck);
 
-    autoStartCheck->setChecked ( isAutoStart() );
+    autoStartCheck->setChecked ( Autostart().isAutostart() );
     checkUpdateCheck->setChecked( preferences->isCheckUpdate() );
 }
 
 void ConfigGeneralPage::save()
 {
-    setAutoStart( autoStartCheck->isChecked() );
+    Autostart().setAutostart( autoStartCheck->isChecked() );
     preferences->setCheckUpdate( checkUpdateCheck->isChecked() );
 }
-
-#ifdef Q_OS_WIN
-#define RUN_REG_NODE    "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
-bool ConfigGeneralPage::isAutoStart()
-{
-    QSettings settings(RUN_REG_NODE, QSettings::NativeFormat);
-    if (settings.value(APP_NAME).isNull()) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-void ConfigGeneralPage::setAutoStart(bool enabled) {
-    QSettings settings(RUN_REG_NODE, QSettings::NativeFormat);
-    if (enabled) {
-        settings.setValue(APP_NAME, appPath().replace('/','\\'));
-    } else {
-        settings.remove(APP_NAME);
-    }
-}
-#else
-bool ConfigGeneralPage::isAutoStart()
-{
-    return false;
-}
-
-void ConfigGeneralPage::setAutoStart(bool enabled)
-{
-    Q_UNUSED(enabled);
-}
-#endif
 
 ConfigDeckPage::ConfigDeckPage(QWidget *parent)
     : ConfigPage(parent)

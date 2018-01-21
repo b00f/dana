@@ -24,7 +24,6 @@
 
 
 #define SETTING_GROUP_NAME             "preference"
-#define SETTING_KEY_AUTOSTART          "auto_start"
 #define SETTING_KEY_CHECK_UPDATE       "update_check"
 #define SETTING_KEY_QUERY_INTERVAL     "query_interval"
 #define SETTING_KEY_USERNAME           "username"
