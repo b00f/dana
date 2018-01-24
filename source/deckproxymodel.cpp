@@ -84,6 +84,19 @@ bool DeckProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right)
             return false;
     }
         break;
+
+    case DeckDataModel::ColumnCreation:
+    {
+        QDateTime leftCreation = left.data(DeckDataModel::CreationRole).toDateTime();
+        QDateTime rightCreation = right.data(DeckDataModel::CreationRole).toDateTime();
+
+        if(leftCreation < rightCreation)
+            return true;
+
+        if(leftCreation > rightCreation)
+            return false;
+    }
+        break;
     }
 
 

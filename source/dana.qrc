@@ -76,5 +76,6 @@
         <file>images/view-options.png</file>
         <file>images/deck_96.png</file>
         <file>images/card-info.png</file>
+        <file>images/dana_tray.png</file>
     </qresource>
 </RCC>

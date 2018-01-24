@@ -274,3 +274,8 @@ CardHistory *Card::getHistory()
 {
     return &history;
 }
+
+QDateTime Card::getCreationTime() const
+{
+    return history.getCreationTime();
+}

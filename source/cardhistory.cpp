@@ -129,3 +129,8 @@ const QList<Point *> &CardHistory::getPoints() const
 {
     return points;
 }
+
+QDateTime CardHistory::getCreationTime() const
+{
+    return points[0]->time;
+}

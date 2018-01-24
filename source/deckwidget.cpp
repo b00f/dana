@@ -28,6 +28,8 @@
 #include <QDomElement>
 #include <QSignalMapper>
 
+#define LEFT_PANE_WIDTH 120
+
 
 DeckWidget::DeckWidget(QWidget *parent)
     : QWidget(parent)
@@ -57,7 +59,7 @@ void DeckWidget::setupView()
     for(int i=0;i<LevelCount;i++) {
         deckLevels[i] = new QxPushButton(this);
         deckLevels[i]->setToolTip(LevelsName[i]);
-        deckLevels[i]->setMinimumSize(QSize(150, 0));
+        deckLevels[i]->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
         deckLevels[i]->setCheckable(true);
         deckLevels[i]->setSizePolicy(sizePolicy);
 
@@ -75,19 +77,19 @@ void DeckWidget::setupView()
 
     hLine->setFrameShape(QFrame::HLine);
     hLine->setFrameShadow(QFrame::Sunken);
-    hLine->setMinimumSize(QSize(150, 0));
+    hLine->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
     hLine->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     deckRetireds = new QxPushButton(this);
     deckRetireds->setToolTip(STR_LEVEL_RETIRED);
     deckRetireds->setCheckable(true);
-    deckRetireds->setMinimumSize(QSize(150, 0));
+    deckRetireds->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
     deckRetireds->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     deckStarreds = new QxPushButton(this);
     deckStarreds->setToolTip(STR_LEVEL_STARRED);
     deckStarreds->setCheckable(true);
-    deckStarreds->setMinimumSize(QSize(150, 0));
+    deckStarreds->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
     deckStarreds->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     signalMapper->setMapping(deckRetireds, Level_Retired);
@@ -172,6 +174,7 @@ void DeckWidget::updateView()
 {
     proxyModel->refresh();
     deckTable->hideColumn(DeckDataModel::ColumnProgress);
+    deckTable->hideColumn(DeckDataModel::ColumnCreation);
 }
 
 void DeckWidget::setContextMenu(QMenu *menu)

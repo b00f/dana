@@ -69,6 +69,7 @@ public:
     bool         isStarred() const;
     bool         isInHand() const;
     bool         isRetired() const;
+    QDateTime    getCreationTime() const;
    
     CardHistory *getHistory();
    

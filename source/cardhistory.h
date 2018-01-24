@@ -41,6 +41,7 @@ public:
     void      fromString(QString historyLine);
     QString   toString() const;
     Point*    getLastPoint(bool sameLevel = false) const;
+    QDateTime getCreationTime() const;
 
     void      addPoint(int level);
 

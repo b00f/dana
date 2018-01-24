@@ -65,6 +65,7 @@ QVariant DeckDataModel::data(const QModelIndex &index, int role) const
         case ColumnProgress:   return Card::getLevelPercentage( card->getLevel() );
         case ColumnStarred:    return QVariant();
         case ColumnDifficulty: return card->getDifficulty();
+        case ColumnCreation:   return card->getCreationTime().toString("dd.MM.yyyy hh:mm");
         } break;
 
     case Qt::ForegroundRole:
@@ -91,6 +92,9 @@ QVariant DeckDataModel::data(const QModelIndex &index, int role) const
     case DifficultyRole:
         return card->getDifficulty();
 
+    case CreationRole:
+        return card->getCreationTime();
+
     case InternalPointerRole:
         return QVariant::fromValue(card);
     }
@@ -116,6 +120,9 @@ QVariant DeckDataModel::headerData(int section, Qt::Orientation orientation, int
 
         case ColumnDifficulty:
             return tr("Difficulty");
+
+        case ColumnCreation:
+            return tr("Creation");
 
 		default:
             return QVariant();

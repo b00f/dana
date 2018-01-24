@@ -33,8 +33,10 @@ public:
     enum Column {
         ColumnFront		=0,
         ColumnProgress    ,
+        ColumnCreation    ,
         ColumnDifficulty  ,
         ColumnStarred     ,
+
 
         ColumnCount
 	};
@@ -44,6 +46,7 @@ public:
         LevelRole                 , 
         StarredRole               , 
         DifficultyRole            ,
+        CreationRole              ,
         InternalPointerRole       ,
     };
 

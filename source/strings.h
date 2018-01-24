@@ -338,7 +338,7 @@
 #define ICON_CONFIG_DECK                                 QIcon(":/images/config-deck.png")
 #define ICON_CONFIG_NETWORK                              QIcon(":/images/config-network.png")
 
-
+#define PIXMAP_DANA_TRAY                                 QPixmap(":/images/dana_tray.png")
 #define PIXMAP_DANA_16                                   QPixmap(":/images/dana_16.png")
 #define PIXMAP_DANA_24                                   QPixmap(":/images/dana_24.png")
 #define PIXMAP_DANA_32                                   QPixmap(":/images/dana_32.png")

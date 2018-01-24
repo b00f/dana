@@ -122,7 +122,7 @@ MainWindow::MainWindow()
 
 	trayIcon = new QSystemTrayIcon(this);
 	trayIcon->setContextMenu(trayIconMenu);
-	trayIcon->setIcon(appIcon);
+    trayIcon->setIcon(QIcon(PIXMAP_DANA_TRAY));
 
 	trayIcon->show();
 
