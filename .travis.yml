@@ -3,27 +3,10 @@ compiler: gcc
 sudo: require
 dist: trusty
 
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "VPdddsVA+xIFDq+WSz2l3x2kmSpUW/NOIvTejglQ95uAW7TAFxIqNc5/GGeGZ9YPeGgVj6XOtywft3P/tp6XkfDXRrFd3v78dsjbWc+aBBLknonaubYv0YKSAoNAJBFF2pP9xbwI5nylHcTTP3H5deIeZrBifo9bViw1dX8sdoHJWCyuAzV3G/aB0E3AGIq/vZgCgTpkunnGsUKpxCHUA1FP14WQ6ge3FruONxqtn/oDCItrtntIn8+AhY6/FzFz7Y3kGVvdhxdB4VOts7yNrZi7coS9EftPuEbwboPiQSlMVXC7DTj9w0Ab7ltZrvT/btAckRvNGAyM07YO3yOr4nybluAuxeRCYXZolKW2dcs5inYi04cJaW7Rq99dzbd2PD9fcKiFkg6yjiqFEdi2kBhpjQZ5Q7lsEyQPFxN0Zkm1NTf6Us8/q3CfrQ7uXK6cLje/5BndVqghYMy6Ep5ySebZ/p/FFg2VvHC6gfBJzTcJ81TAXco1N3nUZJm1GY2g5I2NZIW/guR6d2cQ1cosHtURXUZB9wVFCms0jen6XEsroRVHugTjdyn+xLsqopGOl9yFwLEVDi3zlAUGjfHX7l3Up4GNVb70DSVOyLoq43Vy4E1A0MBvuj7WjR+bR3P6DCA+fFPOA80AHxtIXxo5tvdKVxJvZnep/F3mAvzwVwA="
-
 before_install:
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - sudo add-apt-repository ppa:beineri/opt-qt593-trusty -y
   - sudo apt-get update -qq
   
-addons:
-  coverity_scan:
-    project:
-      name: "b00f/dana"
-      description: "Build submitted via Travis CI"
-    notification_email: mostafa.sedaghat@gmail.com
-    build_command_prepend: "make clean"
-    build_command: "make -j 4"
-    branch_pattern: master
-    
 install:
   - sudo apt-get -y install qt59base qt59svg qt59charts-no-lgpl qt59speech
   - source /opt/qt59/bin/qt59-env.sh
