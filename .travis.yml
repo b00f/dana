@@ -20,9 +20,9 @@ addons:
       name: "b00f/dana"
       description: "Build submitted via Travis CI"
     notification_email: mostafa.sedaghat@gmail.com
-    build_command_prepend: "./configure; make clean"
+    build_command_prepend: "make clean"
     build_command: "make -j 4"
-    branch_pattern: coverity_scan
+    branch_pattern: master
     
 install:
   - sudo apt-get -y install qt59base qt59svg qt59charts-no-lgpl qt59speech
