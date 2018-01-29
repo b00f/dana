@@ -20,8 +20,8 @@ addons:
       name: "b00f/dana"
       description: "Build submitted via Travis CI"
     notification_email: mostafa.sedaghat@gmail.com
-    build_command_prepend: "make clean"
-    build_command: "make -j$(nproc)"
+    build_command_prepend: "./configure; make clean"
+    build_command: "make -j 4"
     branch_pattern: coverity_scan
     
 install:
