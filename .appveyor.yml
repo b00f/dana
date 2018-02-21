@@ -33,7 +33,7 @@ deploy:
  on:
    appveyor_repo_tag: true
  auth_token:
-    secure: DsQ/Nv6Df/ryOXUJhBBmDJFwZ6HHGaIauruGGnv4ouuhw9P6necvd8jjKohav/7Y
+    secure: r/v2YUB4NZ5Go7+S/7nMgotSWFnMtCL6D6UAEfRKRshNCxp6EBj++EILx8fuA43t
  artifact: SetupExe
  draft: false
  prerelease: false
