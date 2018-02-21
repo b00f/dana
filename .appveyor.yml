@@ -4,16 +4,17 @@ branches:
     - develop
 
 install:
-  - set QTDIR=C:\Qt\5.10.0\msvc2015
+  - set QTDIR=C:\Qt\5.10.0\mingw53_32
+  - set MINGW=C:\Qt\Tools\mingw530_32
   ### - choco install -y InnoSetup
   - ps: Start-FileDownload 'http://www.jrsoftware.org/download.php/is.exe' is.exe
   - is.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
-  - set PATH=%QTDIR%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
+  - set PATH=%QTDIR%\bin;%MINGW%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
   
 build_script:
   - git submodule update --init --recursive
   - qmake source\dana.pro CONFIG+=release
-  - cd source && make
+  - mingw32-make
   
 after_build:
   - windeployqt release/dana.exe
