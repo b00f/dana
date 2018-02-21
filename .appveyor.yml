@@ -35,7 +35,8 @@ deploy:
  auth_token:
     secure: DsQ/Nv6Df/ryOXUJhBBmDJFwZ6HHGaIauruGGnv4ouuhw9P6necvd8jjKohav/7Y
  artifact: SetupExe
- prerelease: true
+ draft: false
+ prerelease: false
  tag: $(APPVEYOR_REPO_TAG_NAME)
  release: $(APPVEYOR_REPO_TAG_NAME)
  description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
