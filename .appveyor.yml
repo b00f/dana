@@ -1,12 +1,9 @@
-branches:
-  only:
-    - master
-    - develop
+configuration: Release
 
 install:
   - set QTDIR=C:\Qt\5.10.0\mingw53_32
   - set MINGW=C:\Qt\Tools\mingw530_32
-  ### - choco install -y InnoSetup
+  ### - choco install innosetup
   - ps: Start-FileDownload 'http://www.jrsoftware.org/download.php/is.exe' is.exe
   - is.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
   - set PATH=%QTDIR%\bin;%MINGW%\bin;%PATH%;"C:\Program Files (x86)\Inno Setup 5"
