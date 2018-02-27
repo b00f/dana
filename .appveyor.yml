@@ -1,7 +1,8 @@
-only:
-  - master
-  - develop
-  - /^v\d+\.\d+$/
+branches:
+  only:
+    - master
+    - develop
+    - /^v\d+\.\d+$/
 
 configuration: Release
 
