@@ -1,3 +1,8 @@
+only:
+  - master
+  - develop
+  - /^v\d+\.\d+$/
+
 configuration: Release
 
 install:
