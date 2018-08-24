@@ -7,8 +7,6 @@ branches:
 configuration: Release
 
 install:
-  - set QTDIR=C:\Qt\5.10.0\mingw53_32
-  - set MINGW=C:\Qt\Tools\mingw530_32
   ### - choco install innosetup
   - ps: Start-FileDownload 'http://www.jrsoftware.org/download.php/is.exe' is.exe
   - is.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
