@@ -28,7 +28,7 @@ In Persian 'Dana' is a name for both girls and boys. It means 'Knowledge' or 'Wi
 
 ## About icon
 If you are thinking the icon of 'Dana' is looks like a spider web, you are not far away.
-It is the symbol of 'Wisdom' and 'Creativity' in west African culture. Ananse, the spider, is a well-known character in African folk-tales.
+It is the symbol of 'Wisdom' and 'Creativity' in west [African culture](https://www.ancient-symbols.com/african_symbols.html). Ananse, the spider, is a well-known character in African folk-tales.
 
 Learning faster with Dana!
 
