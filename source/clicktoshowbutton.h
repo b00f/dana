@@ -20,6 +20,7 @@
 #ifndef __CLICKTOSHOWBUTTON_H
 #define __CLICKTOSHOWBUTTON_H
 
+#include <QObject>
 #include <QPushButton>
 
 class ClickToShowButton 

@@ -20,8 +20,7 @@
 #ifndef __STRINGS_H
 #define __STRINGS_H
 
-#include <QString>
-#include <QObject>
+
 
 
 /// info

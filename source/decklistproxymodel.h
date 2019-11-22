@@ -20,6 +20,7 @@
 #ifndef __DECKLISTPROXYMODEL_H
 #define __DECKLISTPROXYMODEL_H
 
+#include <QObject>
 #include <QSortFilterProxyModel>
 
 class DeckListProxyModel 

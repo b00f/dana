@@ -20,6 +20,7 @@
 #ifndef __MAINWINDOW_H
 #define __MAINWINDOW_H
 
+#include <QObject>
 #include <QItemSelection>
 #include <QProgressBar>
 #include <QtGui>

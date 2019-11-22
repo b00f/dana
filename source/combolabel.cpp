@@ -47,10 +47,11 @@ ComboLabel::ComboLabel(const QIcon &icon, bool labelToRight, QWidget *parent)
     
 	labelLayout->addWidget(label);
 
-    if(labelToRight)
+    if(labelToRight) {
         labelLayout->insertStretch(0);
-    else
+    } else {
         labelLayout->addStretch();
+    }
     
 	labelWidget->setLayout(labelLayout);
 

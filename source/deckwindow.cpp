@@ -266,11 +266,7 @@ void DeckWindow::onEditCard()
 
 void DeckWindow::onOpenCard(Card *card)
 {
-    QWidget *parent = this;
-    if(sender()->isWidgetType())
-        parent = (QWidget*)sender(); /// might it is review dialog
-
-    CardDialog *dlg = new CardDialog(CardDialog::Edit, parent);
+    CardDialog *dlg = new CardDialog(CardDialog::Edit, nullptr);
 
     setupCardDialogSignals(dlg);
 

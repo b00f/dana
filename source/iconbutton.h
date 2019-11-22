@@ -20,6 +20,7 @@
 #ifndef __ICONBUTTON_H
 #define __ICONBUTTON_H
 
+#include <QObject>
 #include <QPushButton>
 
 class QToolButton;

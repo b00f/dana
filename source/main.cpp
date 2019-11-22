@@ -36,14 +36,15 @@ int main(int argc, char *argv[])
 #endif
     app.addLibraryPath(plugins);
 
-    MainWindow w;    
+    MainWindow w;
 
     QObject::connect( &app, &SingleApplication::instanceStarted, [ &w ]() {
+        w.show();
         w.raise();
         w.activateWindow();
     });
 
-    w.show();
+    //w.show();
 
     app.setActiveWindow(&w);
     app.setQuitOnLastWindowClosed(false);

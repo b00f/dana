@@ -20,8 +20,8 @@
 #ifndef __DECKLIST_H
 #define __DECKLIST_H
 
-#include <QVariant>
 #include <QObject>
+#include <QVariant>
 #include <QList>
 
 class Deck;
