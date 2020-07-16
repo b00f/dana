@@ -24,11 +24,13 @@
 #include "qxmessagebox.h"
 #include "constants.h"
 
+#include <QLocale>
 
 DanaEditor::DanaEditor(QWidget *parent)
     : QTextEdit(parent)
 {
     speech = new QTextToSpeech(this);
+    speech->setLocale(QLocale("en_US"));
 
     rsrcPath = ":/images/danaeditor/";
 
@@ -248,7 +250,7 @@ void DanaEditor::addActionToToolbar(QAction *a)
     btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     btn->setIconSize(QSize(16,16));
 
-    toolBar->addWidget(btn);    
+    toolBar->addWidget(btn);
 }
 
 void DanaEditor::textBold()
@@ -501,7 +503,7 @@ void DanaEditor::insertImage()
 
     if (!fileName.isEmpty()) {
         QString mediaPath = utils::combinePaths(deckPath, "files");
-        
+
         utils::createDirectory(mediaPath);
 
         QFileInfo fi(fileName);
@@ -652,13 +654,13 @@ void DanaEditor::setAcceptRichText(bool accept)
         removeAction(actListBullet);
         removeAction(actInsertImage);
         removeAction(actClearFormat);
-        removeAction(actAlignLeft);   
-        removeAction(actAlignCenter); 
+        removeAction(actAlignLeft);
+        removeAction(actAlignCenter);
         removeAction(actAlignRight);
 
         QLayoutItem *child;
         while ((child = toolBar->takeAt(0)) != 0) {
-            
+
             delete child->widget();
             delete child;
         }

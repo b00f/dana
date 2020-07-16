@@ -25,11 +25,13 @@
 #include "deck.h"
 #include "card.h"
 
+#include <QLocale>
 
 QueryDialog::QueryDialog(QWidget *parent)
     : QxDialog("query_dialog", parent)
 {
     speech = new QTextToSpeech(this);
+    speech->setLocale(QLocale("en_US"));
     card = 0;
     running = false;
 
@@ -66,7 +68,7 @@ void QueryDialog::setupView()
 
     btnUp     ->setToolTip(STR_CARD_EASY_TIP        );
     btnDown   ->setToolTip(STR_CARD_HARD_TIP        );
-    btnNext   ->setToolTip(STR_CARD_NEXT_TIP        ); 
+    btnNext   ->setToolTip(STR_CARD_NEXT_TIP        );
     btnPrev   ->setToolTip(STR_CARD_PREV_TIP        );
     btnReview ->setToolTip(STR_CARD_REVIEW_TIP      );
     btnPause  ->setToolTip(STR_QUERY_STOP_QUERY_TIP );
@@ -123,7 +125,7 @@ void QueryDialog::setupView()
     int mainTimerInterval = Preferences::GetInstance()->getQueryInterval();
 
     mainTimer->setInterval(MIN_2_MSEC(mainTimerInterval));
-    
+
     /*if(getSetting("geometry").isNull())*/{
         QDesktopWidget desktop;
         QRect r = desktop.availableGeometry();
@@ -150,7 +152,7 @@ bool QueryDialog::isRunning()
 void QueryDialog::start()
 {
     running = true;
-    
+
     cardQuery.shuffle();
 
     onNextCard();
@@ -160,7 +162,7 @@ void QueryDialog::start()
 void QueryDialog::stop()
 {
     running = false;
-    
+
     QTimer::singleShot(0, this, SLOT(accept()));
 }
 
@@ -245,7 +247,7 @@ void QueryDialog::closeEvent(QCloseEvent *event)
 
         hide();
 
-        event->ignore();        
+        event->ignore();
     }
     else {
         mainTimer->stop();

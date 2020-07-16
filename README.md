@@ -18,6 +18,10 @@ qmake
 make
 ```
 
+**Additional step**
+
+install `espeak-ng` to enable text to speech.
+
 ## About name
 'Dana' has several meanings. In English 'Dana' (pronounced /ˈdɑːnə/) is a giving name for girls. It was a popular name in middle of 20th century at USA. It's feminine name for 'Daneil'.
 'Dana' can also refer to 'Danu', Irish goddess.
