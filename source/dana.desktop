@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=A desktop client for the Dana learning box.
-Exec=dana
+Exec=/home/mostafa/Projects/dana/source/dana
 GenericName=Dana
 Icon=dana_96
 Name=Dana
@@ -8,5 +8,5 @@ NoDisplay=false
 StartupNotify=true
 Terminal=false
 Type=Application
-Categories=Education;Qt;
+Categories=GTK;GNOME;Development;Education;Qt;
 

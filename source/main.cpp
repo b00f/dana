@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         w.activateWindow();
     });
 
-    //w.show();
+    w.show();
 
     app.setActiveWindow(&w);
     app.setQuitOnLastWindowClosed(false);
