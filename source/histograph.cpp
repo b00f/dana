@@ -75,14 +75,14 @@ void Histograph::setHistory(CardHistory* history, bool embeded)
 
     QtCharts::QCategoryAxis *axisY = new QtCharts::QCategoryAxis;
     //axisY->setTitleText("Level");
-    axisY->setRange(Level_1, Level_Retired);
+    axisY->setRange(Level_1, Level_Retiree);
     axisY->setStartValue(Level_1);
     axisY->append("1", Level_1);
     axisY->append("2", Level_2);
     axisY->append("3", Level_3);
     axisY->append("4", Level_4);
     axisY->append("5", Level_5);
-    axisY->append("R", Level_Retired);
+    axisY->append("R", Level_Retiree);
     axisY->setLabelsVisible(false);
     axisY->setLabelsPosition(QtCharts::QCategoryAxis::AxisLabelsPositionCenter);
     axisY->setTickCount(1);

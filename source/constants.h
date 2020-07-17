@@ -70,7 +70,7 @@ enum Levels {
     Level_5             ,
 
     LevelCount          ,
-    Level_Retired = LevelCount,
+    Level_Retiree = LevelCount,
     Level_Starred       ,
 };
 
@@ -80,7 +80,7 @@ static const QString LevelsName[LevelCount+1] = {
     STR_LEVEL_3      ,
     STR_LEVEL_4      ,
     STR_LEVEL_5      ,
-    STR_LEVEL_RETIRED,
+    STR_RETIREES     ,
 };
 
 static const QColor LevelsColor[LevelCount+1] = {

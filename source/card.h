@@ -50,14 +50,14 @@ public:
     Card &operator=  (const Card &right);
 
     bool         compare(const Card &right) const;
-                 
+
     void         setId(int id);
     void         updateFront(QString front);
     void         updateBack(QString back);
     void         updateLevel(int level);
     void         setLevel(int _level);
     void         setFlags(uint flags);
-                 
+
     int          getId() const;
     QString      getFront() const;
     QString      getBack() const;
@@ -68,17 +68,17 @@ public:
     Difficulty   getDifficulty() const;
     bool         isStarred() const;
     bool         isInHand() const;
-    bool         isRetired() const;
+    bool         isRetiree() const;
     QDateTime    getCreationTime() const;
-   
+
     CardHistory *getHistory();
-   
+
     void         turnStarFlag();
     void         increaseStudy();
     void         increaseLevel();
     void         decreaseLevel();
 
-   
+
     static QColor    getLevelColor(int level);
     static QString   getLevelString(int level);
     static QString   getLevelPercentage(int level);
@@ -97,7 +97,7 @@ protected:
     int         level;
     uint        flags;
     CardHistory history;
-  
+
 };
 
 #endif // __CARD_H

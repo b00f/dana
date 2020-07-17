@@ -22,23 +22,23 @@
 
 #include <QFileDialog>
 
-class QxFileDialog 
+class QxFileDialog
     : public QFileDialog
 {
     Q_OBJECT
 
 public:
-    explicit QxFileDialog(QWidget *parent = 0);
+    explicit QxFileDialog(QWidget *parent = nullptr);
 
     QString getOpenFileName(const QString &caption = QString(),
                             const QString &filter = QString(),
                             QString *selectedFilter = 0,
-                            Options options = 0);
+                            Options options = Options());
 
     QString getSaveFileName(const QString &caption = QString(),
                             const QString &filter = QString(),
                             QString *selectedFilter = 0,
-                            Options options = 0);
+                            Options options = Options());
 
     QString getOpenDeckName();
     QString getSaveDeckName();
@@ -46,9 +46,9 @@ public:
     QString getOpenTexName();
 
 signals:
-    
+
 public slots:
-    
+
 };
 
 #endif // __QXFILEDIALOG_H

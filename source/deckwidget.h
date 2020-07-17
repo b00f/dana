@@ -30,7 +30,7 @@
 #include <QSortFilterProxyModel>
 
 class Deck;
-class DeckWidget 
+class DeckWidget
     : public QWidget
 {
     Q_OBJECT
@@ -51,7 +51,7 @@ signals:
     void activated();
 
 private slots:
-    
+
 private slots:
     void filter(int level);
 
@@ -66,8 +66,9 @@ protected:
 private:
     QxPushButton *deckLevels[LevelCount];
     QFrame *hLine;
-    QxPushButton *deckRetireds;
+    QxPushButton *deckRetirees;
     QxPushButton *deckStarreds;
+    QxPushButton *deckAllCards;
     DeckTable *deckTable;
 
     DeckDataModel *dataModel;

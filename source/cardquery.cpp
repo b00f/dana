@@ -70,12 +70,12 @@ void CardQuery::shuffle()
         int temp = index[i]; index[i] = index[r]; index[r] = temp;
     }
 
-    /// remove retired cards
+    /// remove Retiree cards
 
     Card *card=0;
     for(int i = 0; i < count; i++) {
         card=deck->getCardAt(index[i]);
-        if(Level_Retired != card->getLevel()) {
+        if(Level_Retiree != card->getLevel()) {
             shuffled.append(card);
         }
     }

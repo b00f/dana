@@ -127,8 +127,8 @@ void QueryDialog::setupView()
     mainTimer->setInterval(MIN_2_MSEC(mainTimerInterval));
 
     /*if(getSetting("geometry").isNull())*/{
-        QDesktopWidget desktop;
-        QRect r = desktop.availableGeometry();
+        QScreen *screen = QGuiApplication::screens()[0];
+        QRect r = screen->availableGeometry();
 
         int x = r.right()-500;
         int y = r.bottom()-200;

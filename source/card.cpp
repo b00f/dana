@@ -172,8 +172,8 @@ Card::Difficulty Card::getDifficulty() const
 
 QString Card::getDifficultyString(Difficulty difficulty)
 {
-    const static QString strings[3] = { 
-        STR_CARD_DIFFICULTY_EASY,        
+    const static QString strings[3] = {
+        STR_CARD_DIFFICULTY_EASY,
         STR_CARD_DIFFICULTY_NORMAL,
         STR_CARD_DIFFICULTY_HARD};
 
@@ -254,7 +254,7 @@ void Card::updateLevel(int _level)
         _level=Level_1;
 
     if(_level>LevelCount)
-        _level=Level_Retired;
+        _level=Level_Retiree;
 
     if(level>=_level) {
         level=_level; /// decrease level

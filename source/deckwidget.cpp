@@ -80,26 +80,35 @@ void DeckWidget::setupView()
     hLine->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
     hLine->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    deckRetireds = new QxPushButton(this);
-    deckRetireds->setToolTip(STR_LEVEL_RETIRED);
-    deckRetireds->setCheckable(true);
-    deckRetireds->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
-    deckRetireds->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    deckAllCards = new QxPushButton(this);
+    deckAllCards->setToolTip(STR_ALL_CARDS);
+    deckAllCards->setCheckable(true);
+    deckAllCards->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
+    deckAllCards->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    deckRetirees = new QxPushButton(this);
+    deckRetirees->setToolTip(STR_RETIREES);
+    deckRetirees->setCheckable(true);
+    deckRetirees->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
+    deckRetirees->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     deckStarreds = new QxPushButton(this);
-    deckStarreds->setToolTip(STR_LEVEL_STARRED);
+    deckStarreds->setToolTip(STR_STARREDS);
     deckStarreds->setCheckable(true);
     deckStarreds->setMinimumSize(QSize(LEFT_PANE_WIDTH, 0));
     deckStarreds->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    signalMapper->setMapping(deckRetireds, Level_Retired);
+    signalMapper->setMapping(deckAllCards, Level_ALL);
+    signalMapper->setMapping(deckRetirees, Level_Retiree);
     signalMapper->setMapping(deckStarreds, Level_Starred);
 
-    connect(deckRetireds, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    connect(deckAllCards, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    connect(deckRetirees, SIGNAL(clicked()), signalMapper, SLOT(map()));
     connect(deckStarreds, SIGNAL(clicked()), signalMapper, SLOT(map()));
 
     leftLayout->addWidget(hLine);
-    leftLayout->addWidget(deckRetireds, Level_Retired);
+    leftLayout->addWidget(deckAllCards, Level_ALL);
+    leftLayout->addWidget(deckRetirees, Level_Retiree);
     leftLayout->addWidget(deckStarreds, Level_Starred);
 
     mainLayout->addLayout(leftLayout,0,0,2,1);
@@ -123,16 +132,29 @@ void DeckWidget::filter(int level)
     }
 
     {
-        QPixmap pixmap(PIXMAP_RETIRED);
+        QPixmap pixmap(PIXMAP_DECK_24);
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         pixmap.save(&buffer, "PNG");
         lable = QString("<table><tr><td><img src=\"data:image/png;base64,%1\"></td><td valign=\"middle\"><small>(%2)</small></td></tr></table>")
                 .arg((QString)byteArray.toBase64())
-                .arg(deck->getCardsNoString(Level_Retired));
+                .arg(deck->getCardsNoString(Level_ALL));
 
-        deckRetireds->setHtml(lable);
-        deckRetireds->setChecked(level==Level_Retired);
+        deckAllCards->setHtml(lable);
+        deckAllCards->setChecked(level==Level_ALL);
+    }
+
+    {
+        QPixmap pixmap(PIXMAP_RETIREE);
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        pixmap.save(&buffer, "PNG");
+        lable = QString("<table><tr><td><img src=\"data:image/png;base64,%1\"></td><td valign=\"middle\"><small>(%2)</small></td></tr></table>")
+                .arg((QString)byteArray.toBase64())
+                .arg(deck->getCardsNoString(Level_Retiree));
+
+        deckRetirees->setHtml(lable);
+        deckRetirees->setChecked(level==Level_Retiree);
     }
 
     {
@@ -149,7 +171,7 @@ void DeckWidget::filter(int level)
     }
 
     proxyModel->setFilterLevel(level);
-    
+
     updateView();
 }
 

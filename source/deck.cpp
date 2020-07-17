@@ -181,7 +181,7 @@ void Deck::Merge(Deck *dst, int option, int *stats)
             leftCard = this->getCardAt(j);
 
             if(leftCard->compare(*rightCard)) {
-                
+
                 hasMerged = true;
                 switch(option) {
                 case AcceptSource:
@@ -191,7 +191,7 @@ void Deck::Merge(Deck *dst, int option, int *stats)
                     leftCard->updateBack(rightCard->getBack());
                     break;
 
-                case AutoMerge: 
+                case AutoMerge:
                     hasMerged = false;
                     break;
                 }
@@ -249,7 +249,7 @@ void Deck::removeOneCard(Card *card)
 
 Card *Deck::getCardAt(int index) const
 {
-    if( index < 0 || 
+    if( index < 0 ||
         index >= cards.count())
         return 0;
 
@@ -280,7 +280,7 @@ int Deck::getCardsNo(int level) const
     while (iter.hasNext()) {
         card=iter.next();
 
-        if(level == Level_Retired)
+        if(level == Level_Retiree)
         {
             if(!card->isInHand())
                 count ++;
@@ -315,7 +315,7 @@ bool Deck::exportDeck(QVariant param)
         return exportToXml(fileName);
     } else if(suffix == txt_suffix) {
         return exportToTxt(fileName);
-    } 
+    }
 
     /// Unknown file name!
     return false;
@@ -349,8 +349,8 @@ bool Deck::importMnemosyne(QString fileName)
     QString baseName = fi.baseName().toLower();
 
     QString tempFolder = utils::combinePaths(tempPath(), baseName);
-    QString metadataPath = utils::combinePaths(tempFolder, "METADATA"); 
-    QString cardsPath = utils::combinePaths(tempFolder, "cards.xml"); 
+    QString metadataPath = utils::combinePaths(tempFolder, "METADATA");
+    QString cardsPath = utils::combinePaths(tempFolder, "cards.xml");
 
     utils::createDirectory(tempFolder);
 
@@ -420,7 +420,7 @@ bool Deck::importMnemosyne(QString fileName)
         QDomNodeList nodes = root.elementsByTagName("log");
         QDomNode node;
         QDomElement elnode;
-        
+
         int count = nodes.count();
 
         for(int no = 0; no < count; no++) {
@@ -510,7 +510,7 @@ bool Deck::importFromTxt(QString fileName)
 
         l = s.readLine();
     };
-    
+
     return true;
 }
 
@@ -520,17 +520,17 @@ bool Deck::importDana(QString fileName)
     QString baseName = fi.baseName().toLower();
 
     QString tempFolder = utils::combinePaths(tempPath(), baseName);
-    QString deckPath = utils::combinePaths(tempFolder, "deck.xml"); 
-    QString iconPath = utils::combinePaths(tempFolder, "icon.png"); 
-    
+    QString deckPath = utils::combinePaths(tempFolder, "deck.xml");
+    QString iconPath = utils::combinePaths(tempFolder, "icon.png");
+
     utils::createDirectory(tempFolder);
-    
+
     Compressor c;
     if(!c.decompressFolder(fileName, tempFolder)) {
         return false;
     }
 
-    /// 
+    ///
     importFromXml(deckPath);
 
     utils::removeFile(deckPath);
@@ -594,7 +594,7 @@ bool Deck::importFromXml(QString fileName)
 
     elnode = nodeDeck.firstChildElement(XML_TAG_ICON);
     if(!elnode.isNull()) {
-        
+
     }
 
     elnode = nodeDeck.firstChildElement(XML_TAG_GUID);
@@ -661,12 +661,12 @@ bool Deck::importFromXml(QString fileName)
                 front = elnode.text();
             }
 
-            elnode = nodeCard.firstChildElement(XML_TAG_BACK);            
+            elnode = nodeCard.firstChildElement(XML_TAG_BACK);
             if(!elnode.isNull()) {
                 back = elnode.text();
             }
 
-            elnode = nodeCard.firstChildElement(XML_TAG_FLAGS);            
+            elnode = nodeCard.firstChildElement(XML_TAG_FLAGS);
             if(!elnode.isNull()) {
                 flags = elnode.text().toInt();
             }
@@ -682,7 +682,7 @@ bool Deck::importFromXml(QString fileName)
             }
         }
     }
-        
+
     file.close();
 
     return true;
@@ -692,13 +692,13 @@ bool Deck::exportToDana(QString fileName)
 {
     QFileInfo fi(fileName);
     QString baseName = fi.baseName().toLower();
-    
+
     QString tempFolder = utils::combinePaths(tempPath(), baseName);
-    QString deckFile = utils::combinePaths(tempFolder, "deck.xml"); 
-        
+    QString deckFile = utils::combinePaths(tempFolder, "deck.xml");
+
     utils::removeDirectory(tempFolder);
     utils::createDirectory(tempFolder);
-    
+
     if(!exportToXml(deckFile))
         return false;
 
@@ -709,7 +709,7 @@ bool Deck::exportToDana(QString fileName)
         return false;
     }
 
-    return true;  
+    return true;
 }
 
 bool Deck::exportToXml(QString fileName)
